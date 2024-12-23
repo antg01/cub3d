@@ -29,13 +29,14 @@ $(NAME) : $(OBJS)
 %.o : %.c	
 	@$(CC) -o $@ -c $<
 
+clean :
+#@make clean -C libft
+	@$(RM) source/*.o mlx/*.o
+	@if [ -f traces.txt ]; then $(RM) traces.txt; fi
+	@if [ -f 0 ]; then $(RM) 0; fi
 
 fclean : clean
 	@make fclean -C libft
-	@$(RM) fdf
-
-clean :
-	@make clean -C libft
-	@$(RM) source/*.o mlx/*.o
+	@$(RM) Cub3d
 
 re : fclean all
