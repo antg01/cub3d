@@ -15,28 +15,37 @@ CFLAGS = -Werror -Wall -Wextra
 
 RM = rm -rf
 
-SRCS =	source/test.c \
+SRCS = source/test.c \
 
-OBJS = $(SRCS:.c=.o)
+OBJ_DIR = Objects
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	@make -C $(MLX_DIR)
-	@make bonus -C libft
+	@echo "Compiling MLX..."
+	@make -s -C $(MLX_DIR) > /dev/null
+	@echo "Compiling Libft..."
+	@make -s bonus -C libft
+	@echo "Building $(NAME)..."
 	@$(CC) $(OBJS) $(LIBFT) $(CFLAGS) $(MLX_LIB) $(MLX) -o $(NAME)
+	@echo "Compiled successfully."
 
-%.o : %.c	
-	@$(CC) -o $@ -c $<
+$(OBJ_DIR)/%.o : %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean :
-#@make clean -C libft
-	@$(RM) source/*.o mlx/*.o
+	@make -s clean -C libft
+	@$(RM) $(OBJ_DIR)
+	@$(RM) mlx/*.o
 	@if [ -f traces.txt ]; then $(RM) traces.txt; fi
 	@if [ -f 0 ]; then $(RM) 0; fi
+	@echo "Cleaned successfully."
 
 fclean : clean
-	@make fclean -C libft
-	@$(RM) Cub3d
+	@make -s fclean -C libft
+	@$(RM) $(NAME)
+	@echo "Program cleaned successfully."
 
 re : fclean all
