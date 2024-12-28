@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2024/12/27 17:02:23 by gnyssens         ###   ########.fr       */
+/*   Updated: 2024/12/28 15:36:20 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,24 @@
 
 void    my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-    char    *dest;
+	char    *dest;
 
-    dest = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-    *(unsigned int *)dest = color;
+	if (x >= 0 && x < 800 && y >= 0 && y < 600)
+	{
+		dest = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+		*(unsigned int *)dest = color;
+	}
+}
+
+void clear_image(t_data *data, int color)
+{
+    for (int y = 0; y < 600; y++)
+    {
+        for (int x = 0; x < 800; x++)
+        {
+            my_mlx_pixel_put(data, x, y, color);
+        }
+    }
 }
 
 void draw_rectangle(t_data *data, int x, int y, int width, int height, int color)
@@ -33,11 +47,32 @@ void draw_rectangle(t_data *data, int x, int y, int width, int height, int color
 
 int handle_keypress(int keycode, t_data *data)
 {
+    static int rect_x = 270; // Initial rectangle position
+    static int rect_y = 220;
+
     if (keycode == 65307) // Escape key (Linux)
 	{
         mlx_destroy_window(data->mlx, data->window);
 		exit(0);
 	}
+    if (keycode == 65307) // Escape key (Linux)
+    {
+        mlx_destroy_window(data->mlx, data->window);
+        exit(0);
+    }
+    else if (keycode == 65361) // Left arrow key
+        rect_x -= 10;
+    else if (keycode == 65362) // Up arrow key
+        rect_y -= 10;
+    else if (keycode == 65363) // Right arrow key
+        rect_x += 10;
+    else if (keycode == 65364) // Down arrow key
+        rect_y += 10;
+
+    // Clear the image and redraw the rectangle at the new position
+    clear_image(data, 0x00000000); // Black background
+    draw_rectangle(data, rect_x, rect_y, 200, 150, 0x0000FF00); // Green rectangle
+    mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);
     return (0);
 }
 
@@ -57,7 +92,7 @@ int main()
     data.addr = mlx_get_data_addr(data.image, &data.bits_per_pixel,
                                   &data.line_length, &data.endian);
 
-    draw_rectangle(&data, 100, 100, 200, 150, 0x0000FF00);
+    draw_rectangle(&data, 270, 220, 200, 150, 0x0000FF00);
     mlx_put_image_to_window(data.mlx, data.window, data.image, 0, 0);
 
 	mlx_key_hook(data.window, handle_keypress, &data);
