@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2024/12/28 15:36:20 by gnyssens         ###   ########.fr       */
+/*   Updated: 2024/12/28 15:49:58 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int handle_keypress(int keycode, t_data *data)
 {
     static int rect_x = 270; // Initial rectangle position
     static int rect_y = 220;
+    int rect_width = 200;
+    int rect_height = 150;
 
     if (keycode == 65307) // Escape key (Linux)
 	{
@@ -68,6 +70,16 @@ int handle_keypress(int keycode, t_data *data)
         rect_x += 10;
     else if (keycode == 65364) // Down arrow key
         rect_y += 10;
+
+    if (rect_x < 0)
+        rect_x = 0;
+    if (rect_y < 0)
+        rect_y = 0;
+    if (rect_x + rect_width > 800)
+        rect_x = 800 - rect_width;
+    if (rect_y + rect_height > 600)
+        rect_y = 600 - rect_height;
+
 
     // Clear the image and redraw the rectangle at the new position
     clear_image(data, 0x00000000); // Black background
