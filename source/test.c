@@ -6,10 +6,11 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2024/12/28 15:49:58 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:51:57 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "../includes/cub3d.h"
 
 void    my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -94,7 +95,7 @@ int close_window(t_data *data)
     exit(0);
 }
 
-int main()
+int main(void)
 {
     t_data data;
 
@@ -114,3 +115,4 @@ int main()
 
 	return (0);
 }
+*/
