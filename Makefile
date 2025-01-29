@@ -15,7 +15,9 @@ CFLAGS = -Werror -Wall -Wextra
 
 RM = rm -rf
 
-SRCS = source/test.c \
+SRCS =	source/main.c \
+		source/parsing.c \
+		
 
 OBJ_DIR = Objects
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
