@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/29 14:57:30 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:38:37 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
+# include "../libft/get_next_line.h"
 # include <X11/keysym.h> //pas sur a 100%
 # include <stdlib.h>
 # include <unistd.h>
