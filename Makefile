@@ -17,6 +17,7 @@ RM = rm -rf
 
 SRCS =	source/main.c \
 		source/parsing.c \
+		source/utils.c \
 		
 
 OBJ_DIR = Objects

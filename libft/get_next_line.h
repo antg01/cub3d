@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 19:42:58 by gnyssens          #+#    #+#             */
-/*   Updated: 2024/05/07 12:42:43 by gnyssens         ###   ########.fr       */
+/*   Created: 2024/07/25 14:43:49 by gnyssens          #+#    #+#             */
+/*   Updated: 2025/01/29 15:26:47 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,27 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10
 # endif
 
-# if BUFFER_SIZE >= 2147483647
-#  undef BUFFER_SIZE
-#  define BUFFER_SIZE 2147483646
-# endif
+# include "libft.h"
 
-// LIBRAIRIES
-# include <fcntl.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <limits.h>
-
-// STRUCTURE
-typedef struct s_variable
+typedef struct s_listt
 {
-	ssize_t		i;
-	ssize_t		check;
-	char		*line;
-	char		*buffer;
-}				t_variable;
+	char			*content;
+	struct s_listt	*next;
+	ssize_t			len;
+}					t_listt;
 
-// PROTOTYPES
-char	*get_next_line(int fd);
-char	*init_remainder(char *remain, char **buffer);
-void	my_bzero(char *s, ssize_t n);
-ssize_t	my_strlen(char *str);
-char	*myy_strdup(char *str);
-char	*dupl_and_adjust_remain(char *remain);
-ssize_t	end_of_line(char *line);
-char	*my_strjoin(char *s1, char *s2);
-ssize_t	manage_extraction(int fd, char *buf, char **line);
-char	extract_buffer(int fd, char *buffer);
+t_listt				*ft_lstneww(char *content);
+void				ft_lstadd_backk(t_listt **lst, t_listt *new);
+char				*ft_strchr_bis(t_listt *lst, int c, int loop);
+char				*ft_strdup(const char *s1);
+void				ft_strjoin_bis(char *line, t_listt *node, size_t len);
+t_listt				**free_node(t_listt **node, int loop);
+char				*get_line_from_list(t_listt *lst);
+void				clean_buffer(t_listt **lst);
+int					read_to_buffer(int fd, t_listt **lst);
+char				*get_next_line(int fd);
 
 #endif
