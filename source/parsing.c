@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:52:31 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/30 15:51:03 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:31:08 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,67 @@ int	only_ones(char *str)
 	return (1);
 }
 
-char	**parsing(int fd)
+int	check_chars(char *str)
 {
-	int		i;
-	int		row_len;
-	int		col_len;
-	char	*line;
-	char	**result;
+	int	i;
 
-	line = NULL;
 	i = 0;
-	while (line != NULL || i == 0)
+	while (str[i])
 	{
-		if (line)
+		if ((str[i] < '0' || str[i] > '9') && str[i] != 'N')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_if_last(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (!line || *line == '\0')
+	{
+		if (*line == '\0')
 			free(line);
+		return (1);
+	}
+	else
+	{
+		free(line);
+		return (0);
+	}
+}
+
+int	parsing(int fd, char *line)
+{ //parametre *line doit etre égal à NULL !!
+	int		i;
+
+	i = 0;
+	while (1)
+	{
 		line = get_next_line(fd);
-		if (0 == i)
-		{
-			row_len = ft_strlen(line);
-			if (!only_ones(line))
-				return(write(2, "invalid map\n", 12), NULL);
-		}
+		if (!line || *line == '\0')
+			break;
+		if (0 == i && !only_ones(line))
+			return(write(2, "invalid map\n", 12), 0);
 		else 
 		{
-			if (line[0] != '1' || line [ft_strlen(line) - 1] != '1')
-				return(write(2, "invalid map\n", 12), NULL);
+			if (only_ones(line))
+			{
+				if (!check_if_last(fd))
+					return(free(line), write(2, "invalid map\n", 12), 0);
+			}
+			else
+			{
+				if (line[0] != '1' || line [ft_strlen(line) - 1] != '1')
+					return(free(line), write(2, "invalid map\n", 12), 0);
+				if (!check_chars(line))
+					return(free(line), write(2, "invalid map\n", 12), 0);
+			}
 		}
-		
+		free(line);
+		i++;
 	}
+	return (1);
 }
