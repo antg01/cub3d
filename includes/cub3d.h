@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/30 19:11:57 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:46:57 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,9 @@ typedef struct s_data {
 
 // PARSING
 int		parsing(int fd, char *line, int num_rows);
+
+// UTILS
+int		num_rows(void);
+
 
 #endif
