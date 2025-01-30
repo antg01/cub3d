@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 16:52:10 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/30 19:52:29 by gnyssens         ###   ########.fr       */
+/*   Created: 2025/01/30 19:52:35 by gnyssens          #+#    #+#             */
+/*   Updated: 2025/01/30 20:19:15 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int main(void)
+char	**make_map(int num_rows)
 {
-	int		fd;
-	int		rows;
-	char	**map;
-	
-	fd = open("source/test.cub", O_RDONLY);
-	if (-1 == fd)
-		return(write(2, "error opening file\n", 19), 1);
-	rows = num_rows(); //path du .cub un peu hardcodée
-	if (!parsing(fd, NULL, rows))
-		return (close(fd), write(2, "invalid map\n", 12), 1);
-	//map = make_map()
-	return (0);
+	char	**result;
+
+	//result = 
 }

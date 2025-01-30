@@ -18,6 +18,8 @@ RM = rm -rf
 SRCS =	source/main.c \
 		source/parsing.c \
 		source/utils.c \
+		source/map.c \
+		source/safe_utils.c \
 		
 
 OBJ_DIR = Objects
