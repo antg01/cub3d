@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:45:29 by gnyssens          #+#    #+#             */
-/*   Updated: 2024/07/30 16:05:41 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:07:56 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_strchr_bis(t_listt *lst, int c, int loop)
 	}
 	return (NULL);
 }
-
+/*
 char	*ft_strdup(const char *s1)
 {
 	char	*copy;
@@ -91,7 +91,7 @@ char	*ft_strdup(const char *s1)
 	copy[i] = '\0';
 	return (copy);
 }
-
+*/
 void	ft_strjoin_bis(char *line, t_listt *node, size_t len)
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:10 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/30 19:52:29 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:06:14 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int main(void)
 	rows = num_rows(); //path du .cub un peu hardcodée
 	if (!parsing(fd, NULL, rows))
 		return (close(fd), write(2, "invalid map\n", 12), 1);
-	//map = make_map()
+	map = make_map(rows);
+	(void)map;
 	return (0);
 }
