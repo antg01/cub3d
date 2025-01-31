@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/31 01:05:15 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:52:32 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 // STRUCTURES
 
-typedef struct s_data {
+typedef struct s_mlx {
     void    *mlx;
     void    *window;
     void    *image;
@@ -36,17 +36,31 @@ typedef struct s_data {
     int     bits_per_pixel;
     int     line_length;
     int     endian;
-} t_data;
+    //...
+} t_mlx;
+
+typedef struct  s_player {
+	double	x;         // Player's X position (continuous, not limited to grid cells)
+	double	y;         // Player's Y position
+	double	dir_x;     // Player's direction vector X
+	double	dir_y;     // Player's direction vector Y
+	double	plane_x;   // Camera plane X (for FOV projection)
+	double	plane_y;   // Camera plane Y
+}               t_player;
+
 
 
 /* ********* */
 /* FONCTIONS */
 /* ********* */
 
+// MLX
+void	handle_mlx(t_mlx *data);
+
 // PARSING
 int		parsing(int fd, char *line, int num_rows);
 
-//MAP
+// MAP
 char	**make_map(int num_rows);
 
 // UTILS

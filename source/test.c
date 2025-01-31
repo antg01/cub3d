@@ -6,14 +6,14 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/27 16:51:57 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:28:54 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-#include "../includes/cub3d.h"
 
-void    my_mlx_pixel_put(t_data *data, int x, int y, int color)
+#include "../includes/cub3d.h"
+/*
+void    my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
 	char    *dest;
 
@@ -24,7 +24,7 @@ void    my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	}
 }
 
-void clear_image(t_data *data, int color)
+void clear_image(t_mlx *data, int color)
 {
     for (int y = 0; y < 600; y++)
     {
@@ -35,7 +35,7 @@ void clear_image(t_data *data, int color)
     }
 }
 
-void draw_rectangle(t_data *data, int x, int y, int width, int height, int color)
+void draw_rectangle(t_mlx *data, int x, int y, int width, int height, int color)
 {
     for (int i = 0; i < height; i++)
     {
@@ -46,7 +46,7 @@ void draw_rectangle(t_data *data, int x, int y, int width, int height, int color
     }
 }
 
-int handle_keypress(int keycode, t_data *data)
+int handle_keypress(int keycode, t_mlx *data)
 {
     static int rect_x = 270; // Initial rectangle position
     static int rect_y = 220;
@@ -89,7 +89,7 @@ int handle_keypress(int keycode, t_data *data)
     return (0);
 }
 
-int close_window(t_data *data)
+int close_window(t_mlx *data)
 {
     mlx_destroy_window(data->mlx, data->window);
     exit(0);
@@ -97,21 +97,21 @@ int close_window(t_data *data)
 
 int main(void)
 {
-    t_data data;
+t_mlx data;
 
-    data.mlx = mlx_init();
-    data.window = mlx_new_window(data.mlx, 800, 600, "Animation");
-    data.image = mlx_new_image(data.mlx, 800, 600);
-    data.addr = mlx_get_data_addr(data.image, &data.bits_per_pixel,
-                                  &data.line_length, &data.endian);
+data.mlx = mlx_init();
+data.window = mlx_new_window(data.mlx, 800, 600, "Animation");
+data.image = mlx_new_image(data.mlx, 800, 600);
+data.addr = mlx_get_data_addr(data.image, &data.bits_per_pixel,
+							&data.line_length, &data.endian);
 
-    draw_rectangle(&data, 270, 220, 200, 150, 0x0000FF00);
-    mlx_put_image_to_window(data.mlx, data.window, data.image, 0, 0);
+draw_rectangle(&data, 270, 220, 200, 150, 0x0000FF00);
+mlx_put_image_to_window(data.mlx, data.window, data.image, 0, 0);
 
-	mlx_key_hook(data.window, handle_keypress, &data);
-	mlx_hook(data.window, 17, 0, close_window, &data);
+mlx_key_hook(data.window, handle_keypress, &data);
+mlx_hook(data.window, 17, 0, close_window, &data);
 
-    mlx_loop(data.mlx);
+mlx_loop(data.mlx);
 
 	return (0);
 }

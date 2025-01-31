@@ -20,6 +20,8 @@ SRCS =	source/main.c \
 		source/utils.c \
 		source/map.c \
 		source/safe_utils.c \
+		source/top-down.c \
+		source/mlx.c \
 		
 
 OBJ_DIR = Objects
