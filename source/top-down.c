@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/03 15:37:59 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/03 21:23:10 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,12 @@ void draw_grid(t_mlx *data, int num_rows)
 		}
 		y += cell_size;
 	}
+}
+
+int	render(t_mlx *data)
+{
+    draw_grid(data, 10);  // 10 = NUMBER_ROWS hardcodée
+    mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);
+
+	return (0);
 }

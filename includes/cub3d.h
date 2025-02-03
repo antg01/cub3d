@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/03 15:37:29 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/03 21:22:59 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	*safe_malloc(size_t size);
 char	*safe_strdup(char *str);
 
 // TOP-DOWN
-void draw_grid(t_mlx *data, int num_rows);
+void 	draw_grid(t_mlx *data, int num_rows);
+int		render(t_mlx *data);
 
 #endif
