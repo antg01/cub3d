@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/03 21:23:10 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:24:46 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,22 @@ void draw_square(t_mlx *data, int x_start, int y_start, int size, int color)
 
 void draw_grid(t_mlx *data, int num_rows)
 {
-	int	cell_size = WINDOW_HEIGHT / num_rows; // Each map cell
+	int	cell_size = IMAGE_HEIGHT / num_rows;
+	//printf("cellsize: %d\n", cell_size);
 	int	x;
 	int	y;
 
-	y = 0;
-	while (y < WINDOW_HEIGHT)
+	y = 2*cell_size;
+	while (y < IMAGE_HEIGHT + 2 * cell_size)
 	{
-		x = 0;
-		while (x < WINDOW_LENGTH)
+		x = 2*cell_size;
+		while (x < IMAGE_LENGTH + 2 * cell_size)
 		{
 			draw_square(data, x, y, cell_size, 0xFFFFFF);
 			x += cell_size;
 		}
 		y += cell_size;
+		//printf("1 row de grid completée\n");
 	}
 }
 
