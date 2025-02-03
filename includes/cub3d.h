@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/31 15:52:32 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:37:29 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 
+# define WINDOW_HEIGHT 800
+# define WINDOW_LENGTH 1000
+# define GRAY 0x808080
 
 
 // STRUCTURES
@@ -55,6 +58,7 @@ typedef struct  s_player {
 /* ********* */
 
 // MLX
+void    my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void	handle_mlx(t_mlx *data);
 
 // PARSING
@@ -69,5 +73,8 @@ int		num_rows(void);
 // SAFE_UTILS
 void	*safe_malloc(size_t size);
 char	*safe_strdup(char *str);
+
+// TOP-DOWN
+void draw_grid(t_mlx *data, int num_rows);
 
 #endif

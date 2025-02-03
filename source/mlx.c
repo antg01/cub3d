@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/31 16:36:17 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:16:08 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
 	char    *dest;
 
-	if (x >= 0 && x < 800 && y >= 0 && y < 600)
+	if (x >= 0 && x < 1000 && y >= 0 && y < 800)
 	{
 		dest = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 		*(unsigned int *)dest = color;
@@ -25,9 +25,9 @@ void    my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 
 void clear_image(t_mlx *data, int color)
 {
-    for (int y = 0; y < 600; y++)
+    for (int y = 0; y < 800; y++)
     {
-        for (int x = 0; x < 800; x++)
+        for (int x = 0; x < 1000; x++)
         {
             my_mlx_pixel_put(data, x, y, color);
         }
@@ -54,7 +54,7 @@ int close_window(t_mlx *data)
 void	handle_mlx(t_mlx *data)
 {
 	data->mlx = mlx_init();
-	data->window = mlx_new_window(data->mlx, 1200, 1200, "Top-Down View");
+	data->window = mlx_new_window(data->mlx, WINDOW_LENGTH, WINDOW_HEIGHT, "Top-Down View");
 
 	mlx_key_hook(data->window, handle_keypress, data);
 	mlx_hook(data->window, 17, 0, close_window, data);
