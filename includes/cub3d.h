@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 00:12:15 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:42:25 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_mlx {
     int     bits_per_pixel;
     int     line_length;
     int     endian;
+	char	**map;
     //...
 } t_mlx;
 
