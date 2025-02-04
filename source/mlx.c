@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 20:40:24 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 22:41:30 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,40 @@ void clear_image(t_mlx *data, int color)
 
 int handle_keypress(int keycode, t_mlx *data)
 {
+	float	rot_speed;
+	double	save_dir_x;
+	int		speed = 5; //temporaire
 
-    if (keycode == 65307) // Escape key (Linux)
+	if (keycode == 65307) // Escape key (Linux)
 	{
-        mlx_destroy_window(data->mlx, data->window);
+		mlx_destroy_window(data->mlx, data->window);
 		exit(0);
 	}
-    else if (keycode == 65361) // Left arrow
-    {
-        data->player->x_pos -= 5;
-    }
-    else if (keycode == 65362) // Up arrow
-    {
-        data->player->y_pos -= 5;
-    }
-    else if (keycode == 65363) // Right arrow
-    {
-        data->player->x_pos += 5;
-    }
-    else if (keycode == 65364) // Down arrow
-    {
-        data->player->y_pos += 5;
-    }
+	rot_speed = data->player->rot_speed; // == pi / 8 pr le moment
+	save_dir_x = data->player->dir_x;
+	if (keycode == 65363) // RIGHT arrow
+	{
+		data->player->dir_x = data->player->dir_x * cos(rot_speed) - data->player->dir_y * sin(rot_speed);
+		data->player->dir_y = save_dir_x * sin(rot_speed) + data->player->dir_y * cos(rot_speed);
+	}
+	else if (keycode == 65361) // LEFT arrow
+	{
+		data->player->dir_x = data->player->dir_x * cos(-rot_speed) - data->player->dir_y * sin(-rot_speed);
+		data->player->dir_y = save_dir_x * sin(-rot_speed) + data->player->dir_y * cos(-rot_speed);
+	}
+	else if (keycode == 65362) // Up arrow
+	{
+		data->player->x_pos += data->player->dir_x * speed;
+		data->player->y_pos += data->player->dir_y * speed;
+	}
+	//else if (keycode == 65364) // Down arrow
+	//{
+	//	data->player->y_pos += 5;
+	//}
 
 	render(data);
-	
-    return (0);
+
+	return (0);
 }
 
 int close_window(t_mlx *data)
