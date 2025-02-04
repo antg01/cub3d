@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 14:54:24 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 20:39:55 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,8 @@ t_player	*init_player(t_mlx *data)
 	coord_player[1] = which_col(data->map[coord_player[0]]);
 	player->x_pos = (3 + 0.5 + coord_player[1]) * cell_size; //3 pr décalage, 0.5 pr etre au milieu carré
 	player->y_pos = (1 + 0.5 + coord_player[0]) * cell_size;
+	player->dir_x = 0; //vers le Nord pr commencer
+	player->dir_y = -1;
+	player->rot_speed = PI / 8; //choisi un peu à la one
 	return (player);
 }
