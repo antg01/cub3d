@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 14:42:37 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:04:43 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,30 @@ int handle_keypress(int keycode, t_mlx *data)
         mlx_destroy_window(data->mlx, data->window);
 		exit(0);
 	}
+	// Move left
+    else if (keycode == 65361) // Left arrow
+    {
+		// Optionally check boundaries or collisions here
+        data->player->x_pos -= 5;
+    }
+    // Move up
+    else if (keycode == 65362) // Up arrow
+    {
+        data->player->y_pos -= 5;
+    }
+    // Move right
+    else if (keycode == 65363) // Right arrow
+    {
+        data->player->x_pos += 5;
+    }
+    // Move down
+    else if (keycode == 65364) // Down arrow
+    {
+        data->player->y_pos += 5;
+    }
+
+	render(data);
+	
     return (0);
 }
 
