@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:52:35 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/31 01:11:12 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 01:08:38 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	**make_map(int num_rows)
 		if (!line) // || *line == '\0' ?
 			break;
 		result[i] = safe_strdup(line);
-		printf("%s\n", line); //temporaire
 		free(line);
 		i++;
 	}
