@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 00:33:39 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:42:37 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	handle_mlx(t_mlx *data)
 	data->addr = mlx_get_data_addr(data->image, &data->bits_per_pixel, &data->line_length, &data->endian);
 	
 	//mlx_loop_hook(data->mlx, render, data);;
+	data->player = init_player(data);
 	render(data);
 
 	mlx_key_hook(data->window, handle_keypress, data);

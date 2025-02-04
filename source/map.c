@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:52:35 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 01:08:38 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:59:02 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**make_map(int num_rows)
 	int		i;
 
 	result = (char **) safe_malloc((size_t) (sizeof(char *) * (num_rows + 1))); // + 1 pr NULL
-	fd = open("source/test.cub", O_RDONLY);
+	fd = open("maps/test.cub", O_RDONLY);
 	if (-1 == fd)
 	{
 		write(2, "file opening failed (exiting)\n", 31);

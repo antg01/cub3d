@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 00:59:01 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:54:41 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ void draw_square(t_mlx *data, int x_start, int y_start, int size, int color)
 
 void	draw_grid(t_mlx *data, int num_rows)
 {
-	int	cell_size = IMAGE_HEIGHT / num_rows;
+	int	cell_size;
 	int	x;
 	int	y;
 
+	cell_size = IMAGE_HEIGHT / num_rows;
 	y = 1 * cell_size;
 	while (y < IMAGE_HEIGHT + (1 * cell_size))
 	{
@@ -57,9 +58,28 @@ void	draw_grid(t_mlx *data, int num_rows)
 	}
 }
 
+void	draw_player(t_mlx *data)
+{
+	int	i;
+	int	j;
+
+	i = data->player->y_pos - 3;
+	while (i < data->player->y_pos + 4)
+	{
+		j = data->player->x_pos - 3;
+		while (j < data->player->x_pos + 4)
+		{
+			my_mlx_pixel_put(data, j, i, 0X0033FF);
+			j++;
+		}
+		i++;
+	}
+}
+
 int	render(t_mlx *data)
 {
     draw_grid(data, 10);  // 10 = NUMBER_ROWS hardcodée
+	draw_player(data);
     mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);
 
 	return (0);

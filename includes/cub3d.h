@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 00:42:25 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:45:33 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,28 @@
 
 // STRUCTURES
 
-typedef struct s_mlx {
-    void    *mlx;
-    void    *window;
-    void    *image;
-    char    *addr;
-    int     bits_per_pixel;
-    int     line_length;
-    int     endian;
-	char	**map;
-    //...
-} t_mlx;
-
 typedef struct  s_player {
-	double	x;         // Player's X position (continuous, not limited to grid cells)
-	double	y;         // Player's Y position
+	double	x_pos;         // Player's X position (continuous, not limited to grid cells)
+	double	y_pos;         // Player's Y position
 	double	dir_x;     // Player's direction vector X
 	double	dir_y;     // Player's direction vector Y
 	double	plane_x;   // Camera plane X (for FOV projection)
 	double	plane_y;   // Camera plane Y
 }               t_player;
+
+typedef struct s_mlx {
+    void    	*mlx;
+    void    	*window;
+    void    	*image;
+    char    	*addr;
+    int     	bits_per_pixel;
+    int     	line_length;
+    int     	endian;
+	char		**map;
+	int			num_rows; //temporaire, map sera pas forcément carrée
+	t_player	*player;
+    //...
+} t_mlx;
 
 
 
@@ -63,6 +65,7 @@ typedef struct  s_player {
 // MLX
 void    my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void	handle_mlx(t_mlx *data);
+void 	clear_image(t_mlx *data, int color);
 
 // PARSING
 int		parsing(int fd, char *line, int num_rows);
@@ -80,5 +83,8 @@ char	*safe_strdup(char *str);
 // TOP-DOWN
 void 	draw_grid(t_mlx *data, int num_rows);
 int		render(t_mlx *data);
+
+// PLAYER
+t_player	*init_player(t_mlx *data);
 
 #endif

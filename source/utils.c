@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:59:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/30 19:48:27 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:58:53 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	num_rows(void)
 	int		count;
 	char	*line;
 
-	fd = open("source/test.cub", O_RDONLY);
+	fd = open("maps/test.cub", O_RDONLY);
 	if (-1 == fd)
 	{
 		write(2, "file opening failed, quitting program...\n", 41);
