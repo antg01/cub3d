@@ -23,6 +23,7 @@ SRCS =	source/main.c \
 		source/top-down.c \
 		source/mlx.c \
 		source/player.c \
+		source/rays.c \
 		
 
 OBJ_DIR = Objects
