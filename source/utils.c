@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:59:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 13:58:53 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:20:34 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,17 @@ int	num_rows(void)
 	}
 	//printf("CHECK nombre de rows: %d\n", count);
 	return (count);
+}
+
+int	round_float(float nb)
+{
+	int	a;
+	int	b;
+
+	a = (int) nb; // == nb truncated
+	b = (float) a;
+	if (nb - b <= 0.5)
+		return (a);
+	else
+		return (a + 1);
 }

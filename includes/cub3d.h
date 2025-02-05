@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 20:39:27 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:20:47 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char	**make_map(int num_rows);
 
 // UTILS
 int		num_rows(void);
+int		round_float(float nb);
 
 // SAFE_UTILS
 void	*safe_malloc(size_t size);
@@ -89,5 +90,6 @@ int		render(t_mlx *data);
 
 // PLAYER
 t_player	*init_player(t_mlx *data);
+int			check_wall(t_mlx *data, float x, float y);
 
 #endif

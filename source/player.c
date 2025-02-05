@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 20:39:55 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:21:55 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,20 @@ t_player	*init_player(t_mlx *data)
 	player->dir_y = -1;
 	player->rot_speed = PI / 8; //choisi un peu à la one
 	return (player);
+}
+
+int	check_wall(t_mlx *data, float x, float y)
+{
+	char	*dest;
+	int		round_x;
+	int		round_y;
+
+	round_x = round_float(x);
+	round_y = round_float(y);
+	dest = data->addr + (round_y * data->line_length + round_x * (data->bits_per_pixel / 8));
+	if (*(unsigned int *)dest == 0xEE0000)
+	{
+		return (0);
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 22:41:30 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:22:16 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ int handle_keypress(int keycode, t_mlx *data)
 {
 	float	rot_speed;
 	double	save_dir_x;
-	int		speed = 5; //temporaire
+	int		speed = 7; //temporaire
+	float	check_x;
+	float	check_y;
 
 	if (keycode == 65307) // Escape key (Linux)
 	{
@@ -59,8 +61,13 @@ int handle_keypress(int keycode, t_mlx *data)
 	}
 	else if (keycode == 65362) // Up arrow
 	{
-		data->player->x_pos += data->player->dir_x * speed;
-		data->player->y_pos += data->player->dir_y * speed;
+		check_x = data->player->x_pos + data->player->dir_x * speed;
+		check_y = data->player->y_pos + data->player->dir_y * speed;
+		if (check_wall(data, check_x, check_y))
+		{
+			data->player->x_pos = check_x;
+			data->player->y_pos = check_y;
+		}
 	}
 	//else if (keycode == 65364) // Down arrow
 	//{
