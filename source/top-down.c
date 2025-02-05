@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 14:54:41 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:42:10 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	render(t_mlx *data)
 {
     draw_grid(data, 10);  // 10 = NUMBER_ROWS hardcodée
 	draw_player(data);
+	//draw_rays
     mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);
 
 	return (0);
