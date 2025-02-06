@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/06 16:00:09 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:10:08 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void draw_long_line(t_mlx *data, int pos_x, int pos_y, double dir_x, double dir_
     
     // Loop until the ray goes out of the window boundaries.
     // (Adjust WINDOW_LENGTH and WINDOW_HEIGHT to your window's dimensions.)
-    while (x >= 0 && x < 13 * cellsize && y >= 0 && y < 11 * cellsize) // cellsize et num_rows hardcodée ici
+    while (x >= 4 * cellsize && x < 13 * cellsize && y >= 2 * cellsize && y < 11 * cellsize) // cellsize et num_rows hardcodée ici
     {
         // Use your check_wall function (which you must implement)
         // to see if the current position (cast to int) is inside a wall.
