@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/05 22:20:47 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:46:02 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,8 @@ int		render(t_mlx *data);
 // PLAYER
 t_player	*init_player(t_mlx *data);
 int			check_wall(t_mlx *data, float x, float y);
+
+// RAYS
+void	draw_rays(t_mlx *data, t_player *player);
 
 #endif
