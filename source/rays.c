@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/06 15:53:57 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:00:09 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // chatGPT (pcq flemme)
 void draw_long_line(t_mlx *data, int pos_x, int pos_y, double dir_x, double dir_y)
 {
+	int	cellsize = IMAGE_HEIGHT / 10;
     // Start at the given position, using double precision for smooth stepping.
     double x = pos_x;
     double y = pos_y;
@@ -25,7 +26,7 @@ void draw_long_line(t_mlx *data, int pos_x, int pos_y, double dir_x, double dir_
     
     // Loop until the ray goes out of the window boundaries.
     // (Adjust WINDOW_LENGTH and WINDOW_HEIGHT to your window's dimensions.)
-    while (x >= 0 && x < WINDOW_LENGTH && y >= 0 && y < WINDOW_HEIGHT)
+    while (x >= 0 && x < 13 * cellsize && y >= 0 && y < 11 * cellsize) // cellsize et num_rows hardcodée ici
     {
         // Use your check_wall function (which you must implement)
         // to see if the current position (cast to int) is inside a wall.
@@ -55,12 +56,12 @@ void	draw_rays(t_mlx *data, t_player *player)
 	ray_dir_y = player->dir_x * sin(-0.185 * PI) + player->dir_y * cos(-0.185 * PI);
 	
 	i = 0;
-	while (i <= 10)
+	while (i <= 20)
 	{
 		draw_long_line(data, (int)player->x_pos, (int)player->y_pos, ray_dir_x, ray_dir_y);
 		i++;
 		save_dir_x = ray_dir_x;
-		ray_dir_x = ray_dir_x * cos(0.037 * PI) - ray_dir_y * sin(0.037 * PI);
-		ray_dir_y = save_dir_x * sin(0.037 * PI) + ray_dir_y * cos(0.037 * PI);
+		ray_dir_x = ray_dir_x * cos(0.0185 * PI) - ray_dir_y * sin(0.0185 * PI);
+		ray_dir_y = save_dir_x * sin(0.0185 * PI) + ray_dir_y * cos(0.0185 * PI);
 	}
 }
