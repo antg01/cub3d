@@ -21,8 +21,8 @@ SRCS =	source/main.c \
 		source/map.c \
 		source/safe_utils.c \
 		source/mlx.c \
+		source/player.c \
 		#minimap/top-down.c \
-		#minimap/player.c \
 		#minimap/rays.c \
 		
 
