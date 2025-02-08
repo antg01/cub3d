@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/05 22:21:55 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:55:31 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,22 @@ int	which_col(char *row)
 t_player	*init_player(t_mlx *data)
 {
 	t_player	*player;
-	int			cell_size;
 	int			coord_player[2]; //[y][x]
 
-	cell_size = IMAGE_HEIGHT / data->num_rows;
 	player = (t_player *)safe_malloc(sizeof(t_player));
 	coord_player[0] = which_row(data->map);
 	coord_player[1] = which_col(data->map[coord_player[0]]);
-	player->x_pos = (3 + 0.5 + coord_player[1]) * cell_size; //3 pr décalage, 0.5 pr etre au milieu carré
-	player->y_pos = (1 + 0.5 + coord_player[0]) * cell_size;
+	player->x_pos = WINDOW_LENGTH / 2;
+	player->y_pos = WINDOW_HEIGHT / 2;
 	player->dir_x = 0; //vers le Nord pr commencer
 	player->dir_y = -1;
 	player->rot_speed = PI / 8; //choisi un peu à la one
+	player->plane_x = -player->dir_y * tan(0.576); //0.576rad == 33°
+	player->plane_y = player->dir_x * tan(0.576);
+	player->camera_x =  -1; //cv de -1 à 1
+	player->ray_dir_x = player->dir_x + player->plane_x * player->camera_x;
+	player->ray_dir_y = player->dir_y + player->plane_y * player->camera_x;
+
 	return (player);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/06 15:46:02 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:34:19 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 
 # define WINDOW_HEIGHT 800
 # define WINDOW_LENGTH 1000
-# define IMAGE_HEIGHT 600
-# define IMAGE_LENGTH 600
 # define GRAY 0x808080
 # define PI 3.14159265
 
@@ -42,6 +40,9 @@ typedef struct  s_player {
 	double	dir_y;     // Player's direction vector Y
 	double	plane_x;   // Camera plane X (for FOV projection)
 	double	plane_y;   // Camera plane Y
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
 	float	rot_speed;
 }               t_player;
 
