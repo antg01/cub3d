@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/08 18:55:58 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/12 00:49:06 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	handle_mlx(t_mlx *data)
 	
 	//mlx_loop_hook(data->mlx, render, data);;
 	data->player = init_player(data);
+	init_raycast(data->player);
+	render_3d(data);
 
 	mlx_key_hook(data->window, handle_keypress, data);
 	mlx_hook(data->window, 17, 0, close_window, data);

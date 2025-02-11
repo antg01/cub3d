@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/08 18:34:19 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/12 00:48:26 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@
 
 // STRUCTURES
 
-typedef struct  s_player {
-	double	x_pos;         // Player's X position (continuous, not limited to grid cells)
-	double	y_pos;         // Player's Y position
+typedef struct s_raycast {
+	double	pl_x_pos;
+	double	pl_y_pos;
 	double	dir_x;     // Player's direction vector X
 	double	dir_y;     // Player's direction vector Y
 	double	plane_x;   // Camera plane X (for FOV projection)
@@ -43,7 +43,20 @@ typedef struct  s_player {
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
-	float	rot_speed;
+}				t_raycast;
+
+typedef struct  s_player {
+	double		x_pos;         // Player's X position (continuous, not limited to grid cells)
+	double		y_pos;         // Player's Y position
+	double		dir_x;     // Player's direction vector X
+	double		dir_y;     // Player's direction vector Y
+	double		plane_x;   // Camera plane X (for FOV projection)
+	double		plane_y;   // Camera plane Y
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	float		rot_speed;
+	t_raycast	*ray;
 }               t_player;
 
 typedef struct s_mlx {
@@ -95,5 +108,9 @@ int			check_wall(t_mlx *data, float x, float y);
 
 // RAYS
 void	draw_rays(t_mlx *data, t_player *player);
+
+// RAYCASTING
+void init_raycast(t_player *player);
+void render_3d(t_mlx *data); //CHATGPT, attention juste checker
 
 #endif

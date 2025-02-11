@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/08 18:55:31 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:29:56 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ t_player	*init_player(t_mlx *data)
 	player->y_pos = WINDOW_HEIGHT / 2;
 	player->dir_x = 0; //vers le Nord pr commencer
 	player->dir_y = -1;
-	player->rot_speed = PI / 8; //choisi un peu à la one
+	player->rot_speed = PI / 16;
+
+	//ci-dessous ça sera p-e trasnféré vers t_raycast (struct)
 	player->plane_x = -player->dir_y * tan(0.576); //0.576rad == 33°
 	player->plane_y = player->dir_x * tan(0.576);
 	player->camera_x =  -1; //cv de -1 à 1

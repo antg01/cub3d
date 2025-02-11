@@ -22,6 +22,7 @@ SRCS =	source/main.c \
 		source/safe_utils.c \
 		source/mlx.c \
 		source/player.c \
+		source/raycast.c \
 		#minimap/top-down.c \
 		#minimap/rays.c \
 		
