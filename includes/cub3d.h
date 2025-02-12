@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/12 00:48:26 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:16:32 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define WINDOW_HEIGHT 800
+# define WINDOW_HEIGHT 1000
 # define WINDOW_LENGTH 1000
 # define GRAY 0x808080
 # define PI 3.14159265
