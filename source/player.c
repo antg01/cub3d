@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/11 18:29:56 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/13 00:49:34 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,19 @@ t_player	*init_player(t_mlx *data)
 
 int	check_wall(t_mlx *data, float x, float y)
 {
-	char	*dest;
-	int		round_x;
-	int		round_y;
+	int			round_x;
+	int			round_y;
+	int			cellsize;
 
 	round_x = round_float(x);
 	round_y = round_float(y);
-	dest = data->addr + (round_y * data->line_length + round_x * (data->bits_per_pixel / 8));
-	if (*(unsigned int *)dest == 0xEE0000)
-	{
+	cellsize = 100; //hardcode
+	round_x /= cellsize;
+	round_y /= cellsize;
+	if (round_x < 0 || round_y < 0 || round_x > 9 || round_y > 9)
 		return (0);
-	}
+	if (data->map[round_y][round_x] == '1')
+		return (0);
+	
 	return (1);
 }

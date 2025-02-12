@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/12 00:49:06 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/13 00:38:10 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 
 void clear_image(t_mlx *data, int color)
 {
-    for (int y = 0; y < 800; y++)
+    for (int y = 0; y < 1000; y++)
     {
         for (int x = 0; x < 1000; x++)
         {
@@ -36,45 +36,49 @@ void clear_image(t_mlx *data, int color)
 
 int handle_keypress(int keycode, t_mlx *data)
 {
-	//float	rot_speed;
-	//double	save_dir_x;
-	//int		speed = 7; //temporaire
-	//float	check_x;
-	//float	check_y;
+	float	rot_speed;
+	double	save_dir_x;
+	int		speed = 7; //temporaire
+	float	check_x;
+	float	check_y;
+	
+	double 	magnitude;
+
+	rot_speed = data->player->rot_speed;
+	save_dir_x = data->player->dir_x;
+	magnitude = sqrt(data->player->dir_x * data->player->dir_x + data->player->dir_y * data->player->dir_y);
 
 	if (keycode == 65307) // Escape key (Linux)
 	{
 		mlx_destroy_window(data->mlx, data->window);
 		exit(0);
 	}
-	// rot_speed = data->player->rot_speed; // == pi / 8 pr le moment
-	// save_dir_x = data->player->dir_x;
-	// if (keycode == 65363) // RIGHT arrow
-	// {
-	// 	data->player->dir_x = data->player->dir_x * cos(rot_speed) - data->player->dir_y * sin(rot_speed);
-	// 	data->player->dir_y = save_dir_x * sin(rot_speed) + data->player->dir_y * cos(rot_speed);
-	// }
-	// else if (keycode == 65361) // LEFT arrow
-	// {
-	// 	data->player->dir_x = data->player->dir_x * cos(-rot_speed) - data->player->dir_y * sin(-rot_speed);
-	// 	data->player->dir_y = save_dir_x * sin(-rot_speed) + data->player->dir_y * cos(-rot_speed);
-	// }
-	// else if (keycode == 65362) // Up arrow
-	// {
-	// 	check_x = data->player->x_pos + data->player->dir_x * speed;
-	// 	check_y = data->player->y_pos + data->player->dir_y * speed;
-	// 	if (check_wall(data, check_x, check_y))
-	// 	{
-	// 		data->player->x_pos = check_x;
-	// 		data->player->y_pos = check_y;
-	// 	}
-	// }
-	//else if (keycode == 65364) // Down arrow
-	//{
-	//	data->player->y_pos += 5;
-	//}
-
-	//render(data);
+	if (keycode == 65363) // RIGHT arrow
+	{
+		data->player->dir_x = data->player->dir_x * cos(rot_speed) - data->player->dir_y * sin(rot_speed);
+		data->player->dir_y = save_dir_x * sin(rot_speed) + data->player->dir_y * cos(rot_speed);
+		data->player->dir_x /= magnitude;
+		data->player->dir_y /= magnitude;
+	}
+	else if (keycode == 65361) // LEFT arrow
+	{
+		data->player->dir_x = data->player->dir_x * cos(-rot_speed) - data->player->dir_y * sin(-rot_speed);
+		data->player->dir_y = save_dir_x * sin(-rot_speed) + data->player->dir_y * cos(-rot_speed);
+		data->player->dir_x /= magnitude;
+		data->player->dir_y /= magnitude;
+	}
+	else if (keycode == 65362) // Up arrow
+	{
+		check_x = data->player->x_pos + data->player->dir_x * speed;
+		check_y = data->player->y_pos + data->player->dir_y * speed;
+		if (check_wall(data, check_x, check_y))
+		{
+			data->player->x_pos = check_x;
+			data->player->y_pos = check_y;
+		}
+	}
+	clear_image(data, 0X000000);
+	render_3d(data);
 
 	return (0);
 }
