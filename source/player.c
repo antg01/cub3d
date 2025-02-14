@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/14 00:55:08 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:44:35 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,10 @@ int	check_wall(t_mlx *data, float x, float y)
 {
 	int			round_x;
 	int			round_y;
-	int			cellsize;
 
 	round_x = round_float(x);
 	round_y = round_float(y);
-	cellsize = 100; //hardcode
-	round_x /= cellsize;
-	round_y /= cellsize;
+	printf("check_wall: x = %d and y = %d\n", round_x, round_y);
 	if (round_x < 0 || round_y < 0 || round_x > 9 || round_y > 9)
 		return (0);
 	if (data->map[round_y][round_x] == '1')

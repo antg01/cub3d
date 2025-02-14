@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/14 01:55:01 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:47:33 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,12 @@ int handle_keypress(int keycode, t_mlx *data)
 {
 	float	rot_speed;
 	double	save_dir_x;
-	int		speed = 7; //temporaire
-	float	check_x;
-	float	check_y;
-	
-	double 	magnitude;
+	double	save_plane_x;
+	float	speed = 0.1; //temporaire
 
 	rot_speed = data->player->rot_speed;
 	save_dir_x = data->player->dir_x;
-	magnitude = sqrt(data->player->dir_x * data->player->dir_x + data->player->dir_y * data->player->dir_y);
+	save_plane_x = data->player->plane_x;
 
 	if (keycode == 65307) // Escape key (Linux)
 	{
@@ -57,24 +54,25 @@ int handle_keypress(int keycode, t_mlx *data)
 	{
 		data->player->dir_x = data->player->dir_x * cos(rot_speed) - data->player->dir_y * sin(rot_speed);
 		data->player->dir_y = save_dir_x * sin(rot_speed) + data->player->dir_y * cos(rot_speed);
-		data->player->dir_x /= magnitude;
-		data->player->dir_y /= magnitude;
+
+		data->player->plane_x = data->player->plane_x * cos(rot_speed) - data->player->plane_y * sin(rot_speed);
+		data->player->plane_y = save_plane_x * sin(rot_speed) + data->player->plane_y * cos(rot_speed);
 	}
 	else if (keycode == 65361) // LEFT arrow
 	{
 		data->player->dir_x = data->player->dir_x * cos(-rot_speed) - data->player->dir_y * sin(-rot_speed);
 		data->player->dir_y = save_dir_x * sin(-rot_speed) + data->player->dir_y * cos(-rot_speed);
-		data->player->dir_x /= magnitude;
-		data->player->dir_y /= magnitude;
+
+		data->player->plane_x = data->player->plane_x * cos(-rot_speed) - data->player->plane_y * sin(-rot_speed);
+		data->player->plane_y = save_plane_x * sin(-rot_speed) + data->player->plane_y * cos(-rot_speed);
 	}
 	else if (keycode == 65362) // Up arrow
 	{
-		check_x = data->player->x_pos + data->player->dir_x * speed;
-		check_y = data->player->y_pos + data->player->dir_y * speed;
-		if (check_wall(data, check_x, check_y))
+		printf("float_x = %f and float_y = %f\n", data->player->x_pos + data->player->dir_x * speed, data->player->y_pos + data->player->dir_y * speed);
+		if (check_wall(data, data->player->x_pos + data->player->dir_x * speed, data->player->y_pos + data->player->dir_y * speed))
 		{
-			data->player->x_pos = check_x;
-			data->player->y_pos = check_y;
+			data->player->x_pos += data->player->dir_x * speed;
+			data->player->y_pos += data->player->dir_y * speed;
 		}
 	}
 	clear_image(data, 0X000000);
