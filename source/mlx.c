@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/13 21:13:57 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/14 01:55:01 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int handle_keypress(int keycode, t_mlx *data)
 		data->player->dir_y = save_dir_x * sin(rot_speed) + data->player->dir_y * cos(rot_speed);
 		data->player->dir_x /= magnitude;
 		data->player->dir_y /= magnitude;
-		clear_image(data, 0X000000);
-		render_3d(data);
 	}
 	else if (keycode == 65361) // LEFT arrow
 	{
@@ -68,8 +66,6 @@ int handle_keypress(int keycode, t_mlx *data)
 		data->player->dir_y = save_dir_x * sin(-rot_speed) + data->player->dir_y * cos(-rot_speed);
 		data->player->dir_x /= magnitude;
 		data->player->dir_y /= magnitude;
-		clear_image(data, 0X000000);
-		render_3d(data);
 	}
 	else if (keycode == 65362) // Up arrow
 	{
@@ -79,12 +75,10 @@ int handle_keypress(int keycode, t_mlx *data)
 		{
 			data->player->x_pos = check_x;
 			data->player->y_pos = check_y;
-			clear_image(data, 0X000000);
-			render_3d(data);
 		}
 	}
-	// clear_image(data, 0X000000);
-	// render_3d(data);
+	clear_image(data, 0X000000);
+	render_3d(data);
 
 	return (0);
 }
