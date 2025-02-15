@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/14 14:47:33 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:49:35 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int handle_keypress(int keycode, t_mlx *data)
 	float	rot_speed;
 	double	save_dir_x;
 	double	save_plane_x;
-	float	speed = 0.1; //temporaire
+	float	speed = 0.25; //temporaire
 
 	rot_speed = data->player->rot_speed;
 	save_dir_x = data->player->dir_x;
