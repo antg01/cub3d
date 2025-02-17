@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/15 19:51:00 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:52:35 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void init_raycast(t_player *player)
 
 void render_3d(t_mlx *data)
 {
-    //int cellsize = WINDOW_LENGTH / data->num_rows; // Pixels per grid cell
-
 	double	cameraX;
 	double	rayDirX;
 	double	rayDirY;

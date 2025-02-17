@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/16 18:22:25 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:13:26 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_player	*init_player(t_mlx *data)
 	player = (t_player *)safe_malloc(sizeof(t_player));
 	coord_player[0] = which_row(data->map);
 	coord_player[1] = which_col(data->map[coord_player[0]]);
-	player->x_pos = coord_player[0] + 0.5; //jsp si cst bien, pr qu'il soit 'au milieu'
-	player->y_pos = coord_player[1] + 0.5;
+	player->x_pos = (double) (coord_player[0] + 0.50); //jsp si cst bien, pr qu'il soit 'au milieu'
+	player->y_pos = (double) (coord_player[1] + 0.50);
 	player->dir_x = 0; //vers le Nord pr commencer
 	player->dir_y = -1;
 	player->rot_speed = PI / 16;

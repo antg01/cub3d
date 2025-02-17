@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/17 00:46:02 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:57:42 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <sys/time.h>
+# include <sys/types.h>
 
 # define WINDOW_HEIGHT 1000
 # define WINDOW_LENGTH 1000
@@ -32,6 +34,15 @@
 
 
 // STRUCTURES
+
+typedef struct s_keys {
+	int	forward;
+	int	backward;
+	int	left;
+	int	right;
+	int	rotate_left;
+	int	rotate_right;
+}				t_keys;
 
 typedef struct s_raycast {
 	double	pl_x_pos;
@@ -69,19 +80,11 @@ typedef struct s_mlx {
     int     	endian;
 	char		**map;
 	int			num_rows; //temporaire, map sera pas forcément carrée
+	double		last_frame;
 	t_player	*player;
+	t_keys		*keys;
     //...
 } t_mlx;
-
-typedef struct s_keys {
-	int	forward;
-	int	backward;
-	int	left;
-	int	right;
-	int	rotate_left;
-	int	rotate_right;
-}				t_keys;
-
 
 /* ********* */
 /* FONCTIONS */
@@ -101,6 +104,7 @@ char	**make_map(int num_rows);
 // UTILS
 int		num_rows(void);
 int		round_float(float nb);
+double	get_time_in_seconds(void);
 
 // SAFE_UTILS
 void	*safe_malloc(size_t size);
@@ -120,5 +124,11 @@ void	draw_rays(t_mlx *data, t_player *player);
 // RAYCASTING
 void init_raycast(t_player *player);
 void render_3d(t_mlx *data); //CHATGPT, attention juste checker
+
+// SMOOTH MOVE
+t_keys	*init_keys(void);
+int		key_press(int keycode, t_mlx *data);
+int		key_release(int keycode, t_mlx *data);
+int		game_loop(t_mlx *data);
 
 #endif

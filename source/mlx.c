@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/16 18:23:11 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:58:16 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,46 +36,11 @@ void clear_image(t_mlx *data, int color)
 
 int handle_keypress(int keycode, t_mlx *data)
 {
-	float	rot_speed;
-	double	save_dir_x;
-	double	save_plane_x;
-	float	speed = 0.25; //temporaire
-
-	rot_speed = data->player->rot_speed;
-	save_dir_x = data->player->dir_x;
-	save_plane_x = data->player->plane_x;
-
 	if (keycode == 65307) // Escape key (Linux)
 	{
 		mlx_destroy_window(data->mlx, data->window);
 		exit(0);
 	}
-	if (keycode == 65363) // RIGHT arrow
-	{
-		data->player->dir_x = data->player->dir_x * cos(rot_speed) - data->player->dir_y * sin(rot_speed);
-		data->player->dir_y = save_dir_x * sin(rot_speed) + data->player->dir_y * cos(rot_speed);
-
-		data->player->plane_x = data->player->plane_x * cos(rot_speed) - data->player->plane_y * sin(rot_speed);
-		data->player->plane_y = save_plane_x * sin(rot_speed) + data->player->plane_y * cos(rot_speed);
-	}
-	else if (keycode == 65361) // LEFT arrow
-	{
-		data->player->dir_x = data->player->dir_x * cos(-rot_speed) - data->player->dir_y * sin(-rot_speed);
-		data->player->dir_y = save_dir_x * sin(-rot_speed) + data->player->dir_y * cos(-rot_speed);
-
-		data->player->plane_x = data->player->plane_x * cos(-rot_speed) - data->player->plane_y * sin(-rot_speed);
-		data->player->plane_y = save_plane_x * sin(-rot_speed) + data->player->plane_y * cos(-rot_speed);
-	}
-	else if (keycode == 65362) // Up arrow
-	{
-		if (check_wall(data, data->player->x_pos + data->player->dir_x * speed, data->player->y_pos + data->player->dir_y * speed))
-		{
-			data->player->x_pos += data->player->dir_x * speed;
-			data->player->y_pos += data->player->dir_y * speed;
-		}
-	}
-	clear_image(data, 0X000000);
-	render_3d(data);
 
 	return (0);
 }
@@ -96,11 +61,17 @@ void	handle_mlx(t_mlx *data)
 	
 	//mlx_loop_hook(data->mlx, render, data);;
 	data->player = init_player(data);
+	data->keys = init_keys();
 	init_raycast(data->player);
 	render_3d(data);
 
+	data->last_frame = get_time_in_seconds();
 	mlx_key_hook(data->window, handle_keypress, data);
+	mlx_hook(data->window, 2, 1L << 0, key_press, data);    // Key press
+	mlx_hook(data->window, 3, 1L << 1, key_release, data);  // Key release
 	mlx_hook(data->window, 17, 0, close_window, data);
+
+	mlx_loop_hook(data->mlx, game_loop, data); // Game loop for smooth movement
 
 	mlx_loop(data->mlx);
 }
