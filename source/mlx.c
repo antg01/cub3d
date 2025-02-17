@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/14 14:49:35 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/16 18:23:11 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int handle_keypress(int keycode, t_mlx *data)
 	}
 	else if (keycode == 65362) // Up arrow
 	{
-		printf("float_x = %f and float_y = %f\n", data->player->x_pos + data->player->dir_x * speed, data->player->y_pos + data->player->dir_y * speed);
 		if (check_wall(data, data->player->x_pos + data->player->dir_x * speed, data->player->y_pos + data->player->dir_y * speed))
 		{
 			data->player->x_pos += data->player->dir_x * speed;
