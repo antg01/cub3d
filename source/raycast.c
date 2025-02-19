@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/17 16:52:35 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:15:37 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void render_3d(t_mlx *data)
 	int		stepX;
 	int		stepY;
 	double	perpWallDist;
+	int		color;
 
     for (int x = 0; x < WINDOW_LENGTH; x++) // Loop through each column
     {
@@ -99,6 +100,10 @@ void render_3d(t_mlx *data)
 				hit = 1;
 			else if (data->map[mapY][mapX] == '1')
                 hit = 1;
+			else if (data->map[mapY][mapX] == '2')
+				hit = 2;
+			else if (data->map[mapY][mapX] == '3')
+				hit = 3;
         }
 
         // 6. Calculate distance to the wall
@@ -117,7 +122,27 @@ void render_3d(t_mlx *data)
 			drawEnd = WINDOW_HEIGHT - 1;
 
         // 8. Draw the vertical line for this column
-        int color = (side == 0) ? 0xFF0000 : 0x880000; // Red walls, darker if horizontal
+        if (hit == 1)
+		{
+			if (side == 0)
+				color = RED;
+			else
+				color = DARK_RED;
+		}
+		else if (hit == 2)
+		{
+			if (side == 0)
+				color = BLUE;
+			else
+				color = DARK_BLUE;
+		}
+		else if (hit == 3)
+		{
+			if (side == 0)
+				color = GREEN;
+			else
+				color = DARK_GREEN;
+		}
         for (int y = drawStart; y < drawEnd; y++)
         {
             my_mlx_pixel_put(data, x, y, color);

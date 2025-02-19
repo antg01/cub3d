@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/17 16:57:42 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:15:02 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 # define WINDOW_HEIGHT 1000
 # define WINDOW_LENGTH 1000
 # define GRAY 0x808080
+# define RED 0xFF0000
+# define DARK_RED 0x880000
+# define BLUE 0X444FF
+# define DARK_BLUE 0X0000B9
+# define GREEN 0X00FF00
+# define DARK_GREEN 0X00CA00
 # define PI 3.14159265
 
 

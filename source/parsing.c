@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:52:31 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/30 19:16:13 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:22:23 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	only_ones(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != '1' && str[i] != '\n')
+		if (str[i] != '1' && str[i] != '\n' && str[i] != '2' && str[i] != '3')
 			return (0);
 		i++;
 	}
@@ -43,25 +43,14 @@ int	check_chars(char *str)
 	return (1);
 }
 
-/*
-int	check_if_last(int fd)
+int	one_to_three(char c)
 {
-	char	*line;
-
-	line = get_next_line(fd);
-	if (!line || *line == '\0')
-	{
-		if (line)
-			free(line);
-		return (1);
-	}
-	else
-	{
-		free(line);
+	if (c < '1' || c > '3')
 		return (0);
-	}
+	else
+		return (1);
 }
-*/
+
 
 //ya encore des pb, devrait pas pouvoir y avoir plusieurs 'N', et faut checker si la forme de la map a un sens
 //si une row a longueur 5, la suivante doit avoir longueur 3, 5 ou 7 !
@@ -90,7 +79,7 @@ int	parsing(int fd, char *line, int num_rows)
 				return(free(line), write(2, "2 invalid map\n", 14), 0);
 			else
 			{
-				if (line[0] != '1' || line [ft_strlen(line) - 2] != '1') //-2 pcq [-1] cest \n
+				if (!one_to_three(line[0]) || !one_to_three(line [ft_strlen(line) - 2])) //-2 pcq [-1] cest \n
 					return(free(line), write(2, "3 invalid map\n", 14), 0);
 				if (!check_chars(line))
 					return(free(line), write(2, "4 invalid map\n", 14), 0);
