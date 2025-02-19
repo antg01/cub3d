@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/19 15:15:37 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:03:43 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void render_3d(t_mlx *data)
             }
 
             // Check if the ray hit a wall
-            if (mapX <= 0 || mapY <= 0 || mapX >= 9 || mapY >= 9)
+            if (mapX <= 0 || mapY <= 0 || mapX >= data->num_rows - 1 || mapY >= data->num_rows - 1)
 				hit = 1;
 			else if (data->map[mapY][mapX] == '1')
                 hit = 1;

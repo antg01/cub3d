@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/17 17:13:26 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:02:55 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ int	check_wall(t_mlx *data, float x, float y)
 
 	round_x = (int) x;//round_float(x);
 	round_y = (int) y;//round_float(y);
-	if (round_x < 0 || round_y < 0 || round_x > 9 || round_y > 9)
+	if (round_x < 0 || round_y < 0 || round_x > data->num_rows || round_y > data->num_rows)
 		return (0);
-	if (data->map[round_y][round_x] == '1')
+	if (data->map[round_y][round_x] == '1'
+		|| data->map[round_y][round_x] == '2' || data->map[round_y][round_x] == '3')
 		return (0);
 	
 	return (1);
