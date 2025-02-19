@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/17 16:58:16 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:47:28 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
 	char    *dest;
 
-	if (x >= 0 && x < 1000 && y >= 0 && y < 800)
+	if (x >= 0 && x < WINDOW_LENGTH && y >= 0 && y < WINDOW_HEIGHT)
 	{
 		dest = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 		*(unsigned int *)dest = color;
@@ -25,9 +25,9 @@ void    my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 
 void clear_image(t_mlx *data, int color)
 {
-    for (int y = 0; y < 1000; y++)
+    for (int y = 0; y < WINDOW_HEIGHT; y++)
     {
-        for (int x = 0; x < 1000; x++)
+        for (int x = 0; x < WINDOW_LENGTH; x++)
         {
             my_mlx_pixel_put(data, x, y, color);
         }

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:44:23 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/17 18:41:26 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:48:01 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	game_loop(t_mlx *data)
 	currentTime = get_time_in_seconds(); // Get time
 	deltaTime = currentTime - data->last_frame;
 	data->last_frame = currentTime;
-	moveSpeed = 4 * deltaTime; // Movement speed (units per second)
+	moveSpeed = 3 * deltaTime; // Movement speed (units per second)
 	rot_speed = 1.5 * deltaTime; // Rotation speed (radians per second)
 	
 	if (data->keys->forward)

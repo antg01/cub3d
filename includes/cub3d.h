@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/19 15:15:02 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:45:31 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <sys/types.h>
 
 # define WINDOW_HEIGHT 1000
-# define WINDOW_LENGTH 1000
+# define WINDOW_LENGTH 1500
 # define GRAY 0x808080
 # define RED 0xFF0000
 # define DARK_RED 0x880000
