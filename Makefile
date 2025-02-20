@@ -24,6 +24,7 @@ SRCS =	source/main.c \
 		source/player.c \
 		source/raycast.c \
 		source/smooth_move.c \
+		source/textures.c \
 		#minimap/top-down.c \
 		#minimap/rays.c \
 		

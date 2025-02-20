@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/19 15:45:31 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/20 19:21:19 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,18 @@ typedef struct  s_player {
 	t_raycast	*ray;
 }               t_player;
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}				t_img;
+
+
 typedef struct s_mlx {
     void    	*mlx;
     void    	*window;
@@ -89,6 +101,7 @@ typedef struct s_mlx {
 	double		last_frame;
 	t_player	*player;
 	t_keys		*keys;
+	t_img		textures[1]; //pr linstant juste 1, pr tester brick
     //...
 } t_mlx;
 
@@ -136,5 +149,9 @@ t_keys	*init_keys(void);
 int		key_press(int keycode, t_mlx *data);
 int		key_release(int keycode, t_mlx *data);
 int		game_loop(t_mlx *data);
+
+// TEXTURES
+t_img	*init_textures(void);
+void	load_textures(t_mlx *data);
 
 #endif
