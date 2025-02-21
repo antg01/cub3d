@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/20 19:21:19 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:49:17 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,5 +153,6 @@ int		game_loop(t_mlx *data);
 // TEXTURES
 t_img	*init_textures(void);
 void	load_textures(t_mlx *data);
+int 	get_texture_pixel(t_img *texture, int x, int y);
 
 #endif
