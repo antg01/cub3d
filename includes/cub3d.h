@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/21 16:49:17 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:49:57 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_mlx {
 	double		last_frame;
 	t_player	*player;
 	t_keys		*keys;
-	t_img		textures[1]; //pr linstant juste 1, pr tester brick
+	t_img		textures[4]; //pr linstant juste 1, pr tester brick
     //...
 } t_mlx;
 

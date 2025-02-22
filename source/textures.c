@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 19:05:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/21 16:48:37 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:07:34 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,25 @@ void	load_textures(t_mlx *data)
 	data->textures[0].addr = mlx_get_data_addr(data->textures[0].img_ptr,
 		&data->textures[0].bpp, &data->textures[0].line_length, &data->textures[0].endian);
 
-	// faudra rajouter les autres textures...
+	data->textures[1].img_ptr = mlx_xpm_file_to_image(data->mlx, "textures/bluestone.xpm",
+		&width, &height);
+	data->textures[1].height = height;
+	data->textures[1].width = width;
+	data->textures[1].addr = mlx_get_data_addr(data->textures[1].img_ptr,
+		&data->textures[1].bpp, &data->textures[1].line_length, &data->textures[1].endian);
+
+	data->textures[2].img_ptr = mlx_xpm_file_to_image(data->mlx, "textures/purplestone.xpm",
+		&width, &height);
+	data->textures[2].height = height;
+	data->textures[2].width = width;
+	data->textures[2].addr = mlx_get_data_addr(data->textures[2].img_ptr,
+		&data->textures[2].bpp, &data->textures[2].line_length, &data->textures[2].endian);
 }
 
 int get_texture_pixel(t_img *texture, int x, int y)
 {
-    // Move the pointer to the correct pixel:
-    char *pixel = texture->addr
-        + (y * texture->line_length)
-        + (x * (texture->bpp / 8));
+    char	*pixel;
 
-    // Return it as an integer color (ARGB or BGRA depending on system)
+	pixel = texture->addr + (y * texture->line_length) + (x * (texture->bpp / 8));
     return *(int *)pixel;
 }

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/21 16:48:01 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:09:20 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,61 +124,41 @@ void render_3d(t_mlx *data)
 
         // 8. Draw the vertical line for this column
 		int texture_index = 0;
-        if (hit == 1)
+        if (hit == 1 || hit == 2 || hit == 3)
 		{
+			if (hit == 2)
+				texture_index = 1;
+			else if (hit == 3)
+				texture_index = 2;
 			if (side == 0)
 				wallX = data->player->y_pos + perpWallDist * rayDirY;
 			else
 				wallX = data->player->x_pos + perpWallDist * rayDirX;
 			wallX -= floor(wallX); // keep fractional part
 		}
-		else if (hit == 2)
+		int texWidth = data->textures[0].width;
+		int texHeight = data->textures[0].height;
+		int texX = (int)(wallX * (double)texWidth);
+		if (side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+		if (side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
+
+		// [TEXTURE CODE HERE] Now draw the column using the texture
+		double step = 1.0 * texHeight / lineHeight;
+		double texPos = (drawStart - WINDOW_HEIGHT / 2 + lineHeight / 2) * step;
+
+		for (int y = drawStart; y < drawEnd; y++)
 		{
-			if (side == 0)
-				color = BLUE;
-			else
-				color = DARK_BLUE;
+			int texY = (int)texPos & (texHeight - 1);
+			texPos += step;
+
+			color = get_texture_pixel(&data->textures[texture_index], texX, texY);
+
+			// Optional shading if horizontal side
+			if (side == 1)
+				color = (color >> 1) & 0x7F7F7F;
+
+			my_mlx_pixel_put(data, x, y, color);
 		}
-		else if (hit == 3)
-		{
-			if (side == 0)
-				color = GREEN;
-			else
-				color = DARK_GREEN;
-		}
-		if (hit ==2 || hit == 3)
-		{
-        	for (int y = drawStart; y < drawEnd; y++)
-        	{
-        	    my_mlx_pixel_put(data, x, y, color);
-        	}
-		}
-		else
-		{
-			int texWidth = data->textures[0].width;
-			int texHeight = data->textures[0].height;
-			int texX = (int)(wallX * (double)texWidth);
-			if (side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
-			if (side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
-
-			// [TEXTURE CODE HERE] Now draw the column using the texture
-			double step = 1.0 * texHeight / lineHeight;
-			double texPos = (drawStart - WINDOW_HEIGHT / 2 + lineHeight / 2) * step;
-
-			for (int y = drawStart; y < drawEnd; y++)
-			{
-				int texY = (int)texPos & (texHeight - 1);
-				texPos += step;
-
-				int color = get_texture_pixel(&data->textures[texture_index], texX, texY);
-
-				// Optional shading if horizontal side
-				if (side == 1)
-					color = (color >> 1) & 0x7F7F7F;
-
-				my_mlx_pixel_put(data, x, y, color);
-			}
-    	}
     }
 
     // Push the image to the window
