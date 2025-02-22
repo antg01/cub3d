@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 19:05:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/22 16:07:34 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:05:12 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ void	load_textures(t_mlx *data)
 	data->textures[2].width = width;
 	data->textures[2].addr = mlx_get_data_addr(data->textures[2].img_ptr,
 		&data->textures[2].bpp, &data->textures[2].line_length, &data->textures[2].endian);
+
+	data->textures[3].img_ptr = mlx_xpm_file_to_image(data->mlx, "textures/greystone.xpm",
+		&width, &height);
+	data->textures[3].height = height;
+	data->textures[3].width = width;
+	data->textures[3].addr = mlx_get_data_addr(data->textures[3].img_ptr,
+		&data->textures[3].bpp, &data->textures[3].line_length, &data->textures[3].endian);
 }
 
 int get_texture_pixel(t_img *texture, int x, int y)

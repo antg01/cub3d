@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/22 16:09:20 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/22 17:07:07 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ void render_3d(t_mlx *data)
             if (mapX <= 0 || mapY <= 0 || mapX >= data->num_rows - 1 || mapY >= data->num_rows - 1)
 				hit = 1;
 			else if (data->map[mapY][mapX] == '1')
-                hit = 1;
+                hit = 2;
 			else if (data->map[mapY][mapX] == '2')
-				hit = 2;
-			else if (data->map[mapY][mapX] == '3')
 				hit = 3;
+			else if (data->map[mapY][mapX] == '3')
+				hit = 4;
         }
 
         // 6. Calculate distance to the wall
@@ -124,18 +124,18 @@ void render_3d(t_mlx *data)
 
         // 8. Draw the vertical line for this column
 		int texture_index = 0;
-        if (hit == 1 || hit == 2 || hit == 3)
-		{
-			if (hit == 2)
-				texture_index = 1;
-			else if (hit == 3)
-				texture_index = 2;
-			if (side == 0)
-				wallX = data->player->y_pos + perpWallDist * rayDirY;
-			else
-				wallX = data->player->x_pos + perpWallDist * rayDirX;
-			wallX -= floor(wallX); // keep fractional part
-		}
+		if (hit == 2)
+			texture_index = 1;
+		else if (hit == 3)
+			texture_index = 2;
+		else if (hit == 4)
+			texture_index = 3;
+		if (side == 0)
+			wallX = data->player->y_pos + perpWallDist * rayDirY;
+		else
+			wallX = data->player->x_pos + perpWallDist * rayDirX;
+		wallX -= floor(wallX); // keep fractional part
+
 		int texWidth = data->textures[0].width;
 		int texHeight = data->textures[0].height;
 		int texX = (int)(wallX * (double)texWidth);
