@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/21 16:30:08 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/22 23:07:51 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	handle_mlx(t_mlx *data)
 
 	//data->textures = init_textures(); //simplifié: sur stack pr linstant
 	load_textures(data);
+	load_handgun(data);
 
 	//mlx_loop_hook(data->mlx, render, data);;
 	data->player = init_player(data);

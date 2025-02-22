@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/21 18:49:57 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/22 23:07:39 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define DARK_BLUE 0X0000B9
 # define GREEN 0X00FF00
 # define DARK_GREEN 0X00CA00
+# define BROWN 0x483C32
 # define PI 3.14159265
 
 
@@ -102,6 +103,7 @@ typedef struct s_mlx {
 	t_player	*player;
 	t_keys		*keys;
 	t_img		textures[4]; //pr linstant juste 1, pr tester brick
+	t_img		hand[1];
     //...
 } t_mlx;
 
@@ -154,5 +156,6 @@ int		game_loop(t_mlx *data);
 t_img	*init_textures(void);
 void	load_textures(t_mlx *data);
 int 	get_texture_pixel(t_img *texture, int x, int y);
+void	load_handgun(t_mlx *data);
 
 #endif

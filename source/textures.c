@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 19:05:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/22 17:05:12 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/22 23:07:26 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	load_textures(t_mlx *data)
 	data->textures[1].addr = mlx_get_data_addr(data->textures[1].img_ptr,
 		&data->textures[1].bpp, &data->textures[1].line_length, &data->textures[1].endian);
 
-	data->textures[2].img_ptr = mlx_xpm_file_to_image(data->mlx, "textures/purplestone.xpm",
+	data->textures[2].img_ptr = mlx_xpm_file_to_image(data->mlx, "textures/eagle.xpm",
 		&width, &height);
 	data->textures[2].height = height;
 	data->textures[2].width = width;
@@ -65,4 +65,21 @@ int get_texture_pixel(t_img *texture, int x, int y)
 
 	pixel = texture->addr + (y * texture->line_length) + (x * (texture->bpp / 8));
     return *(int *)pixel;
+}
+
+void load_handgun(t_mlx *data)
+{
+    int width;
+	int	height;
+
+    data->hand->img_ptr = mlx_xpm_file_to_image(data->mlx, "textures/handgun.xpm", &width, &height);
+    if (!data->hand->img_ptr)
+    {
+        perror("Failed to load gun sprite");
+        exit(1);
+    }
+    data->hand->width = width;
+    data->hand->height = height;
+    data->hand->addr = mlx_get_data_addr(data->hand->img_ptr, 
+		&data->hand->bpp, &data->hand->line_length, &data->hand->endian);
 }

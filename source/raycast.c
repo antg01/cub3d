@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/22 17:07:07 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/22 23:20:08 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,37 @@
 void init_raycast(t_player *player)
 {
 	player->ray = safe_malloc(sizeof(t_raycast));
+}
+
+// Simple function to retrieve a pixel from the gun sprite
+int get_sprite_pixel(t_img *sprite, int x, int y)
+{
+    char *pixel = sprite->addr
+                + (y * sprite->line_length)
+                + (x * (sprite->bpp / 8));
+    return *(int *)pixel;
+}
+
+void draw_gun_sprite(t_mlx *data)
+{
+    // Where to place the gun on the screen
+    int xOffset = WINDOW_LENGTH / 2 - data->hand->width / 2;
+    int yOffset = WINDOW_HEIGHT - data->hand->height * 2;
+
+    for (int y = 0; y < data->hand->height; y++)
+    {
+        for (int x = 0; x < data->hand->width; x++)
+        {
+            int color = get_sprite_pixel(data->hand, x, y);
+
+            // If you have a "transparent color"
+            // skip drawing those pixels:
+            if (color != 0xFFFFFF)
+            {
+                my_mlx_pixel_put(data, xOffset + x, yOffset + y, color);
+            }
+        }
+    }
 }
 
 void render_3d(t_mlx *data)
@@ -33,6 +64,8 @@ void render_3d(t_mlx *data)
 	double	perpWallDist;
 	int		color;
 	double	wallX;
+	
+	int		z; //test for the floor
 
     for (int x = 0; x < WINDOW_LENGTH; x++) // Loop through each column
     {
@@ -158,9 +191,12 @@ void render_3d(t_mlx *data)
 				color = (color >> 1) & 0x7F7F7F;
 
 			my_mlx_pixel_put(data, x, y, color);
+			z = y;
 		}
+		while (++z < WINDOW_HEIGHT)
+			my_mlx_pixel_put(data, x, z, BROWN);
     }
-
+	draw_gun_sprite(data);
     // Push the image to the window
     mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);
 }
