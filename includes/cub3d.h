@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/26 14:18:15 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:41:46 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define GREEN 0X00FF00
 # define DARK_GREEN 0X00CA00
 # define BROWN 0x483C32
+# define SKY 0x90D5FF
 # define PI 3.14159265
 
 

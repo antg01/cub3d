@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/26 13:58:13 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:41:53 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,9 @@ void render_3d(t_mlx *data)
 		// [TEXTURE CODE HERE] Now draw the column using the texture
 		double step = 1.0 * texHeight / lineHeight;
 		double texPos = (drawStart - WINDOW_HEIGHT / 2 + lineHeight / 2) * step;
-
+		z = -1; //draw ceiling
+		while (++z < drawStart)
+			my_mlx_pixel_put(data, x, z, SKY);
 		for (int y = drawStart; y < drawEnd; y++)
 		{
 			int texY = (int)texPos & (texHeight - 1);
@@ -193,11 +195,10 @@ void render_3d(t_mlx *data)
 			my_mlx_pixel_put(data, x, y, color);
 			z = y;
 		}
-		while (++z < WINDOW_HEIGHT)
+		while (++z < WINDOW_HEIGHT) //draw_floor
 			my_mlx_pixel_put(data, x, z, BROWN);
     }
 	//draw_gun_sprite(data);
-    // Push the image to the window
     mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);
 	render(data);
 }
