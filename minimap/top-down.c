@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/06 15:46:46 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:18:25 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,18 @@ void	draw_grid(t_mlx *data, int num_rows)
 	int	y;
 
 	cell_size = IMAGE_HEIGHT / num_rows;
-	y = 1 * cell_size;
-	while (y < IMAGE_HEIGHT + (1 * cell_size))
+	y = WINDOW_HEIGHT - IMAGE_HEIGHT;
+	while (y < WINDOW_HEIGHT)
 	{
-		x = 3 * cell_size;
-		while (x < IMAGE_LENGTH + (3 * cell_size))
+		x = 0;
+		while (x < IMAGE_LENGTH)
 		{
-			if (x == 3 * cell_size || x == IMAGE_LENGTH + (2 * cell_size)
-				|| y == 1 * cell_size || y == IMAGE_HEIGHT + cell_size
-				|| data->map[(y / cell_size) - 1][(x / cell_size) - 3] == '1')
-				draw_square(data, x, y, cell_size, 0xEE0000);
+			if (x == 0 || x == (num_rows - 1) * cell_size
+				|| y ==  WINDOW_HEIGHT - (num_rows * cell_size) || y == WINDOW_HEIGHT - cell_size)
+				draw_square(data, x, y, cell_size, RED);
+			else if (data->map[(y - (WINDOW_HEIGHT - (num_rows * cell_size))) / cell_size][(x / cell_size)] >= '2' &&
+					data->map[(y - (WINDOW_HEIGHT - (num_rows * cell_size))) / cell_size][(x / cell_size)] <= '4')
+				draw_square(data, x, y, cell_size, DARK_RED);
 			else
 				draw_square(data, x, y, cell_size, 0xFFFFFF);
 			x += cell_size;
@@ -60,16 +62,22 @@ void	draw_grid(t_mlx *data, int num_rows)
 
 void	draw_player(t_mlx *data)
 {
+	int i_start;
+	int	j_start;
 	int	i;
 	int	j;
+	int	cellsize;
 
-	i = data->player->y_pos - 3;
-	while (i < data->player->y_pos + 4)
+	cellsize = IMAGE_HEIGHT / data->num_rows;
+	i_start = (data->player->y_pos * cellsize + WINDOW_HEIGHT - (data->num_rows * cellsize)) - 3;
+	i = i_start;
+	while (i < i_start + 4)
 	{
-		j = data->player->x_pos - 3;
-		while (j < data->player->x_pos + 4)
+		j_start = (data->player->x_pos * cellsize) - 3;
+		j = j_start;
+		while (j < j_start + 4)
 		{
-			my_mlx_pixel_put(data, j, i, 0X0033FF);
+			my_mlx_pixel_put(data, j, i, DARK_BLUE);
 			j++;
 		}
 		i++;
@@ -78,7 +86,7 @@ void	draw_player(t_mlx *data)
 
 int	render(t_mlx *data)
 {
-    draw_grid(data, 10);  // 10 = NUMBER_ROWS hardcodée
+    draw_grid(data, data->num_rows);
 	draw_player(data);
 	draw_rays(data, data->player);
     mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);

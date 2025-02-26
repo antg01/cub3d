@@ -25,8 +25,8 @@ SRCS =	source/main.c \
 		source/raycast.c \
 		source/smooth_move.c \
 		source/textures.c \
-		#minimap/top-down.c \
-		#minimap/rays.c \
+		minimap/top-down.c \
+		minimap/rays.c \
 		
 
 OBJ_DIR = Objects

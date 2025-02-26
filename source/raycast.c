@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/22 23:20:08 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:58:13 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,9 @@ void render_3d(t_mlx *data)
 		while (++z < WINDOW_HEIGHT)
 			my_mlx_pixel_put(data, x, z, BROWN);
     }
-	draw_gun_sprite(data);
+	//draw_gun_sprite(data);
     // Push the image to the window
     mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);
+	render(data);
 }
 
