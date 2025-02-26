@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/26 15:09:49 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/26 21:38:15 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void draw_long_line(t_mlx *data, double x, double y, double dir_x, double dir_y)
 	img_y =  ((y * cellsize) + WINDOW_HEIGHT - IMAGE_HEIGHT) + 4 * dir_y;
     while (check_wall(data, (float) (img_x / cellsize), (float) ((img_y - WINDOW_HEIGHT + IMAGE_HEIGHT) / cellsize)))
 	{
-        my_mlx_pixel_put(data, (int) img_x, (int) img_y, GREEN);
-        img_x += dir_x * 1.0;
-        img_y += dir_y * 1.0;
+        my_mlx_pixel_put(data, (int) img_x, (int) img_y, BLUE);
+        img_x += dir_x * 1.0 * cellsize; //retire le * cellsize stv des vrais rays
+        img_y += dir_y * 1.0 * cellsize;
     }
 }
 
@@ -42,12 +42,12 @@ void	draw_rays(t_mlx *data, t_player *player)
 	ray_dir_y = player->dir_x * sin(-0.185 * PI) + player->dir_y * cos(-0.185 * PI);
 	
 	i = 0;
-	while (i <= 20)
+	while (i <= 100)
 	{
 		draw_long_line(data, player->x_pos, player->y_pos, ray_dir_x, ray_dir_y);
 		i++;
 		save_dir_x = ray_dir_x;
-		ray_dir_x = ray_dir_x * cos(0.0185 * PI) - ray_dir_y * sin(0.0185 * PI);
-		ray_dir_y = save_dir_x * sin(0.0185 * PI) + ray_dir_y * cos(0.0185 * PI);
+		ray_dir_x = ray_dir_x * cos(0.0037 * PI) - ray_dir_y * sin(0.0037 * PI);
+		ray_dir_y = save_dir_x * sin(0.0037 * PI) + ray_dir_y * cos(0.0037 * PI);
 	}
 }
