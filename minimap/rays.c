@@ -6,40 +6,26 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/06 16:10:08 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:09:49 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 // chatGPT (pcq flemme)
-void draw_long_line(t_mlx *data, int pos_x, int pos_y, double dir_x, double dir_y)
+void draw_long_line(t_mlx *data, double x, double y, double dir_x, double dir_y)
 {
-	int	cellsize = IMAGE_HEIGHT / 10;
-    // Start at the given position, using double precision for smooth stepping.
-    double x = pos_x;
-    double y = pos_y;
-    
-    // Define a step size in pixels.
-    // A step of 1.0 means we move approximately 1 pixel per iteration along the ray.
-    double step = 1.0;
-    
-    // Loop until the ray goes out of the window boundaries.
-    // (Adjust WINDOW_LENGTH and WINDOW_HEIGHT to your window's dimensions.)
-    while (x >= 4 * cellsize && x < 13 * cellsize && y >= 2 * cellsize && y < 11 * cellsize) // cellsize et num_rows hardcodée ici
-    {
-        // Use your check_wall function (which you must implement)
-        // to see if the current position (cast to int) is inside a wall.
-        if (!check_wall(data, (float)x, (float)y))
-            break;
+	int	cellsize = IMAGE_HEIGHT / data->num_rows;
+	double	img_x;
+	double	img_y;
 
-        // Draw the current pixel in the given color.
-        my_mlx_pixel_put(data, (int)x, (int)y, 0x00FF00);
-
-        // Advance the ray in the direction of (dir_x, dir_y).
-        // For example, if dir_x == 0.6 and dir_y == 0.8, then x increases by 0.6 and y by 0.8 each step.
-        x += dir_x * step;
-        y += dir_y * step;
+	img_x =  (x * cellsize) + 4 * dir_x; // + 4 * dir pr pas que ca cache le player blue dot
+	img_y =  ((y * cellsize) + WINDOW_HEIGHT - IMAGE_HEIGHT) + 4 * dir_y;
+    while (check_wall(data, (float) (img_x / cellsize), (float) ((img_y - WINDOW_HEIGHT + IMAGE_HEIGHT) / cellsize)))
+	{
+        my_mlx_pixel_put(data, (int) img_x, (int) img_y, GREEN);
+        img_x += dir_x * 1.0;
+        img_y += dir_y * 1.0;
     }
 }
 
@@ -58,7 +44,7 @@ void	draw_rays(t_mlx *data, t_player *player)
 	i = 0;
 	while (i <= 20)
 	{
-		draw_long_line(data, (int)player->x_pos, (int)player->y_pos, ray_dir_x, ray_dir_y);
+		draw_long_line(data, player->x_pos, player->y_pos, ray_dir_x, ray_dir_y);
 		i++;
 		save_dir_x = ray_dir_x;
 		ray_dir_x = ray_dir_x * cos(0.0185 * PI) - ray_dir_y * sin(0.0185 * PI);

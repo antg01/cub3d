@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/26 14:18:25 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:05:47 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	draw_grid(t_mlx *data, int num_rows)
 			if (x == 0 || x == (num_rows - 1) * cell_size
 				|| y ==  WINDOW_HEIGHT - (num_rows * cell_size) || y == WINDOW_HEIGHT - cell_size)
 				draw_square(data, x, y, cell_size, RED);
-			else if (data->map[(y - (WINDOW_HEIGHT - (num_rows * cell_size))) / cell_size][(x / cell_size)] >= '2' &&
+			else if (data->map[(y - (WINDOW_HEIGHT - (num_rows * cell_size))) / cell_size][(x / cell_size)] >= '1' &&
 					data->map[(y - (WINDOW_HEIGHT - (num_rows * cell_size))) / cell_size][(x / cell_size)] <= '4')
 				draw_square(data, x, y, cell_size, DARK_RED);
 			else
@@ -69,11 +69,11 @@ void	draw_player(t_mlx *data)
 	int	cellsize;
 
 	cellsize = IMAGE_HEIGHT / data->num_rows;
-	i_start = (data->player->y_pos * cellsize + WINDOW_HEIGHT - (data->num_rows * cellsize)) - 3;
+	i_start = (data->player->y_pos * cellsize + WINDOW_HEIGHT - IMAGE_HEIGHT) - 2;
 	i = i_start;
 	while (i < i_start + 4)
 	{
-		j_start = (data->player->x_pos * cellsize) - 3;
+		j_start = (data->player->x_pos * cellsize) - 2;
 		j = j_start;
 		while (j < j_start + 4)
 		{
