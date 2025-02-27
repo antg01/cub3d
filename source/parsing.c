@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:52:31 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/27 16:47:54 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:38:18 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ int	parsing(t_mlx *data, int fd, char *line, int num_rows)
 { //parametre *line doit etre égal à NULL !!
 	int		i;
 
+	check_four_dir(fd, data);
+	check_colors(data, fd);	
+	//apres ca, GNL arrive direct sur la map (newline deja skippee)
 	i = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line || *line == '\0')
 			break;
-		check_four_dir(fd, data);
 		if (0 == i || num_rows - 1 == i)
 		{
 			if (!only_ones(line))

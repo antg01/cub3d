@@ -25,7 +25,8 @@ SRCS =	source/main.c \
 		source/raycast.c \
 		source/smooth_move.c \
 		source/textures.c \
-		source/parsing_extra.c \
+		source/parsing_texture.c \
+		source/parsing_colors.c \
 		minimap/top-down.c \
 		minimap/rays.c \
 		
