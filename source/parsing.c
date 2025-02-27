@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:52:31 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/19 15:22:23 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:47:54 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	one_to_three(char c)
 
 //ya encore des pb, devrait pas pouvoir y avoir plusieurs 'N', et faut checker si la forme de la map a un sens
 //si une row a longueur 5, la suivante doit avoir longueur 3, 5 ou 7 !
-int	parsing(int fd, char *line, int num_rows)
+
+int	parsing(t_mlx *data, int fd, char *line, int num_rows)
 { //parametre *line doit etre égal à NULL !!
 	int		i;
 
@@ -64,6 +65,7 @@ int	parsing(int fd, char *line, int num_rows)
 		line = get_next_line(fd);
 		if (!line || *line == '\0')
 			break;
+		check_four_dir(fd, data);
 		if (0 == i || num_rows - 1 == i)
 		{
 			if (!only_ones(line))

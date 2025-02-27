@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/26 15:41:46 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:47:36 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # include <sys/time.h>
 # include <sys/types.h>
 
-# define IMAGE_HEIGHT 350
-# define IMAGE_LENGTH 350
-# define WINDOW_HEIGHT 900
-# define WINDOW_LENGTH 1500
+# define IMAGE_HEIGHT 500
+# define IMAGE_LENGTH 500
+# define WINDOW_HEIGHT 1400
+# define WINDOW_LENGTH 2000
 # define GRAY 0x808080
 # define RED 0xFF0000
 # define DARK_RED 0x8B0000
@@ -89,6 +89,7 @@ typedef struct s_img
 	int		bpp;
 	int		line_length;
 	int		endian;
+	char	*path //path pr textures/"exemple.xpm"
 }				t_img;
 
 
@@ -107,6 +108,8 @@ typedef struct s_mlx {
 	t_keys		*keys;
 	t_img		textures[4]; //pr linstant juste 1, pr tester brick
 	t_img		hand[1];
+	int			floor_color;
+	int			ceiling_color;
     //...
 } t_mlx;
 
@@ -120,7 +123,10 @@ void	handle_mlx(t_mlx *data);
 void 	clear_image(t_mlx *data, int color);
 
 // PARSING
-int		parsing(int fd, char *line, int num_rows);
+int		parsing(t_mlx *data, int fd, char *line, int num_rows);
+
+//PARSING EXTRA
+void	check_four_dir(int fd, t_mlx *data);
 
 // MAP
 char	**make_map(int num_rows);

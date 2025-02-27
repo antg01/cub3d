@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/26 21:38:15 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:25:15 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	draw_rays(t_mlx *data, t_player *player)
 	ray_dir_y = player->dir_x * sin(-0.185 * PI) + player->dir_y * cos(-0.185 * PI);
 	
 	i = 0;
-	while (i <= 100)
+	while (i < 400)
 	{
 		draw_long_line(data, player->x_pos, player->y_pos, ray_dir_x, ray_dir_y);
 		i++;
 		save_dir_x = ray_dir_x;
-		ray_dir_x = ray_dir_x * cos(0.0037 * PI) - ray_dir_y * sin(0.0037 * PI);
-		ray_dir_y = save_dir_x * sin(0.0037 * PI) + ray_dir_y * cos(0.0037 * PI);
+		ray_dir_x = ray_dir_x * cos(0.000925 * PI) - ray_dir_y * sin(0.000925 * PI);
+		ray_dir_y = save_dir_x * sin(0.000925 * PI) + ray_dir_y * cos(0.000925 * PI);
 	}
 }

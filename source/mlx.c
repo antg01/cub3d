@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/22 23:07:51 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:15:09 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int close_window(t_mlx *data)
 
 void	handle_mlx(t_mlx *data)
 {
-	data->mlx = mlx_init();
+	//data->mlx = mlx_init();
 
 	data->window = mlx_new_window(data->mlx, WINDOW_LENGTH, WINDOW_HEIGHT, "Top-Down View");
 	data->image = mlx_new_image(data->mlx, WINDOW_LENGTH, WINDOW_HEIGHT);
