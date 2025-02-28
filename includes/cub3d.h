@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 15:57:25 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/28 19:14:14 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@
 
 typedef struct s_maplist {
 	char				*line;
-	int					row_count;
 	struct s_maplist	*next;
 }				t_maplist;
 
@@ -95,7 +94,7 @@ typedef struct s_img
 	int		bpp;
 	int		line_length;
 	int		endian;
-	char	*path //path pr textures/"exemple.xpm"
+	//char	*path; //path pr textures/"exemple.xpm"
 }				t_img;
 
 
@@ -133,12 +132,12 @@ int		parsing(t_mlx *data, int fd);
 
 //PARSING TEXTURE && COLORS
 void	check_four_dir(int fd, t_mlx *data);
-void	my_exit(void);
+void	my_exit(char *msg);
 void	skip_nl(int fd);
 void	check_colors(t_mlx *data, int fd);
 
 // MAP
-char	**make_map(int num_rows);
+char	**make_map(t_maplist *head, int num_rows);
 
 // EXTRACT MAP
 t_maplist	*extract_map(int fd, int *count_rows);
@@ -164,8 +163,8 @@ int			check_wall(t_mlx *data, float x, float y);
 void	draw_rays(t_mlx *data, t_player *player);
 
 // RAYCASTING
-void init_raycast(t_player *player);
-void render_3d(t_mlx *data); //CHATGPT, attention juste checker
+void	init_raycast(t_player *player);
+void	render_3d(t_mlx *data); //CHATGPT, attention juste checker
 
 // SMOOTH MOVE
 t_keys	*init_keys(void);

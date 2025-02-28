@@ -6,37 +6,32 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:52:35 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 15:55:09 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:36:40 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-//probablement pour la poubelle
-char	**make_map(int num_rows)
+char	**make_map(t_maplist *head, int num_rows)
 {
-	char	**result;
-	char	*line;
-	int		fd;
-	int		i;
+	char		**map;
+	t_maplist	*curr;
+	t_maplist	*save; //to allow freeing
+	int			i;
 
-	result = (char **) safe_malloc((size_t) (sizeof(char *) * (num_rows + 1))); // + 1 pr NULL
-	fd = open("maps/test.cub", O_RDONLY);
-	if (-1 == fd)
-	{
-		write(2, "file opening failed (exiting)\n", 31);
-		exit(EXIT_FAILURE);
-	}
+	map = safe_malloc(sizeof(char *) * (num_rows + 1));
+	curr = head;
 	i = 0;
-	while (1)
+	while (curr != NULL)
 	{
-		line = get_next_line(fd);
-		if (!line) // || *line == '\0' ?
-			break;
-		result[i] = safe_strdup(line);
-		free(line);
+		map[i] = safe_strdup(curr->line);
+		save = curr->next;
+		free(curr->line);
+		curr->next = NULL;
+		free(curr);
+		curr = save;
 		i++;
 	}
-	result[i] = NULL;
-	return (result);
+	map[i] = NULL;
+	return (map);
 }

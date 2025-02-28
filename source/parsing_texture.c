@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_extra.c                                    :+:      :+:    :+:   */
+/*   parsing_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:01:45 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/27 16:47:20 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/28 18:52:40 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void	skip_nl(int fd)
 	free(line);
 }
 
-void	my_exit(void)
+void	my_exit(char *msg)
 {
-	write(2, "Error, info file corrupted\n", 27);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
 	exit(EXIT_SUCCESS);
 }
 
@@ -36,14 +37,15 @@ void	do_textures(t_mlx *data, char *path_texture, int index)
 	int	height;
 	int	width;
 
+	printf("%s\n", path_texture);
 	data->textures[index].img_ptr = mlx_xpm_file_to_image(data->mlx, path_texture,
 		&width, &height);
 	if (!(data->textures[index].img_ptr))
-		my_exit();
+		my_exit("xpm_file_to_image failed");
 	data->textures[index].height = height;
 	data->textures[index].width = width;
-	data->textures[index].addr = mlx_get_data_addr(data->textures[0].img_ptr,
-		&data->textures[0].bpp, &data->textures[0].line_length, &data->textures[0].endian);
+	data->textures[index].addr = mlx_get_data_addr(data->textures[index].img_ptr,
+		&data->textures[index].bpp, &data->textures[index].line_length, &data->textures[index].endian);
 }
 
 void	check_four_dir(int fd, t_mlx *data)
@@ -57,20 +59,30 @@ void	check_four_dir(int fd, t_mlx *data)
 	{
 		current = get_next_line(fd);
 		if (i == 0)
+		{
 			if (!current || ft_strncmp(current, "NO ./", 5))
-				my_exit();
+				my_exit("check_four_dir 1");
+		}
 		else if (i == 1)
+		{
 			if (!current || ft_strncmp(current, "SO ./", 5))
-				my_exit();
+				my_exit("check_four_dir 2");
+		}
 		else if (i == 2)
+		{
 			if (!current || ft_strncmp(current, "WE ./", 5))
-				my_exit();
+				my_exit("check_four_dir 3");
+		}
 		else if (i == 3)
+		{
 			if (!current || ft_strncmp(current, "EA ./", 5))
-				my_exit();
+				my_exit("check_four_dir 4");
+		}
 		path = current + 5;
 		do_textures(data, path, i);
 		free(current);
+		i++;
 	}
 	skip_nl(fd);
+	write(2, "CHECK FOUR DIR\n", 15);
 }
