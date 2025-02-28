@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/27 17:36:37 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:24:00 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@
 
 
 // STRUCTURES
+
+typedef struct s_maplist {
+	char				*line;
+	int					row_count;
+	struct s_maplist	*next;
+}				t_maplist;
 
 typedef struct s_keys {
 	int	forward;

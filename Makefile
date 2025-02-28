@@ -27,6 +27,7 @@ SRCS =	source/main.c \
 		source/textures.c \
 		source/parsing_texture.c \
 		source/parsing_colors.c \
+		source/extract_map.c \
 		minimap/top-down.c \
 		minimap/rays.c \
 		

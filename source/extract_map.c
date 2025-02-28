@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 14:52:31 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 14:19:45 by gnyssens         ###   ########.fr       */
+/*   Created: 2025/02/28 14:09:01 by gnyssens          #+#    #+#             */
+/*   Updated: 2025/02/28 15:24:56 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,16 @@ int	one_to_three(char c)
 		return (1);
 }
 
+void	extract_map(t_mlx *data, int fd)
+{
+	char	*line;
+	int		i;
+	int		player_letter;
 
-//ya encore des pb, devrait pas pouvoir y avoir plusieurs 'N', et faut checker si la forme de la map a un sens
-//si une row a longueur 5, la suivante doit avoir longueur 3, 5 ou 7 !
-
-int	parsing(t_mlx *data, int fd, int num_rows)
-{ //parametre *line doit etre égal à NULL !!
-
-
-	check_four_dir(fd, data);
-	check_colors(data, fd);	
-	//apres ca, GNL arrive direct sur la map (newline deja skippee)
-
-	//extract map
-	return (1);
+	player_letter = 0;
+	i = 0;
+	while (1)
+	{
+		
+	}
 }
