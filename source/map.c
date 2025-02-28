@@ -6,12 +6,13 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:52:35 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/04 13:59:02 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:55:09 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+//probablement pour la poubelle
 char	**make_map(int num_rows)
 {
 	char	**result;

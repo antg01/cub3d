@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 15:24:00 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:57:25 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	handle_mlx(t_mlx *data);
 void 	clear_image(t_mlx *data, int color);
 
 // PARSING
-int		parsing(t_mlx *data, int fd, char *line, int num_rows);
+int		parsing(t_mlx *data, int fd);
 
 //PARSING TEXTURE && COLORS
 void	check_four_dir(int fd, t_mlx *data);
@@ -139,6 +139,9 @@ void	check_colors(t_mlx *data, int fd);
 
 // MAP
 char	**make_map(int num_rows);
+
+// EXTRACT MAP
+t_maplist	*extract_map(int fd, int *count_rows);
 
 // UTILS
 int		num_rows(void);

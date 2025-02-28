@@ -6,12 +6,13 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:59:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/27 15:44:04 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/02/28 15:55:59 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+//pr la poubelle aussi
 int	num_rows(void)
 {
 	int		fd;
