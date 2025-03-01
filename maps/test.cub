@@ -1,10 +1,10 @@
 NO ./textures/bluestone.xpm
 SO ./textures/redbrick.xpm
 WE ./textures/wood.xpm
-EA ./textures/mossy.xpm
+EA ./textures/eagle.xpm
 
-F 220,100,0
-C 225,30,0
+F 48,60,32
+C 90,213,255
 
 1111111111111111111111111
 1000000000000000000100001

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/26 15:41:53 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:05:21 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void render_3d(t_mlx *data)
 	double	wallX;
 	
 	int		z; //test for the floor
+	int		index_texture;
 
     for (int x = 0; x < WINDOW_LENGTH; x++) // Loop through each column
     {
@@ -133,11 +134,7 @@ void render_3d(t_mlx *data)
             if (mapX <= 0 || mapY <= 0 || mapX >= data->num_rows - 1 || mapY >= data->num_rows - 1)
 				hit = 1;
 			else if (data->map[mapY][mapX] == '1')
-                hit = 2;
-			else if (data->map[mapY][mapX] == '2')
-				hit = 3;
-			else if (data->map[mapY][mapX] == '3')
-				hit = 4;
+				hit = 1;
         }
 
         // 6. Calculate distance to the wall
@@ -156,21 +153,27 @@ void render_3d(t_mlx *data)
 			drawEnd = WINDOW_HEIGHT - 1;
 
         // 8. Draw the vertical line for this column
-		int texture_index = 0;
-		if (hit == 2)
-			texture_index = 1;
-		else if (hit == 3)
-			texture_index = 2;
-		else if (hit == 4)
-			texture_index = 3;
-		if (side == 0)
+		//index_texture
+		if (side == 0) //vertical wall
+		{
 			wallX = data->player->y_pos + perpWallDist * rayDirY;
-		else
+			if (rayDirX < 0) // west
+				index_texture = 2;
+			else
+				index_texture = 3; //east
+		}
+		else //horizontal wall
+		{
 			wallX = data->player->x_pos + perpWallDist * rayDirX;
+			if (rayDirY < 0)
+				index_texture = 0; //north
+			else
+				index_texture = 1; //south
+		}
 		wallX -= floor(wallX); // keep fractional part
 
-		int texWidth = data->textures[0].width;
-		int texHeight = data->textures[0].height;
+		int texWidth = data->textures[index_texture].width;
+		int texHeight = data->textures[index_texture].height;
 		int texX = (int)(wallX * (double)texWidth);
 		if (side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
 		if (side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
@@ -180,23 +183,23 @@ void render_3d(t_mlx *data)
 		double texPos = (drawStart - WINDOW_HEIGHT / 2 + lineHeight / 2) * step;
 		z = -1; //draw ceiling
 		while (++z < drawStart)
-			my_mlx_pixel_put(data, x, z, SKY);
+			my_mlx_pixel_put(data, x, z, data->ceiling_color);
 		for (int y = drawStart; y < drawEnd; y++)
 		{
 			int texY = (int)texPos & (texHeight - 1);
 			texPos += step;
 
-			color = get_texture_pixel(&data->textures[texture_index], texX, texY);
+			color = get_texture_pixel(&data->textures[index_texture], texX, texY);
 
 			// Optional shading if horizontal side
-			if (side == 1)
-				color = (color >> 1) & 0x7F7F7F;
+			//if (side == 1)
+			//	color = (color >> 1) & 0x7F7F7F;
 
 			my_mlx_pixel_put(data, x, y, color);
 			z = y;
 		}
 		while (++z < WINDOW_HEIGHT) //draw_floor
-			my_mlx_pixel_put(data, x, z, BROWN);
+			my_mlx_pixel_put(data, x, z, data->floor_color);
     }
 	//draw_gun_sprite(data);
     mlx_put_image_to_window(data->mlx, data->window, data->image, 0, 0);

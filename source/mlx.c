@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 18:58:22 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:03:35 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ void	handle_mlx(t_mlx *data)
 	data->image = mlx_new_image(data->mlx, WINDOW_LENGTH, WINDOW_HEIGHT);
 	data->addr = mlx_get_data_addr(data->image, &data->bits_per_pixel, &data->line_length, &data->endian);
 
-	//data->textures = init_textures(); //simplifié: sur stack pr linstant
-	load_textures(data);
-	load_handgun(data);
+	//load_textures(data); SUPPRIMER
+	//load_handgun(data);
 
 	//mlx_loop_hook(data->mlx, render, data);;
 	data->player = init_player(data);
