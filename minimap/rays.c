@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/27 14:25:15 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/01 21:04:07 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void draw_long_line(t_mlx *data, double x, double y, double dir_x, double dir_y)
 	double	img_y;
 
 	img_x =  (x * cellsize) + 4 * dir_x; // + 4 * dir pr pas que ca cache le player blue dot
-	img_y =  ((y * cellsize) + WINDOW_HEIGHT - IMAGE_HEIGHT) + 4 * dir_y;
-    while (check_wall(data, (float) (img_x / cellsize), (float) ((img_y - WINDOW_HEIGHT + IMAGE_HEIGHT) / cellsize)))
+	img_y =  ((y * cellsize) + WINDOW_HEIGHT - (data->num_rows * cellsize)) + 4 * dir_y;
+    while (check_wall(data, (float) (img_x / cellsize), (float) ((img_y - WINDOW_HEIGHT + (data->num_rows * cellsize)) / cellsize)))
 	{
         my_mlx_pixel_put(data, (int) img_x, (int) img_y, BLUE);
         img_x += dir_x * 1.0 * cellsize; //retire le * cellsize stv des vrais rays

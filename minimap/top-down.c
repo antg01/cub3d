@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/01 20:52:35 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/01 20:57:31 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_player(t_mlx *data)
 	int	cellsize;
 
 	cellsize = IMAGE_HEIGHT / data->num_rows;
-	i_start = (data->player->y_pos * cellsize + WINDOW_HEIGHT - IMAGE_HEIGHT) - 2;
+	i_start = (data->player->y_pos * cellsize + WINDOW_HEIGHT - (data->num_rows * cellsize)) - 2;
 	i = i_start;
 	while (i < i_start + 4)
 	{
