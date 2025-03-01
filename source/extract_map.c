@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:09:01 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 18:48:27 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:35:01 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	check_chars(char *str, int *check_nsew)
 {
 	int	i;
 
+	i = 0;
+	while (str[i] && str[i] != '\n') //remove the '\n' for the map
+		i++;
+	if (str[i] == '\n')
+		str[i] = '\0';
 	i = 0;
 	while (str[i])
 	{

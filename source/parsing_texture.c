@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:01:45 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 18:52:40 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:28:12 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	skip_nl(int fd)
 	char	*line;
 
 	line = get_next_line(fd);
-	if (*line != '\0')
+	if (*line != '\n')
 	{
 		write(2, "Error, no newline\n", 18);
 		exit(EXIT_FAILURE);
@@ -34,10 +34,15 @@ void	my_exit(char *msg)
 
 void	do_textures(t_mlx *data, char *path_texture, int index)
 {
-	int	height;
-	int	width;
+	int		height;
+	int		width;
+	int		i;
 
-	printf("%s\n", path_texture);
+	i = 0;
+	while (path_texture[i] && path_texture[i] != '\n')
+		i++;
+	if (path_texture[i] == '\n')
+		path_texture[i] = '\0';
 	data->textures[index].img_ptr = mlx_xpm_file_to_image(data->mlx, path_texture,
 		&width, &height);
 	if (!(data->textures[index].img_ptr))
@@ -84,5 +89,4 @@ void	check_four_dir(int fd, t_mlx *data)
 		i++;
 	}
 	skip_nl(fd);
-	write(2, "CHECK FOUR DIR\n", 15);
 }

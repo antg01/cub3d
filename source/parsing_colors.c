@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:56:02 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 18:49:33 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:26:49 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void	check_colors(t_mlx *data, int fd)
 	info = get_next_line(fd);
 	if (!info || ft_strncmp(info, "F ", 2))
 		my_exit("color line FLOOR");
-	data->floor_color = str_to_hexa(info);
+	data->floor_color = str_to_hexa(info + 2);
 	free(info);
 	info = get_next_line(fd);
 	if (!info || ft_strncmp(info, "C ", 2))
 		my_exit("color line CEILING");
-	data->ceiling_color = str_to_hexa(info);
+	data->ceiling_color = str_to_hexa(info + 2);
 	free(info);
 	skip_nl(fd);
 }

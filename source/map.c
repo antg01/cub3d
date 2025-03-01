@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:52:35 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 18:36:40 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:35:20 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**make_map(t_maplist *head, int num_rows)
 	map = safe_malloc(sizeof(char *) * (num_rows + 1));
 	curr = head;
 	i = 0;
-	while (curr != NULL)
+	while (curr->line)
 	{
 		map[i] = safe_strdup(curr->line);
 		save = curr->next;
