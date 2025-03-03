@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/01 21:04:07 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:57:01 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,20 @@ void draw_long_line(t_mlx *data, double x, double y, double dir_x, double dir_y)
 	int	cellsize = IMAGE_HEIGHT / data->num_rows;
 	double	img_x;
 	double	img_y;
+	int		i;
 
 	img_x =  (x * cellsize) + 4 * dir_x; // + 4 * dir pr pas que ca cache le player blue dot
 	img_y =  ((y * cellsize) + WINDOW_HEIGHT - (data->num_rows * cellsize)) + 4 * dir_y;
-    while (check_wall(data, (float) (img_x / cellsize), (float) ((img_y - WINDOW_HEIGHT + (data->num_rows * cellsize)) / cellsize)))
+	i = 0;
+    while (1)
 	{
-        my_mlx_pixel_put(data, (int) img_x, (int) img_y, BLUE);
-        img_x += dir_x * 1.0 * cellsize; //retire le * cellsize stv des vrais rays
-        img_y += dir_y * 1.0 * cellsize;
+		if (!check_wall(data, (float) (img_x / cellsize), (float) ((img_y - WINDOW_HEIGHT + (data->num_rows * cellsize)) / cellsize)))
+			break ;
+		if (i == 0 || i % cellsize == 0)
+        	my_mlx_pixel_put(data, (int) img_x, (int) img_y, BLUE);
+        img_x += dir_x * 1.0; //retire le * cellsize stv des vrais rays
+        img_y += dir_y * 1.0;
+		i++;
     }
 }
 

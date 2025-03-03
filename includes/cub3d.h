@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/01 15:36:58 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:38:54 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # include <sys/time.h>
 # include <sys/types.h>
 
-# define IMAGE_HEIGHT 350
-# define IMAGE_LENGTH 350
-# define WINDOW_HEIGHT 900
-# define WINDOW_LENGTH 1500
+# define IMAGE_HEIGHT 500
+# define IMAGE_LENGTH 500
+# define WINDOW_HEIGHT 1200
+# define WINDOW_LENGTH 2000
 # define GRAY 0x808080
 # define RED 0xFF0000
 # define DARK_RED 0x8B0000

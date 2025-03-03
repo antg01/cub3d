@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/19 18:02:55 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:51:57 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_player	*init_player(t_mlx *data)
 	player = (t_player *)safe_malloc(sizeof(t_player));
 	coord_player[0] = which_row(data->map);
 	coord_player[1] = which_col(data->map[coord_player[0]]);
-	player->x_pos = (double) (coord_player[0] + 0.50); //jsp si cst bien, pr qu'il soit 'au milieu'
-	player->y_pos = (double) (coord_player[1] + 0.50);
+	player->x_pos = (double) (coord_player[1] + 0.50); //jsp si cst bien, pr qu'il soit 'au milieu'
+	player->y_pos = (double) (coord_player[0] + 0.50);
 	player->dir_x = 0; //vers le Nord pr commencer
 	player->dir_y = -1;
 	player->rot_speed = PI / 16;
@@ -81,8 +81,9 @@ int	check_wall(t_mlx *data, float x, float y)
 	round_y = (int) y;//round_float(y);
 	if (round_x < 0 || round_y < 0 || round_x > data->num_rows || round_y > data->num_rows)
 		return (0);
-	if (data->map[round_y][round_x] == '1'
-		|| data->map[round_y][round_x] == '2' || data->map[round_y][round_x] == '3')
+	if (data->map[round_y][round_x] == '1')
+		return (0);
+	if (data->map[(int)(y - 0.01)][(int)x] == '1' || data->map[(int) (y)][(int) (x - 0.01)] == '1')
 		return (0);
 	
 	return (1);
