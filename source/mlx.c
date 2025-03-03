@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 15:08:43 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:25:58 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,10 @@ int close_window(t_mlx *data)
 
 void	handle_mlx(t_mlx *data)
 {
-	//data->mlx = mlx_init();
-
 	data->window = mlx_new_window(data->mlx, WINDOW_LENGTH, WINDOW_HEIGHT, "Top-Down View");
 	data->image = mlx_new_image(data->mlx, WINDOW_LENGTH, WINDOW_HEIGHT);
 	data->addr = mlx_get_data_addr(data->image, &data->bits_per_pixel, &data->line_length, &data->endian);
-
-	//load_textures(data); SUPPRIMER
-	//load_handgun(data);
-
-	//mlx_loop_hook(data->mlx, render, data);;
+	
 	data->player = init_player(data);
 	data->keys = init_keys();
 	init_raycast(data->player);

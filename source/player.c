@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 16:07:23 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:30:52 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	which_row(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if ('N' == map[i][j])
+			if ('N' == map[i][j] || 'S' == map[i][j] || 'E' == map[i][j] || 'W' == map[i][j])
 				return (i);
 			j++;
 		}
@@ -40,11 +40,35 @@ int	which_col(char *row)
 	i = 0;
 	while (row[i])
 	{
-		if ('N' == row[i])
+		if ('N' == row[i] || 'S' == row[i] || 'E' == row[i] || 'W' == row[i])
 			return (i);
 		i++;
 	}
 	return (-1);
+}
+
+void	set_start_dirs(t_mlx *data, t_player *player)
+{
+	if (*(data->orientation) == 'N')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+	}
+	else if (*(data->orientation) == 'S')
+	{
+		player->dir_x = 0;
+		player->dir_y = 1;
+	}
+	else if (*(data->orientation) == 'E')
+	{
+		player->dir_x = 1;
+		player->dir_y = 0;
+	}
+	else if (*(data->orientation) == 'W')
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+	}
 }
 
 //incomplet, pr l'instant juste pos pr top-down
@@ -58,8 +82,7 @@ t_player	*init_player(t_mlx *data)
 	coord_player[1] = which_col(data->map[coord_player[0]]);
 	player->x_pos = (double) (coord_player[1] + 0.50); //jsp si cst bien, pr qu'il soit 'au milieu'
 	player->y_pos = (double) (coord_player[0] + 0.50);
-	player->dir_x = 0; //vers le Nord pr commencer
-	player->dir_y = -1;
+	set_start_dirs(data, player);
 	player->rot_speed = PI / 16;
 
 	//ci-dessous ça sera p-e trasnféré vers t_raycast (struct)

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 15:32:15 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:26:15 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_mlx {
 	t_img		hand[1];
 	int			floor_color;
 	int			ceiling_color;
+	char		orientation[2];
     //...
 } t_mlx;
 
@@ -140,7 +141,7 @@ void	check_colors(t_mlx *data, int fd);
 char	**make_map(t_maplist *head, int num_rows);
 
 // EXTRACT MAP
-t_maplist	*extract_map(int fd, int *count_rows);
+t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows);
 
 // UTILS
 int		num_rows(void);
