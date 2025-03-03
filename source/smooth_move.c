@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:44:23 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 15:34:59 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:11:10 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	game_loop(t_mlx *data)
 		data->player->plane_y = save_plane_x * sin(rot_speed) + data->player->plane_y * cos(rot_speed);
 	}
 
-	clear_image(data, 0X000000);
+	//clear_image(data, 0X000000);
 	render_3d(data);
 
 	return (0);
