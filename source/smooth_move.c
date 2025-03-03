@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:44:23 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/19 18:04:34 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:34:59 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	game_loop(t_mlx *data)
 	{
 		newX = data->player->x_pos + data->player->dir_x * moveSpeed;
 		newY = data->player->y_pos + data->player->dir_y * moveSpeed;
-		if (check_wall(data, newX, newY))
+		if (check_wall(data, (int)newX, (int)newY))
 		{
 			data->player->x_pos = newX;
 			data->player->y_pos = newY;
@@ -90,7 +90,7 @@ int	game_loop(t_mlx *data)
 	{
 		newX = data->player->x_pos - data->player->dir_x * moveSpeed;
 		newY = data->player->y_pos - data->player->dir_y * moveSpeed;
-		if (check_wall(data, newX, newY))
+		if (check_wall(data, (int)newX, (int)newY))
 		{
 			data->player->x_pos = newX;
 			data->player->y_pos = newY;

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/01 16:03:35 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:08:43 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int handle_keypress(int keycode, t_mlx *data)
 	if (keycode == 65307) // Escape key (Linux)
 	{
 		mlx_destroy_window(data->mlx, data->window);
+		free_split(data->map);
+		//free reste aussi
 		exit(0);
 	}
 

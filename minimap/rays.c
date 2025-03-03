@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 14:57:01 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:36:11 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void draw_long_line(t_mlx *data, double x, double y, double dir_x, double dir_y)
 	i = 0;
     while (1)
 	{
-		if (!check_wall(data, (float) (img_x / cellsize), (float) ((img_y - WINDOW_HEIGHT + (data->num_rows * cellsize)) / cellsize)))
+		if (!check_wall(data,(img_x / cellsize), (img_y - WINDOW_HEIGHT + (data->num_rows * cellsize)) / cellsize))
 			break ;
 		if (i == 0 || i % cellsize == 0)
         	my_mlx_pixel_put(data, (int) img_x, (int) img_y, BLUE);

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 14:38:54 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:32:15 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ t_maplist	*extract_map(int fd, int *count_rows);
 int		num_rows(void);
 int		round_float(float nb);
 double	get_time_in_seconds(void);
+void	free_split(char **map);
 
 // SAFE_UTILS
 void	*safe_malloc(size_t size);
@@ -157,7 +158,7 @@ int		render(t_mlx *data);
 
 // PLAYER
 t_player	*init_player(t_mlx *data);
-int			check_wall(t_mlx *data, float x, float y);
+int			check_wall(t_mlx *data, int x, int y);
 
 // RAYS
 void	draw_rays(t_mlx *data, t_player *player);

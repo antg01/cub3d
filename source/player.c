@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 14:51:57 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:50:43 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,53 @@ t_player	*init_player(t_mlx *data)
 	return (player);
 }
 
-int	check_wall(t_mlx *data, float x, float y)
+int	check_wall(t_mlx *data, int x, int y)
 {
-	int			round_x;
-	int			round_y;
+	int			old_x;
+	int			old_y;
+	int			dx; //dir_x
+	int			dy; //dir_y
 
-	round_x = (int) x;//round_float(x);
-	round_y = (int) y;//round_float(y);
-	if (round_x < 0 || round_y < 0 || round_x > data->num_rows || round_y > data->num_rows)
+	if (x < 0 || y < 0 || x > data->num_rows || y > data->num_rows)
 		return (0);
-	if (data->map[round_y][round_x] == '1')
+	if (data->map[y][x] == '1')
 		return (0);
-	if (data->map[(int)(y - 0.01)][(int)x] == '1' || data->map[(int) (y)][(int) (x - 0.01)] == '1')
-		return (0);
-	
+	old_x = data->player->x_pos;
+	old_y = data->player->y_pos;
+	if (data->player->dir_x > 0)
+		dx = 1;
+	else if (data->player->dir_x == 0)
+		dx = 0;
+	else
+		dx = -1;
+	if (data->player->dir_y > 0)
+		dy = 1;
+	else if (data->player->dir_y == 0)
+		dy = 0;
+	else
+		dy = -1;
+	if (old_x != x && old_y != y) //ca veut dire que ya changement diagonal (de 2 cases)
+	{
+		if (dx == 1 && dy == 1)
+		{
+			if (data->map[y - 1][x] == '1' && data->map[y][x - 1] == '1')
+				return (0);
+		}
+		else if (dx == 1 && dy == -1)
+		{
+			if (data->map[y + 1][x] == '1' && data->map[y][x - 1] == '1')
+				return (0);
+		}
+		else if (dx == -1 && dy == 1)
+		{
+			if (data->map[y - 1][x] == '1' && data->map[y][x + 1] == '1')
+				return (0);
+		}
+		else if (dx == -1 && dy == -1)
+		{
+			if (data->map[y + 1][x] == '1' && data->map[y][x + 1] == '1')
+				return (0);
+		}
+	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:59:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/02/28 15:55:59 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:08:19 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,17 @@ double	get_time_in_seconds(void)
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec + tv.tv_usec / 1000000.0);
+}
+
+void	free_split(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }
