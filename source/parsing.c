@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:52:31 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 16:16:32 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:25:53 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	parsing(t_mlx *data, int fd)
 	data->num_rows = count_rows;
 	if (0 == count_rows)
 		write(2, "empty map\n", 10), exit(1);
-	data->map = make_map(head, count_rows);
+	data->longest_row = 0;
+	data->map = make_map(head, count_rows, &(data->longest_row));
 
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 16:30:52 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:38:34 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	check_wall(t_mlx *data, int x, int y)
 	int			dx; //dir_x
 	int			dy; //dir_y
 
-	if (x < 0 || y < 0 || x > data->num_rows || y > data->num_rows)
+	if (x < 0 || y < 0 || x > data->longest_row || y > data->num_rows)
 		return (0);
 	if (data->map[y][x] == '1')
 		return (0);

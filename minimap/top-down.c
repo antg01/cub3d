@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/01 20:57:31 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:34:48 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,18 @@ void	draw_grid(t_mlx *data, int num_rows)
 	cell_size = IMAGE_HEIGHT / num_rows;
 	y = WINDOW_HEIGHT - num_rows * cell_size;
 	y_limit = y + (num_rows - 1) * cell_size;
-	x_limit = num_rows * cell_size;
+	x_limit = data->longest_row * cell_size;
 	while (y <= y_limit)
 	{
 		x = 0;
 		while (x < x_limit)
 		{
-			if (x == 0 || x == (num_rows - 1) * cell_size
-				|| y ==  WINDOW_HEIGHT - (num_rows * cell_size) || y == y_limit)
-				draw_square(data, x, y, cell_size, RED);
-			if (data->map[(y - WINDOW_HEIGHT + (num_rows * cell_size)) / cell_size][(x / cell_size)] == '1')
+			//if (x == 0 || x >= (num_rows - 1) * cell_size
+			//	|| y ==  WINDOW_HEIGHT - (num_rows * cell_size) || y == y_limit)
+			//	draw_square(data, x, y, cell_size, RED);
+			if (!data->map[(y - WINDOW_HEIGHT + (num_rows * cell_size)) / cell_size][(x / cell_size)])
+				break ;
+			else if (data->map[(y - WINDOW_HEIGHT + (num_rows * cell_size)) / cell_size][(x / cell_size)] == '1')
 				draw_square(data, x, y, cell_size, DARK_RED);
 			else
 				draw_square(data, x, y, cell_size, 0xFFFFFF);
