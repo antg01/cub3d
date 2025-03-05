@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 16:25:58 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:47:18 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	handle_mlx(t_mlx *data)
 	mlx_hook(data->window, 3, 1L << 1, key_release, data);  // Key release
 	mlx_hook(data->window, 17, 0, close_window, data);
 
-	mlx_loop_hook(data->mlx, game_loop, data); // Game loop for smooth movement
+	mlx_loop_hook(data->mlx, game_loop, data); // game loop for smooth movement
 
 	mlx_loop(data->mlx);
 }

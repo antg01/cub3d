@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/05 15:17:38 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:51:20 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ void draw_long_line(t_mlx *data, double x, double y, double dir_x, double dir_y)
     }
 }
 
-// FOV == 0.37 * PI
-// start_dir = player_dir - 0.185 * PI vers la gauche, puis 10x rays de 0.037 * PI
+// fonction qui créé le 'sonar' du joueur, pr afficher son champ de vision dans la minimap
 void	draw_rays(t_mlx *data, t_player *player)
 {
 	float	ray_dir_x;

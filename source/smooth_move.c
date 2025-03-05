@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:44:23 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 16:11:10 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:46:54 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int key_release(int keycode, t_mlx *data)
 	return (0);
 }
 
+//fonction qui gere le fps, les mouvements fluides
 int	game_loop(t_mlx *data)
 {
 	double newX;

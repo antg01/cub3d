@@ -6,12 +6,14 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/05 14:51:54 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:49:26 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+// cette fonction elle sert a rien pr linstant, la structure t_raycast yen aura besoin
+// pr normer 'render_3d' qui a blindé de variables
 void init_raycast(t_player *player)
 {
 	player->ray = safe_malloc(sizeof(t_raycast));
@@ -48,6 +50,7 @@ void draw_gun_sprite(t_mlx *data)
     }
 }
 
+// ici cest la grosse fonction principale du raycasting, donc pour dessiner les murs ligne verticale par ligne verticale
 void render_3d(t_mlx *data)
 {
 	double	cameraX;

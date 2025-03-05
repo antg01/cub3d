@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/05 15:15:49 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:50:21 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	draw_player(t_mlx *data)
 	}
 }
 
+//ca cest la fonction qui cree la minimap
 int	render(t_mlx *data)
 {
     draw_grid(data, data->num_rows);
