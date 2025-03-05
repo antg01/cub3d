@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/05 14:34:48 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:15:49 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@ void	draw_grid(t_mlx *data, int num_rows)
 	int	y;
 	int	y_limit;
 	int	x_limit;
+	int	biggest_line;
 
-	cell_size = IMAGE_HEIGHT / num_rows;
+	if (data->longest_row > num_rows)
+		biggest_line = data->longest_row;
+	else
+		biggest_line = num_rows;
+	cell_size = IMAGE_HEIGHT / biggest_line;
 	y = WINDOW_HEIGHT - num_rows * cell_size;
 	y_limit = y + (num_rows - 1) * cell_size;
 	x_limit = data->longest_row * cell_size;
@@ -72,8 +77,14 @@ void	draw_player(t_mlx *data)
 	int	i;
 	int	j;
 	int	cellsize;
+	int	biggest_line;
 
-	cellsize = IMAGE_HEIGHT / data->num_rows;
+	if (data->longest_row > data->num_rows)
+		biggest_line = data->longest_row;
+	else
+		biggest_line = data->num_rows;
+
+	cellsize = IMAGE_HEIGHT / biggest_line;
 	i_start = (data->player->y_pos * cellsize + WINDOW_HEIGHT - (data->num_rows * cellsize)) - 2;
 	i = i_start;
 	while (i < i_start + 4)

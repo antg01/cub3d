@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/05 14:40:22 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:17:38 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,17 @@ int	rays_check_wall(t_mlx *data, int x, int y)
 // chatGPT (pcq flemme)
 void draw_long_line(t_mlx *data, double x, double y, double dir_x, double dir_y)
 {
-	int	cellsize = IMAGE_HEIGHT / data->num_rows;
+	int		cellsize;
 	double	img_x;
 	double	img_y;
 	int		i;
+	int	biggest_line;
 
+	if (data->longest_row > data->num_rows)
+		biggest_line = data->longest_row;
+	else
+		biggest_line = data->num_rows;
+	cellsize = IMAGE_HEIGHT / biggest_line;
 	img_x =  (x * cellsize) + 4 * dir_x; // + 4 * dir pr pas que ca cache le player blue dot
 	img_y =  ((y * cellsize) + WINDOW_HEIGHT - (data->num_rows * cellsize)) + 4 * dir_y;
 	i = 0;
