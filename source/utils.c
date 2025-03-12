@@ -74,3 +74,49 @@ void	free_split(char **map)
 	}
 	free(map);
 }
+
+void	free_all(t_mlx *data)
+{
+	int i;
+
+    i = 0;
+	if (data->map)
+		free_split(data->map);
+	if (data->player)
+		free(data->player);
+	if (data->keys)
+		free(data->keys);
+    while (i < 4)
+    {
+        if (data->textures[i].img_ptr)
+            mlx_destroy_image(data->mlx, data->textures[i].img_ptr);
+        i++;
+    }
+	if (data->hand->img_ptr)
+		mlx_destroy_image(data->mlx, data->hand->img_ptr);
+	if (data->image)
+		mlx_destroy_image(data->mlx, data->image);
+	if (data->window)
+		mlx_destroy_window(data->mlx, data->window);
+	if (data->mlx)
+		mlx_destroy_display(data->mlx);
+	free(data->mlx);
+}
+
+void	free_maplist(t_maplist *head)
+{
+	t_maplist	*temp;
+
+	if (!head)
+		return;
+
+	while (head)
+	{
+		temp = head;
+		head = head->next;
+		if (temp->line)
+			free(temp->line);
+		free(temp);
+	}
+}
+

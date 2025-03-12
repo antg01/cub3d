@@ -12,18 +12,20 @@
 
 #include "../includes/cub3d.h"
 
-void	*safe_malloc(size_t size)
+void *safe_malloc(size_t size)
 {
-	void	*result;
+	void *result;
 
 	result = malloc(size);
 	if (!result)
 	{
-		write(2, "memory alloc failed, exiting\n", 29);
+		write(2, "Memory allocation failed, exiting...\n", 37);
 		exit(EXIT_FAILURE);
 	}
-	return (result);
+	memset(result, 0, size); // Initialisation pour éviter les accès à des valeurs non définies
+	return result;
 }
+
 
 char	*safe_strdup(char *str)
 {

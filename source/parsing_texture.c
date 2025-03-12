@@ -55,38 +55,34 @@ void	do_textures(t_mlx *data, char *path_texture, int index)
 
 void	check_four_dir(int fd, t_mlx *data)
 {
-	int		i;
 	char	*current;
 	char	*path;
+	int		found[4] = {0}; // Pour suivre si chaque texture a été trouvée
 
-	i = 0;
-	while (i < 4)
+	for (int i = 0; i < 4; i++)
 	{
 		current = get_next_line(fd);
-		if (i == 0)
-		{
-			if (!current || ft_strncmp(current, "NO ./", 5))
-				my_exit("check_four_dir 1");
-		}
-		else if (i == 1)
-		{
-			if (!current || ft_strncmp(current, "SO ./", 5))
-				my_exit("check_four_dir 2");
-		}
-		else if (i == 2)
-		{
-			if (!current || ft_strncmp(current, "WE ./", 5))
-				my_exit("check_four_dir 3");
-		}
-		else if (i == 3)
-		{
-			if (!current || ft_strncmp(current, "EA ./", 5))
-				my_exit("check_four_dir 4");
-		}
-		path = current + 5;
-		do_textures(data, path, i);
+		if (!current)
+			my_exit("Error: Missing texture line");
+
+		if (!ft_strncmp(current, "NO ", 3) && !found[0])
+			found[0] = 1, path = current + 3, do_textures(data, path, 0);
+		else if (!ft_strncmp(current, "SO ", 3) && !found[1])
+			found[1] = 1, path = current + 3, do_textures(data, path, 1);
+		else if (!ft_strncmp(current, "WE ", 3) && !found[2])
+			found[2] = 1, path = current + 3, do_textures(data, path, 2);
+		else if (!ft_strncmp(current, "EA ", 3) && !found[3])
+			found[3] = 1, path = current + 3, do_textures(data, path, 3);
+		else
+			my_exit("Error: Invalid texture format or duplicate entry");
+
 		free(current);
-		i++;
 	}
+
+	// Vérifier que toutes les textures ont été trouvées
+	if (!found[0] || !found[1] || !found[2] || !found[3])
+		my_exit("Error: Missing one or more textures");
+
 	skip_nl(fd);
 }
+

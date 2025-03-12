@@ -4,14 +4,14 @@ LIBFT = libft/libft.a
 
 MLX_DIR = ./mlx
 MLX_PATH = mlx/libmlx.a
-MLX =  -L /usr/lib -lXext -lX11 -lm -lz 
+MLX =  -L /usr/lib -lXext -lX11 -lm -lz
 MLX_OBJ = -I/usr/include -Imlx_linux -O3
 
 MLX_LIB = -L $(MLX_DIR) -lmlx
 
 CC = cc
 
-CFLAGS = -Werror -Wall -Wextra #-fsanitize=address -g
+CFLAGS = -Werror -Wall -Wextra -g #-fsanitize=address
 
 RM = rm -rf
 
@@ -30,7 +30,6 @@ SRCS =	source/main.c \
 		source/extract_map.c \
 		minimap/top-down.c \
 		minimap/rays.c \
-		
 
 OBJ_DIR = Objects
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)

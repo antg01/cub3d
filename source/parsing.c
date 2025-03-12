@@ -16,16 +16,37 @@ int	parsing(t_mlx *data, int fd)
 {
 	t_maplist	*head;
 	int			count_rows;
-	
-	check_four_dir(fd, data); //check les 4 premieres lignes, qui renseignent les textures des murs Nord/S/E/Ouest
-	check_colors(data, fd);	//check et enregistre les couleurs du floor et ceiling
+
+	if (!data || fd < 0)
+	{
+		my_exit("Error: Invalid input to parsing");
+	}
+
+	check_four_dir(fd, data);
+	check_colors(data, fd);
+
 	count_rows = 0;
-	head = extract_map(data, fd, &count_rows); //ici la map est stockée en linked list, checkée pour only '1' && '0' et max 1 'NSEW'
+	head = extract_map(data, fd, &count_rows);
+	if (!head)
+	{
+		my_exit("Error: Failed to extract map");
+	}
+
 	data->num_rows = count_rows;
-	if (0 == count_rows)
-		write(2, "empty map\n", 10), exit(1);
+
+	if (count_rows == 0)
+	{
+		my_exit("Error: Empty map");
+	}
+
 	data->longest_row = 0;
-	data->map = make_map(head, count_rows, &(data->longest_row)); //cree la map en char **
+	data->map = make_map(head, count_rows, &(data->longest_row));
+	if (!data->map)
+	{
+		my_exit("Error: Failed to create map");
+	}
+
+	check_map_walls(data->map, data->num_rows);
 
 	return (1);
 }

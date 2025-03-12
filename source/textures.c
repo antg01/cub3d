@@ -61,9 +61,9 @@ void	load_textures(t_mlx *data)
 
 int get_texture_pixel(t_img *texture, int x, int y)
 {
-    char	*pixel;
-
-	pixel = texture->addr + (y * texture->line_length) + (x * (texture->bpp / 8));
+    if (!texture || x < 0 || y < 0 || x >= texture->width || y >= texture->height)
+        return (0); // Retourne noir si problème
+    char	*pixel = texture->addr + (y * texture->line_length) + (x * (texture->bpp / 8));
     return *(int *)pixel;
 }
 
@@ -80,6 +80,6 @@ void load_handgun(t_mlx *data)
     }
     data->hand->width = width;
     data->hand->height = height;
-    data->hand->addr = mlx_get_data_addr(data->hand->img_ptr, 
+    data->hand->addr = mlx_get_data_addr(data->hand->img_ptr,
 		&data->hand->bpp, &data->hand->line_length, &data->hand->endian);
 }

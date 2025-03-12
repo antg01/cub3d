@@ -43,16 +43,27 @@ unsigned int	str_to_hexa(char *str)
 void	check_colors(t_mlx *data, int fd)
 {
 	char	*info;
+	int		floor_found = 0;
+	int		ceiling_found = 0;
 
-	info = get_next_line(fd);
-	if (!info || ft_strncmp(info, "F ", 2))
-		my_exit("color line FLOOR");
-	data->floor_color = str_to_hexa(info + 2);
-	free(info);
-	info = get_next_line(fd);
-	if (!info || ft_strncmp(info, "C ", 2))
-		my_exit("color line CEILING");
-	data->ceiling_color = str_to_hexa(info + 2);
-	free(info);
+	for (int i = 0; i < 2; i++)
+	{
+		info = get_next_line(fd);
+		if (!info)
+			my_exit("Error: Missing floor/ceiling color");
+
+		if (!ft_strncmp(info, "F ", 2) && !floor_found)
+			floor_found = 1, data->floor_color = str_to_hexa(info + 2);
+		else if (!ft_strncmp(info, "C ", 2) && !ceiling_found)
+			ceiling_found = 1, data->ceiling_color = str_to_hexa(info + 2);
+		else
+			my_exit("Error: Invalid color format or duplicate entry");
+
+		free(info);
+	}
+
+	if (!floor_found || !ceiling_found)
+		my_exit("Error: Floor or ceiling color missing");
+
 	skip_nl(fd);
 }

@@ -16,7 +16,7 @@ int main(void)
 {
 	t_mlx	data;
 	int		fd;
-	
+
 	fd = open("maps/test.cub", O_RDONLY);
 	if (-1 == fd)
 		return(write(2, "error opening file\n", 19), 1);

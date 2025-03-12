@@ -40,7 +40,7 @@ int handle_keypress(int keycode, t_mlx *data)
 	{
 		mlx_destroy_window(data->mlx, data->window);
 		free_split(data->map);
-		//free reste aussi
+		free_all(data);
 		exit(0);
 	}
 
@@ -58,7 +58,7 @@ void	handle_mlx(t_mlx *data)
 	data->window = mlx_new_window(data->mlx, WINDOW_LENGTH, WINDOW_HEIGHT, "Top-Down View");
 	data->image = mlx_new_image(data->mlx, WINDOW_LENGTH, WINDOW_HEIGHT);
 	data->addr = mlx_get_data_addr(data->image, &data->bits_per_pixel, &data->line_length, &data->endian);
-	
+
 	data->player = init_player(data);
 	data->keys = init_keys();
 	init_raycast(data->player);
@@ -73,4 +73,5 @@ void	handle_mlx(t_mlx *data)
 	mlx_loop_hook(data->mlx, game_loop, data); // game loop for smooth movement
 
 	mlx_loop(data->mlx);
+    free_all(data);
 }

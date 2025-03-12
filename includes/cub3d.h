@@ -130,7 +130,7 @@ void	handle_mlx(t_mlx *data);
 void 	clear_image(t_mlx *data, int color);
 
 // PARSING
-int		parsing(t_mlx *data, int fd);
+int	parsing(t_mlx *data, int fd);
 
 //PARSING TEXTURE && COLORS
 void	check_four_dir(int fd, t_mlx *data);
@@ -143,12 +143,15 @@ char	**make_map(t_maplist *head, int num_rows, int *longest_row);
 
 // EXTRACT MAP
 t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows);
+void	check_map_walls(char **map, int num_rows);
 
 // UTILS
 int		num_rows(void);
 int		round_float(float nb);
 double	get_time_in_seconds(void);
 void	free_split(char **map);
+void	free_all(t_mlx *data);
+void free_maplist(t_maplist *head);
 
 // SAFE_UTILS
 void	*safe_malloc(size_t size);
