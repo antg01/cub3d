@@ -58,43 +58,59 @@ void	check_chars(t_mlx *data, char *str, int *check_nsew, t_maplist *head)
 	}
 }
 
-
-void	check_map_walls(char **map, int rows)
+void    check_map_walls(char **map, int rows)
 {
-	int	i, j;
-	int	player_count = 0;
+    int i;
+    int j;
+    int player_count = 0;
 
-	for (i = 0; i < rows; i++)
-	{
-		for (j = 0; map[i][j]; j++)
-		{
-			if (map[i][j] != '1' && map[i][j] != '0' &&
-				map[i][j] != 'N' && map[i][j] != 'S' &&
-				map[i][j] != 'E' && map[i][j] != 'W' &&
-				map[i][j] != ' ')
-				my_exit("Error: Invalid character in map");
+    i = 0;
+    while (i < rows)
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            if (map[i][j] != '1' && map[i][j] != '0' &&
+                map[i][j] != 'N' && map[i][j] != 'S' &&
+                map[i][j] != 'E' && map[i][j] != 'W' &&
+                map[i][j] != ' ')
+                my_exit("Error: Invalid character in map");
 
-			if (map[i][j] == 'N' || map[i][j] == 'S' ||
-				map[i][j] == 'E' || map[i][j] == 'W')
-				player_count++;
-		}
-	}
+            if (map[i][j] == 'N' || map[i][j] == 'S' ||
+                map[i][j] == 'E' || map[i][j] == 'W')
+                player_count++;
+            j++;
+        }
+        i++;
+    }
 
-	if (player_count != 1)
-		my_exit("Error: Map must contain exactly one player position");
+    if (player_count != 1)
+        my_exit("Error: Map must contain exactly one player position");
 
-	// Vérification des bords
-	for (i = 0; i < rows; i++)
-	{
-		if (map[i][0] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
-			my_exit("Error: Map not closed on the sides");
-	}
-	for (j = 0; map[0][j]; j++)
-		if (map[0][j] != '1')
-			my_exit("Error: Map not closed at the top");
-	for (j = 0; map[rows - 1][j]; j++)
-		if (map[rows - 1][j] != '1')
-			my_exit("Error: Map not closed at the bottom");
+    // Vérification des bords
+    i = 0;
+    while (i < rows)
+    {
+        if (map[i][0] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
+            my_exit("Error: Map not closed on the sides");
+        i++;
+    }
+
+    j = 0;
+    while (map[0][j])
+    {
+        if (map[0][j] != '1')
+            my_exit("Error: Map not closed at the top");
+        j++;
+    }
+
+    j = 0;
+    while (map[rows - 1][j])
+    {
+        if (map[rows - 1][j] != '1')
+            my_exit("Error: Map not closed at the bottom");
+        j++;
+    }
 }
 
 t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows)
