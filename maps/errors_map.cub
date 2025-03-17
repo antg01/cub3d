@@ -4,7 +4,7 @@ SHOUD NOT WORK
 ----------------
 ----------------
 
-color_missing_ceiling_rgb.cub
+color_missing_ceiling_rgb.cub OK
 
 NO ./textures/bluestone.xpm
 SO ./textures/redbrick.xpm
@@ -30,7 +30,7 @@ C 200,200,
 
 -----------------
 
-filetype_missing
+filetype_missing OK
 
 NO ./textures/bluestone.xpm
 SO ./textures/redbrick.xpm
@@ -56,7 +56,7 @@ C 200,200,200
 
 -----------------
 
-filetype_wrong.buc
+filetype_wrong.buc OK
 
 NO ./textures/bluestone.xpm
 SO ./textures/redbrick.xpm

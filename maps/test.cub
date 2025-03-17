@@ -3,8 +3,8 @@ SO ./textures/redbrick.xpm
 WE ./textures/wood.xpm
 EA ./textures/eagle.xpm
 
-F 48,60,32
-C 90,213,255
+F 220,100,255
+C 225,30,0
 
 11111
 10001

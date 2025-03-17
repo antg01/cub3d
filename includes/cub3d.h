@@ -131,12 +131,14 @@ void 	clear_image(t_mlx *data, int color);
 
 // PARSING
 int	parsing(t_mlx *data, int fd);
+char	*trim_spaces(char *str);
 
 //PARSING TEXTURE && COLORS
 void	check_four_dir(int fd, t_mlx *data);
 void	my_exit(char *msg);
 void	skip_nl(int fd);
 void	check_colors(t_mlx *data, int fd);
+void skip_empty_lines(int fd);
 
 // MAP
 char	**make_map(t_maplist *head, int num_rows, int *longest_row);
