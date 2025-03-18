@@ -178,3 +178,4 @@ C 225,30,0
 ◦ Si un problème de configuration de n’importe quel type est rencontré dans
 le fichier, le programme doit quitter et renvoyer "Error\n" suivi d’un message
 d’erreur explicite de votre choix.
+

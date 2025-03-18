@@ -53,40 +53,40 @@ void	do_textures(t_mlx *data, char *path_texture, int index)
 		&data->textures[index].bpp, &data->textures[index].line_length, &data->textures[index].endian);
 }
 
-void	check_four_dir(int fd, t_mlx *data)
-{
-	int		i;
-	char	*current;
-	char	*path;
+// void	check_four_dir(int fd, t_mlx *data)
+// {
+// 	int		i;
+// 	char	*current;
+// 	char	*path;
 
-	i = 0;
-	while (i < 4)
-	{
-		current = get_next_line(fd);
-		if (i == 0)
-		{
-			if (!current || ft_strncmp(current, "NO ./", 5))
-				my_exit("check_four_dir 1");
-		}
-		else if (i == 1)
-		{
-			if (!current || ft_strncmp(current, "SO ./", 5))
-				my_exit("check_four_dir 2");
-		}
-		else if (i == 2)
-		{
-			if (!current || ft_strncmp(current, "WE ./", 5))
-				my_exit("check_four_dir 3");
-		}
-		else if (i == 3)
-		{
-			if (!current || ft_strncmp(current, "EA ./", 5))
-				my_exit("check_four_dir 4");
-		}
-		path = current + 5;
-		do_textures(data, path, i);
-		free(current);
-		i++;
-	}
-	skip_nl(fd);
-}
+// 	i = 0;
+// 	while (i < 4)
+// 	{
+// 		current = get_next_line(fd);
+// 		if (i == 0)
+// 		{
+// 			if (!current || ft_strncmp(current, "NO ./", 5))
+// 				my_exit("check_four_dir 1");
+// 		}
+// 		else if (i == 1)
+// 		{
+// 			if (!current || ft_strncmp(current, "SO ./", 5))
+// 				my_exit("check_four_dir 2");
+// 		}
+// 		else if (i == 2)
+// 		{
+// 			if (!current || ft_strncmp(current, "WE ./", 5))
+// 				my_exit("check_four_dir 3");
+// 		}
+// 		else if (i == 3)
+// 		{
+// 			if (!current || ft_strncmp(current, "EA ./", 5))
+// 				my_exit("check_four_dir 4");
+// 		}
+// 		path = current + 5;
+// 		do_textures(data, path, i);
+// 		free(current);
+// 		i++;
+// 	}
+// 	skip_nl(fd);
+// }

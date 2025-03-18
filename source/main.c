@@ -20,8 +20,12 @@ int main(void)
 	fd = open("maps/test.cub", O_RDONLY);
 	if (-1 == fd)
 		return(write(2, "error opening file\n", 19), 1);
-	data.mlx = mlx_init();
-
+    data.mlx = mlx_init();
+    if (data.mlx == NULL)
+    {
+        write(2, "mlx_init failed\n", 16);
+        return (1);
+    }
 	if (!parsing(&data, fd))
 		return (close(fd), write(2, "invalid map\n", 12), 1);
 	handle_mlx(&data);
