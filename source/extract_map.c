@@ -12,20 +12,28 @@
 
 #include "../includes/cub3d.h"
 
-char	*replace_spaces_with_walls(char *line)
+void check_map_closed(char **map, int num_rows, int longest_row)
 {
-	int		i;
-	char	*new_line;
+    int i;
+    int j;
 
-	i = 0;
-	new_line = safe_strdup(line);
-	while (new_line[i])
-	{
-		if (new_line[i] == ' ' || new_line[i] == '\t')
-			new_line[i] = '1';
-		i++;
-	}
-	return (new_line);
+    i = 0;
+    while (i < num_rows)
+    {
+        j = 0;
+        while (j < longest_row && map[i][j])
+        {
+            if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
+            {
+                if (i == 0 || j == 0 || i == num_rows - 1 || j == longest_row - 1)
+                    my_exit("Map is not closed (border)");
+                if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+                    my_exit("Map is not closed (adjacent to space)");
+            }
+            j++;
+        }
+        i++;
+    }
 }
 
 void	which_orien(t_mlx *data, char c)
@@ -41,173 +49,78 @@ void	which_orien(t_mlx *data, char c)
 	*(data->orientation + 1) = '\0';
 }
 
-void check_chars(t_mlx *data, char *str, int *check_nsew, t_maplist *head)
+void	check_chars(t_mlx *data, char *str, int *check_nsew)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i] && str[i] != '\n')
-        i++;
-    if (str[i] == '\n')
-        str[i] = '\0';
-
-    printf("Checking line: '%s'\n", str); // Debug: Affiche la ligne complète
-
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] != ' ' && str[i] != '1' && str[i] != '0' &&
-            str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != 'W')
-        {
-            printf("Invalid character found: '%c' (ASCII: %d) at index %d\n", str[i], str[i], i);
-            my_exit("Error: Non-valid character in map");
-        }
-        if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
-        {
-            which_orien(data, str[i]);
-            (*check_nsew)++;
-            printf("Player position found: %c at index %d\n", str[i], i);
-        }
-        if (*check_nsew > 1)
-        {
-            free_maplist(head);
-            my_exit("Error: Too many player's start positions");
-        }
-        i++;
-    }
+	i = 0;
+	while (str[i] && str[i] != '\n') //remove the '\n' for the map
+		i++;
+	if (str[i] == '\n')
+		str[i] = '\0';
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '1' && str[i] != '0'&& str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != 'W')
+			my_exit("non-valid character in map");
+		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
+		{
+			which_orien(data, str[i]);
+			(*check_nsew)++;
+		}
+		if (*check_nsew > 1)
+			my_exit("Too many player's start positions"); //would need to free the linked list
+		i++;
+	}
 }
 
-void    check_map_walls(char **map, int rows)
+t_maplist *extract_map(t_mlx *data, int fd, int *count_rows)
 {
-    int i;
-    int j;
-    int player_count = 0;
+    char        *line;
+    int          check_nsew;
+    t_maplist   *head;
+    t_maplist   *curr;
 
-    // Vérification ligne du haut
-    j = 0;
-    while (map[0][j])
-    {
-        if (map[0][j] != '1' && map[0][j] != ' ')
-            my_exit("Error: Map not closed at the top");
-        j++;
-    }
-
-    // Vérification ligne du bas
-    j = 0;
-    while (map[rows - 1][j])
-    {
-        if (map[rows - 1][j] != '1' && map[rows - 1][j] != ' ')
-            my_exit("Error: Map not closed at the bottom");
-        j++;
-    }
-
-    // Vérification des lignes intermédiaires
-    i = 1;
-    while (i < rows - 1)
-    {
-        j = 0;
-
-        // Ignorer espaces à gauche
-        while (map[i][j] == ' ')
-            j++;
-        if (map[i][j] != '1')
-            my_exit("Error: Map not closed on the left side");
-
-        // Vérifier chaque caractère
-        while (map[i][j])
-        {
-            if (map[i][j] != '1' && map[i][j] != '0' &&
-                map[i][j] != 'N' && map[i][j] != 'S' &&
-                map[i][j] != 'E' && map[i][j] != 'W' &&
-                map[i][j] != ' ')
-                my_exit("Error: Invalid character in map");
-
-            if (map[i][j] == 'N' || map[i][j] == 'S' ||
-                map[i][j] == 'E' || map[i][j] == 'W')
-                player_count++;
-            j++;
-        }
-
-        // Vérifier côté droit
-        j--;
-        while (j >= 0 && map[i][j] == ' ')
-            j--;
-        if (j < 0 || map[i][j] != '1')
-            my_exit("Error: Map not closed on the right side");
-
-        i++;
-    }
-
-    if (player_count != 1)
-        my_exit("Error: Map must contain exactly one player position");
-}
-
-t_maplist *extract_map(t_mlx *data, int fd, int *count_rows, char *first_line, char *first_trimmed)
-{
-    char *line;
-    char *line_to_store;
-    int check_nsew;
-    t_maplist *head;
-    t_maplist *curr;
-    t_maplist *prev;
-
-    head = safe_malloc(sizeof(t_maplist));
-    head->line = NULL;
-    head->next = NULL;
-    curr = head;
-    prev = NULL;
     check_nsew = 0;
+    head = NULL;
+    curr = NULL;
 
-    // Ajout de la première ligne détectée
-    check_chars(data, first_trimmed, &check_nsew, head);
-    (*count_rows)++;
-    line_to_store = replace_spaces_with_walls(first_trimmed);
-    curr->line = safe_strdup(line_to_store);
-    free(line_to_store);
-    curr->next = safe_malloc(sizeof(t_maplist));
-    curr->next->line = NULL;
-    curr->next->next = NULL;
-    prev = curr;
-    curr = curr->next;
-    free(first_line);
-    free(first_trimmed);
-
-    // Lecture des lignes suivantes
     while (1)
     {
         line = get_next_line(fd);
         if (!line)
             break;
-
-        char *trimmed = trim_spaces(line);
-        if (!*trimmed || (!ft_strchr("10", trimmed[0]) && trimmed[0] != ' '))
+        char *trimmed_line = trim_spaces_tabs(line);
+        if (*trimmed_line == '\0' || *trimmed_line == '\n')
         {
             free(line);
-            free(trimmed);
             continue;
         }
 
-        check_chars(data, trimmed, &check_nsew, head);
-        (*count_rows)++;
+        check_chars(data, trimmed_line, &check_nsew);
 
-        line_to_store = replace_spaces_with_walls(trimmed);
-        curr->line = safe_strdup(line_to_store);
-        free(line_to_store);
-        curr->next = safe_malloc(sizeof(t_maplist));
-        curr->next->line = NULL;
-        curr->next->next = NULL;
-        prev = curr;
-        curr = curr->next;
+        if (!head)
+        {
+            head = safe_malloc(sizeof(t_maplist));
+            curr = head;
+        }
+        else
+        {
+            curr->next = safe_malloc(sizeof(t_maplist));
+            curr = curr->next;
+        }
 
+        curr->line = ft_strdup(trimmed_line);
+        curr->next = NULL;
         free(line);
-        free(trimmed);
+        (*count_rows)++;
     }
 
-    if (prev)
-    {
-        free(curr);
-        prev->next = NULL;
-    }
+    if (check_nsew == 0)
+        my_exit("No player start position found in map");
+
+    if (!head)
+        my_exit("extract_map: head is NULL (no lines read)");
     write(2, "EXTRACT OK\n", 11);
-    return head;
+    return (head);
 }
