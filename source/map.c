@@ -33,7 +33,7 @@ char	**make_map(t_maplist *head, int num_rows, int *longest_row)
 
 	curr = head;
 	i = 0;
-	while (curr && curr->line) // Sécurité : vérifie que `curr` et `curr->line` existent
+	while (curr && curr->line) // Sécurité : vérifie que curr et curr->line existent
 	{
 		map[i] = safe_strdup(curr->line);
 		if (!map[i])

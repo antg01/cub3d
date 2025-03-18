@@ -117,6 +117,7 @@ typedef struct s_mlx {
 	int			ceiling_color;
 	char		orientation[2];
 	int			longest_row;
+    char	*first_map_line;
     //...
 } t_mlx;
 
@@ -139,13 +140,17 @@ void	my_exit(char *msg);
 void	skip_nl(int fd);
 void	check_colors(t_mlx *data, int fd);
 void skip_empty_lines(int fd);
+void do_textures(t_mlx *data, char *path_texture, int index);
+unsigned int str_to_hexa(char *str);
 
 // MAP
 char	**make_map(t_maplist *head, int num_rows, int *longest_row);
 
 // EXTRACT MAP
-t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows);
+t_maplist *extract_map(t_mlx *data, int fd, int *count_rows, char *first_line, char *first_trimmed);
 void	check_map_walls(char **map, int num_rows);
+char	**normalize_map(char **map, int rows);
+void check_chars(t_mlx *data, char *str, int *check_nsew, t_maplist *head);
 
 // UTILS
 int		num_rows(void);
