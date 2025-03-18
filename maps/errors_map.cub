@@ -4,7 +4,7 @@ SHOUD NOT WORK
 ----------------
 ----------------
 
-color_missing_ceiling_rgb.cub OK
+color_missing_ceiling_rgb.cub
 
 NO ./textures/bluestone.xpm
 SO ./textures/redbrick.xpm
@@ -29,85 +29,10 @@ C 200,200,
 11111
 
 -----------------
-
-filetype_missing OK
-
-NO ./textures/bluestone.xpm
-SO ./textures/redbrick.xpm
-WE ./textures/wood.xpm
-EA ./textures/eagle.xpm
-
-F 20,20,20
-C 200,200,200
-
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
-
------------------
-
-filetype_wrong.buc OK
-
-NO ./textures/bluestone.xpm
-SO ./textures/redbrick.xpm
-WE ./textures/wood.xpm
-EA ./textures/eagle.xpm
-
-F 20,20,20
-C 200,200,200
-
-11111
-10001
-10S01
-10001
-10001
-10001
-11001
-10001
-10001
-10001
-10001
-10001
-11111
-
------------------
 -----------------
 SHOULD BE GOOD
 -----------------
 -----------------
-
-dungeon.cub
-
-F 76,76,76
-C 99,99,99
-
-NO ./textures/bluestone.xpm
-SO ./textures/redbrick.xpm
-WE ./textures/wood.xpm
-EA ./textures/eagle.xpm
-
-1111111111111111111
-10W1001001001000001
-1011000001000001001
-1001001001111101111
-1001111000001001001
-1000000000000001001
-1001111111111001001
-1111000000000001011
-1000000001000000001
-1111111111111111111
-
-------------------
 
 square_map.cub
 

@@ -5,7 +5,7 @@ NO       ./textures/bluestone.xpm
 
 SO ./textures/redbrick.xpm
 
-F       48,60,32
+F       48,60, 32
 
 EA ./textures/eagle.xpm
 

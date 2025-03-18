@@ -74,53 +74,29 @@ void	check_chars(t_mlx *data, char *str, int *check_nsew)
 	}
 }
 
-t_maplist *extract_map(t_mlx *data, int fd, int *count_rows)
+t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows)
 {
-    char        *line;
-    int          check_nsew;
-    t_maplist   *head;
-    t_maplist   *curr;
+	char		*line;
+	int			check_nsew; //check N S E W (max 1 per map)
+	t_maplist	*head;
+	t_maplist	*curr;
 
-    check_nsew = 0;
-    head = NULL;
-    curr = NULL;
-
-    while (1)
-    {
-        line = get_next_line(fd);
-        if (!line)
-            break;
-        char *trimmed_line = trim_spaces_tabs(line);
-        if (*trimmed_line == '\0' || *trimmed_line == '\n')
-        {
-            free(line);
-            continue;
-        }
-
-        check_chars(data, trimmed_line, &check_nsew);
-
-        if (!head)
-        {
-            head = safe_malloc(sizeof(t_maplist));
-            curr = head;
-        }
-        else
-        {
-            curr->next = safe_malloc(sizeof(t_maplist));
-            curr = curr->next;
-        }
-
-        curr->line = ft_strdup(trimmed_line);
-        curr->next = NULL;
-        free(line);
-        (*count_rows)++;
-    }
-
-    if (check_nsew == 0)
-        my_exit("No player start position found in map");
-
-    if (!head)
-        my_exit("extract_map: head is NULL (no lines read)");
-    write(2, "EXTRACT OK\n", 11);
-    return (head);
+	head = safe_malloc(sizeof(t_maplist));
+	check_nsew = 0;
+	curr = head;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line || '\0' == *line)
+			break ;
+		check_chars(data, line, &check_nsew);
+		(*count_rows)++;
+		curr->line = line;
+		curr->next = safe_malloc(sizeof(t_maplist));
+		curr = curr->next;
+	}
+	curr->line = NULL;
+	curr->next = NULL;
+	write(2, "EXTRACT OK\n", 11);
+	return (head);
 }
