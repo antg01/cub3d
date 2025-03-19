@@ -17,6 +17,7 @@ RM = rm -rf
 
 SRCS =	source/main.c \
 		source/parsing.c \
+		source/parsing_utils.c \
 		source/utils.c \
 		source/map.c \
 		source/safe_utils.c \
@@ -28,6 +29,7 @@ SRCS =	source/main.c \
 		source/parsing_texture.c \
 		source/parsing_colors.c \
 		source/extract_map.c \
+		source/extract_map_utils.c \
 		minimap/top-down.c \
 		minimap/rays.c \
 
