@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/05 14:38:34 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:19:50 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-//in which row is 'N' (player)
 int	which_row(char **map)
 {
 	int	i;
@@ -24,7 +23,8 @@ int	which_row(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if ('N' == map[i][j] || 'S' == map[i][j] || 'E' == map[i][j] || 'W' == map[i][j])
+			if ('N' == map[i][j] || 'S' == map[i][j] || 'E' == map[i][j]
+				|| 'W' == map[i][j])
 				return (i);
 			j++;
 		}
@@ -71,36 +71,32 @@ void	set_start_dirs(t_mlx *data, t_player *player)
 	}
 }
 
-//incomplet, pr l'instant juste pos pr top-down
 t_player	*init_player(t_mlx *data)
 {
 	t_player	*player;
-	int			coord_player[2]; //[y][x]
+	int			coord_player[2];
 
 	player = (t_player *)safe_malloc(sizeof(t_player));
 	coord_player[0] = which_row(data->map);
 	coord_player[1] = which_col(data->map[coord_player[0]]);
-	player->x_pos = (double) (coord_player[1] + 0.50); //jsp si cst bien, pr qu'il soit 'au milieu'
-	player->y_pos = (double) (coord_player[0] + 0.50);
+	player->x_pos = (double)(coord_player[1] + 0.50);
+	player->y_pos = (double)(coord_player[0] + 0.50);
 	set_start_dirs(data, player);
 	player->rot_speed = PI / 16;
-
-	//ci-dessous ça sera p-e trasnféré vers t_raycast (struct)
-	player->plane_x = -player->dir_y * tan(0.576); //0.576rad == 33°
+	player->plane_x = -player->dir_y * tan(0.576);
 	player->plane_y = player->dir_x * tan(0.576);
-	player->camera_x =  -1; //cv de -1 à 1
+	player->camera_x = -1;
 	player->ray_dir_x = player->dir_x + player->plane_x * player->camera_x;
 	player->ray_dir_y = player->dir_y + player->plane_y * player->camera_x;
-
 	return (player);
 }
 
 int	check_wall(t_mlx *data, int x, int y)
 {
-	int			old_x;
-	int			old_y;
-	int			dx; //dir_x
-	int			dy; //dir_y
+	int	old_x;
+	int	old_y;
+	int	dx;
+	int	dy;
 
 	if (x < 0 || y < 0 || x > data->longest_row || y > data->num_rows)
 		return (0);
@@ -120,12 +116,12 @@ int	check_wall(t_mlx *data, int x, int y)
 		dy = 0;
 	else
 		dy = -1;
-	if (old_x + dx != x && old_y + dy != y) //if (fleche marche arriere)
+	if (old_x + dx != x && old_y + dy != y)
 	{
 		dx *= (-1);
 		dy *= (-1);
 	}
-	if (old_x != x && old_y != y) //ca veut dire que ya changement diagonal (de 2 cases)
+	if (old_x != x && old_y != y)
 	{
 		if (dx == 1 && dy == 1)
 		{

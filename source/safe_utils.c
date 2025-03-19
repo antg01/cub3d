@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   safe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:53:45 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/31 01:01:41 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:20:15 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void *safe_malloc(size_t size)
+void	*safe_malloc(size_t size)
 {
-	void *result;
+	void	*result;
 
 	result = malloc(size);
 	if (!result)
@@ -22,10 +22,9 @@ void *safe_malloc(size_t size)
 		write(2, "Memory allocation failed, exiting...\n", 37);
 		exit(EXIT_FAILURE);
 	}
-	memset(result, 0, size); // Initialisation pour éviter les accès à des valeurs non définies
-	return result;
+	memset(result, 0, size);
+	return (result);
 }
-
 
 char	*safe_strdup(char *str)
 {

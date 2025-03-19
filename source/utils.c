@@ -3,60 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:59:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/03 15:08:19 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:22:28 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-//pr la poubelle aussi
-int	num_rows(void)
-{
-	int		fd;
-	int		count;
-	char	*line;
+// int	num_rows(void)
+// {
+// 	int		fd;
+// 	int		count;
+// 	char	*line;
 
-	fd = open("maps/test.cub", O_RDONLY);
-	if (-1 == fd)
-	{
-		write(2, "file opening failed, quitting program...\n", 41);
-		exit(EXIT_FAILURE);
-	}
-	count = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		else
-		{
-			count++;
-			free(line);
-		}
-	}
-	//printf("CHECK nombre de rows: %d\n", count);
-	return (count);
-}
+// 	fd = open("maps/test.cub", O_RDONLY);
+// 	if (-1 == fd)
+// 	{
+// 		write(2, "file opening failed, quitting program...\n", 41);
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	count = 0;
+// 	while (1)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (!line)
+// 			break ;
+// 		else
+// 		{
+// 			count++;
+// 			free(line);
+// 		}
+// 	}
+// 	return (count);
+// }
 
-int	round_float(float nb)
-{
-	int	a;
-	int	b;
+// int	round_float(float nb)
+// {
+// 	int	a;
+// 	int	b;
 
-	a = (int) nb; // == nb truncated
-	b = (float) a;
-	if (nb - b <= 0.5)
-		return (a);
-	else
-		return (a + 1);
-}
+// 	a = (int)nb;
+// 	b = (float)a;
+// 	if (nb - b <= 0.5)
+// 		return (a);
+// 	else
+// 		return (a + 1);
+// }
 
 double	get_time_in_seconds(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec + tv.tv_usec / 1000000.0);
@@ -77,21 +75,21 @@ void	free_split(char **map)
 
 void	free_all(t_mlx *data)
 {
-	int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	if (data->map)
 		free_split(data->map);
 	if (data->player)
 		free(data->player);
 	if (data->keys)
 		free(data->keys);
-    while (i < 4)
-    {
-        if (data->textures[i].img_ptr)
-            mlx_destroy_image(data->mlx, data->textures[i].img_ptr);
-        i++;
-    }
+	while (i < 4)
+	{
+		if (data->textures[i].img_ptr)
+			mlx_destroy_image(data->mlx, data->textures[i].img_ptr);
+		i++;
+	}
 	if (data->hand->img_ptr)
 		mlx_destroy_image(data->mlx, data->hand->img_ptr);
 	if (data->image)
@@ -108,8 +106,7 @@ void	free_maplist(t_maplist *head)
 	t_maplist	*temp;
 
 	if (!head)
-		return;
-
+		return ;
 	while (head)
 	{
 		temp = head;
@@ -119,4 +116,3 @@ void	free_maplist(t_maplist *head)
 		free(temp);
 	}
 }
-

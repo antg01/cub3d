@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:45:29 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/31 01:07:56 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:26:59 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char	*ft_strdup(const char *s1)
 	return (copy);
 }
 */
+
 void	ft_strjoin_bis(char *line, t_listt *node, size_t len)
 {
 	size_t	i;
