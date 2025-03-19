@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 17:51:06 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 18:06:04 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/19 18:14:11 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	draw_vertical_line(t_mlx *data, t_raycast *r, int x)
 	int	y;
 
 	y = r->draw_start - 1;
-	
 	while (++y < r->draw_end)
 	{
 		r->tex_y = (int)r->tex_pos & (r->tex_height - 1);
 		r->tex_pos += r->step;
-		r->color = get_texture_pixel(&data->textures[r->index_texture], r->tex_x, r->tex_y);
+		r->color = get_texture_pixel(&data->textures[r->index_texture],
+				r->tex_x, r->tex_y);
 		my_mlx_pixel_put(data, x, y, r->color);
 		r->z = y;
 	}
