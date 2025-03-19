@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 18:06:26 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/19 19:03:10 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,15 @@ typedef struct s_mlx
 	//...
 }						t_mlx;
 
+typedef struct	s_grid
+{
+	int	x;
+	int	y;
+	int	y_limit;
+	int	x_limit;
+	int	biggest_line;
+}				t_grid;
+
 /* ********* */
 /* FONCTIONS */
 /* ********* */
@@ -208,9 +217,10 @@ void					free_all(t_mlx *data);
 void					*safe_malloc(size_t size);
 char					*safe_strdup(char *str);
 
-// TOP-DOWN
-void					draw_grid(t_mlx *data, int num_rows);
+// MINIMAP
+void					draw_grid(t_mlx *data, int num_rows, int cell_size);
 int						render(t_mlx *data);
+void					set_biggest_line(t_mlx *data, t_grid *g, int num_rows);
 
 // PLAYER
 t_player				*init_player(t_mlx *data);
