@@ -30,7 +30,7 @@ SRCS =	source/main.c \
 		source/parsing_colors.c \
 		source/extract_map.c \
 		source/extract_map_utils.c \
-		minimap/top-down.c \
+		minimap/top_down.c \
 		minimap/rays.c \
 
 OBJ_DIR = Objects
