@@ -52,6 +52,7 @@ static void	extract_map_loop(t_mlx *data, int fd, t_extract_state *state,
 t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows)
 {
 	t_maplist		*head;
+	t_maplist		*last;
 	t_extract_state	state;
 
 	head = safe_malloc(sizeof(t_maplist));
@@ -59,8 +60,16 @@ t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows)
 	extract_map_loop(data, fd, &state, count_rows);
 	if (state.check_nsew == 0)
 		my_exit("Error: no player start position found in map");
-	state.curr->line = NULL;
-	state.curr->next = NULL;
+
+	last = head;
+	while (last->next && last->next->line != NULL)
+		last = last->next;
+
+	if (last->next)
+	{
+		free(last->next);
+		last->next = NULL;
+	}
 	write(2, "EXTRACT OK\n", 11);
 	return (head);
 }
