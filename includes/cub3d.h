@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 17:55:16 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/19 18:06:26 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,9 @@ int						check_wall(t_mlx *data, int x, int y);
 void					draw_rays(t_mlx *data, t_player *player);
 
 // RAYCASTING NORME
-void	calc_wall_height(t_raycast *r);
+void					calc_wall_height(t_raycast *r);
+void					prep_vertical_line(t_mlx *data, t_raycast *r);
+void					draw_vertical_line(t_mlx *data, t_raycast *r, int x);
 
 // RAYCASTING
 void					init_raycast(t_player *player);
