@@ -6,7 +6,7 @@
 /*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:09:01 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 11:57:59 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:38:24 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,9 @@ t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows)
 	extract_map_loop(data, fd, &state, count_rows);
 	if (state.check_nsew == 0)
 		my_exit("Error: no player start position found in map");
-
 	last = head;
 	while (last->next && last->next->line != NULL)
 		last = last->next;
-
 	if (last->next)
 	{
 		free(last->next);
