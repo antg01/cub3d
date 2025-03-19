@@ -23,6 +23,7 @@ SRCS =	source/main.c \
 		source/safe_utils.c \
 		source/mlx.c \
 		source/player.c \
+		source/raycast_norm.c \
 		source/raycast.c \
 		source/smooth_move.c \
 		source/textures.c \

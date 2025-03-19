@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/05 15:47:18 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:24:30 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	handle_mlx(t_mlx *data)
 
 	data->player = init_player(data);
 	data->keys = init_keys();
-	init_raycast(data->player);
 	render_3d(data);
 
 	data->last_frame = get_time_in_seconds();

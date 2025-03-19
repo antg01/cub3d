@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 12:08:38 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:55:16 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,33 @@ typedef struct s_keys
 
 typedef struct s_raycast
 {
-	double				pl_x_pos;
-	double				pl_y_pos;
-	double				dir_x;
-	double				dir_y;
-	double				plane_x;
-	double				plane_y;
-	double				camera_x;
-	double				ray_dir_x;
-	double				ray_dir_y;
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	int		map_x;
+	int		map_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+	double	perp_wall_dis;
+	int		color;
+	double	wall_x;
+	int		line_height;
+	int		z;
+	int		index_texture;
+	int		hit;
+	int		side;
+	int		draw_start;
+	int		draw_end;
+	int		tex_width;
+	int		tex_height;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
 }						t_raycast;
 
 typedef struct s_player
@@ -200,6 +218,9 @@ int						check_wall(t_mlx *data, int x, int y);
 
 // RAYS
 void					draw_rays(t_mlx *data, t_player *player);
+
+// RAYCASTING NORME
+void	calc_wall_height(t_raycast *r);
 
 // RAYCASTING
 void					init_raycast(t_player *player);
