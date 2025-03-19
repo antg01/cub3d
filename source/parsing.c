@@ -58,7 +58,7 @@ void parse_config_elements(t_mlx *data, int fd)
     {
         line = get_next_line(fd);
         if (!line)
-            my_exit("Unexpected EOF before all elements parsed");
+            my_exit("Error: Unexpected EOF before all elements parsed");
 
         trimmed_line = trim_spaces_tabs(line);
         if (*trimmed_line == '\0' || *trimmed_line == '\n')
@@ -97,7 +97,7 @@ void parse_config_elements(t_mlx *data, int fd)
             c_found = 1;
         }
         else
-            my_exit("Invalid or duplicate element in config");
+            my_exit("Error: Invalid or duplicate element in config");
 
         free(line);
     }
@@ -116,8 +116,7 @@ int parsing(t_mlx *data, int fd)
 
     if (count_rows == 0)
     {
-        write(2, "empty map\n", 10);
-        exit(1);
+        my_exit("Error: empty map");
     }
 
     data->num_rows = count_rows;

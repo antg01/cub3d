@@ -26,14 +26,14 @@ unsigned int	str_to_hexa(char *str)
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
-		my_exit("Error\nMissing or invalid red value");
+		my_exit("Error: Missing or invalid red value");
 	r = ft_atoi(str + i);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (str[i] != ',')
-		my_exit("Error\nMissing first comma");
+		my_exit("Error: Missing first comma");
 	comma_count++;
 	i++;
 
@@ -41,14 +41,14 @@ unsigned int	str_to_hexa(char *str)
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
-		my_exit("Error\nMissing or invalid green value");
+		my_exit("Error: Missing or invalid green value");
 	g = ft_atoi(str + i);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (str[i] != ',')
-		my_exit("Error\nMissing second comma");
+		my_exit("Error: Missing second comma");
 	comma_count++;
 	i++;
 
@@ -56,37 +56,20 @@ unsigned int	str_to_hexa(char *str)
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
-		my_exit("Error\nMissing or invalid blue value");
+		my_exit("Error: Missing or invalid blue value");
 	b = ft_atoi(str + i);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (str[i] != '\0' && str[i] != '\n')
-		my_exit("Error\nToo many values or invalid character");
+		my_exit("Error: Too many values or invalid character");
 
 	if (comma_count != 2)
-		my_exit("Error\nIncorrect comma count");
+		my_exit("Error: Incorrect comma count");
 
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		my_exit("Error\nColor value out of range (0-255)");
+		my_exit("Error: Color value out of range (0-255)");
 
 	return ((r << 16) | (g << 8) | b);
 }
-
-// void	check_colors(t_mlx *data, int fd)
-// {
-// 	char	*info;
-
-// 	info = get_next_line(fd);
-// 	if (!info || ft_strncmp(info, "F ", 2))
-// 		my_exit("color line FLOOR");
-// 	data->floor_color = str_to_hexa(info + 2);
-// 	free(info);
-// 	info = get_next_line(fd);
-// 	if (!info || ft_strncmp(info, "C ", 2))
-// 		my_exit("color line CEILING");
-// 	data->ceiling_color = str_to_hexa(info + 2);
-// 	free(info);
-// 	skip_nl(fd);
-// }

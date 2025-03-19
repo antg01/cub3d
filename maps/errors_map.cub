@@ -4,7 +4,7 @@ SHOUD NOT WORK
 ----------------
 ----------------
 
-color_missing_ceiling_rgb.cub
+color_missing_ceiling_rgb.cub OK
 
 NO ./textures/bluestone.xpm
 SO ./textures/redbrick.xpm
@@ -28,13 +28,120 @@ C 200,200,
 10001
 11111
 
+--------------
+
+maps/bad/map_missing.cub = segfault OK
+
+NO ./textures/bluestone.xpm
+SO ./textures/redbrick.xpm
+WE ./textures/wood.xpm
+EA ./textures/eagle.xpm
+
+F 18,53,25
+C 153,204,255
+
+\n
+
+----------------
+
+map_too_small.cub = segfault OK
+
+NO ./textures/bluestone.xpm
+SO ./textures/redbrick.xpm
+WE ./textures/wood.xpm
+EA ./textures/eagle.xpm
+
+F 18,53,25
+C 153,204,255
+
+111
+111
+
+----------------
+
+player_none.cub = segfault OK
+
+NO ./textures/bluestone.xpm
+SO ./textures/redbrick.xpm
+WE ./textures/wood.xpm
+EA ./textures/eagle.xpm
+
+F 18,53,25
+C 153,204,255
+
+11111
+10001
+10001
+10001
+10001
+10001
+11001
+10001
+10001
+10001
+10001
+10001
+11111
+
+----------------
+
+player_on_edge.cub = works but shoud not OK
+
+NO ./textures/bluestone.xpm
+SO ./textures/redbrick.xpm
+WE ./textures/wood.xpm
+EA ./textures/eagle.xpm
+
+F 18,53,25
+C 153,204,255
+
+1S111
+10001
+10001
+10001
+10001
+10001
+11001
+10001
+10001
+10001
+10001
+10001
+11111
+
+----------------
+
+wall_hole_north.cub = works but shoud not OK
+
+NO ./textures/bluestone.xpm
+SO ./textures/redbrick.xpm
+WE ./textures/wood.xpm
+EA ./textures/eagle.xpm
+
+F 18,53,25
+C 153,204,255
+
+11011
+10001
+10S01
+10001
+10001
+10001
+11001
+10001
+10001
+10001
+10001
+10001
+11111
+
 -----------------
 -----------------
 SHOULD BE GOOD
 -----------------
 -----------------
 
-square_map.cub
+square_map.cub OK
 
     WE                  ./textures/wood.xpm
 NO       ./textures/bluestone.xpm
@@ -81,7 +188,7 @@ C 90,213,255
 
 ------------------------
 
-spaces_in_map.cub
+spaces_in_map.cub OK
 
 NO ./textures/bluestone.xpm
 SO ./textures/redbrick.xpm
@@ -105,3 +212,24 @@ C 90,213,255
 11000001110101011111011110N0111
 11110111 1110101 101111010001
 11111111 1111111 111111111111
+
+------------------------
+
+test_map_hole.cub = does not work but should
+
+NO ./textures/bluestone.xpm
+SO ./textures/redbrick.xpm
+WE ./textures/wood.xpm
+EA ./textures/eagle.xpm
+
+F 18,53,25
+C 153,204,255
+
+111111111111
+1         11
+1       0001
+1000000 0011
+10S000000001
+111111111111
+11         1
+111111111111
