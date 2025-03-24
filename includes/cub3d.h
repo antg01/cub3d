@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 19:03:10 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/24 01:00:09 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,13 +221,15 @@ char					*safe_strdup(char *str);
 void					draw_grid(t_mlx *data, int num_rows, int cell_size);
 int						render(t_mlx *data);
 void					set_biggest_line(t_mlx *data, t_grid *g, int num_rows);
+int						norm_fix(t_mlx *data, int dx, int dy, int *xy);
 
 // PLAYER
 t_player				*init_player(t_mlx *data);
 int						check_wall(t_mlx *data, int x, int y);
 
-// RAYS
+// RAYS (and NORM)
 void					draw_rays(t_mlx *data, t_player *player);
+void					set_dir_x_y(t_mlx *data, int *dx, int *dy);
 
 // RAYCASTING NORME
 void					calc_wall_height(t_raycast *r);
