@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 18:56:13 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 00:58:21 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:46:08 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,10 @@ int	norm_fix(t_mlx *data, int dx, int dy, int *xy)
 			return (0);
 	}
 	return (1);
+}
+
+void	set_xy(int *xy, int x, int y)
+{
+	xy[0] = x;
+	xy[1] = y;
 }

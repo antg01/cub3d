@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 15:39:15 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:53:20 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,85 +185,85 @@ typedef struct s_loop
 /* ********* */
 
 // MLX
-void					my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
-void					handle_mlx(t_mlx *data);
-void					clear_image(t_mlx *data, int color);
+void				my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+void				handle_mlx(t_mlx *data);
+void				clear_image(t_mlx *data, int color);
 
 // PARSING + utils
-int						parsing(t_mlx *data, int fd);
-char					*trim_spaces_tabs(char *line);
-char					*trim_spaces_tabs(char *line);
-void					parse_texture_line(t_mlx *data, char *line, int index);
-void					parse_color_line(unsigned int *color, char *line);
-void					init_element_flags(t_element_flags *flags);
+int					parsing(t_mlx *data, int fd);
+char				*trim_spaces_tabs(char *line);
+char				*trim_spaces_tabs(char *line);
+void				parse_texture_line(t_mlx *data, char *line, int index);
+void				parse_color_line(unsigned int *color, char *line);
+void				init_element_flags(t_element_flags *flags);
 
 //PARSING TEXTURE && COLORS
-void					check_four_dir(int fd, t_mlx *data);
-void					my_exit(char *msg);
-void					skip_nl(int fd);
-void					check_colors(t_mlx *data, int fd);
-void					do_textures(t_mlx *data, char *path_texture, int index);
-unsigned int			str_to_hexa(char *str);
+void				check_four_dir(int fd, t_mlx *data);
+void				my_exit(char *msg);
+void				skip_nl(int fd);
+void				check_colors(t_mlx *data, int fd);
+void				do_textures(t_mlx *data, char *path_texture, int index);
+unsigned int		str_to_hexa(char *str);
 
 // MAP
-char					**make_map(t_maplist *head, int num_rows,
-							int *longest_row);
+char				**make_map(t_maplist *head, int num_rows, int *longest_row);
 
 // EXTRACT MAP + utils
-t_maplist				*extract_map(t_mlx *data, int fd, int *count_rows);
-void					check_map_closed(char **map, int num_rows,
-							int longest_row);
-int						is_only_spaces(char *line);
-void					check_map_closed(char **map, int num_rows,
-							int longest_row);
-void					check_chars(t_mlx *data, char *str, int *check_nsew);
+t_maplist			*extract_map(t_mlx *data, int fd, int *count_rows);
+void				check_map_closed(char **map, int num_rows, int longest_row);
+int					is_only_spaces(char *line);
+void				check_map_closed(char **map, int num_rows, int longest_row);
+void				check_chars(t_mlx *data, char *str, int *check_nsew);
 
 // UTILS
-int						num_rows(void);
-int						round_float(float nb);
-double					get_time_in_seconds(void);
-void					free_split(char **map);
-void					free_all(t_mlx *data);
+int					num_rows(void);
+int					round_float(float nb);
+double				get_time_in_seconds(void);
+void				free_split(char **map);
+void				free_all(t_mlx *data);
 
 // SAFE_UTILS
-void					*safe_malloc(size_t size);
-char					*safe_strdup(char *str);
+void				*safe_malloc(size_t size);
+char				*safe_strdup(char *str);
 
 // MINIMAP
-void					draw_grid(t_mlx *data, int num_rows, int cell_size);
-int						render(t_mlx *data);
-void					set_biggest_line(t_mlx *data, t_grid *g, int num_rows);
-int						norm_fix(t_mlx *data, int dx, int dy, int *xy);
+void				draw_grid(t_mlx *data, int num_rows, int cell_size);
+int					render(t_mlx *data);
+void				set_biggest_line(t_mlx *data, t_grid *g, int num_rows);
+int					norm_fix(t_mlx *data, int dx, int dy, int *xy);
+void				set_xy(int *xy, int x, int y);
 
 // PLAYER
-t_player				*init_player(t_mlx *data);
-int						check_wall(t_mlx *data, int x, int y);
+t_player			*init_player(t_mlx *data);
+int					check_wall(t_mlx *data, int x, int y);
 
 // RAYS (and NORM)
-void					draw_rays(t_mlx *data, t_player *player);
-void					set_dir_x_y(t_mlx *data, int *dx, int *dy);
+void				draw_rays(t_mlx *data, t_player *player);
+void				set_dir_x_y(t_mlx *data, int *dx, int *dy);
 
 // RAYCASTING NORME
-void					calc_wall_height(t_raycast *r);
-void					prep_vertical_line(t_mlx *data, t_raycast *r);
-void					draw_vertical_line(t_mlx *data, t_raycast *r, int x);
+void				calc_wall_height(t_raycast *r);
+void				prep_vertical_line(t_mlx *data, t_raycast *r);
+void				draw_vertical_line(t_mlx *data, t_raycast *r, int x);
 
 // RAYCASTING
-void					init_raycast(t_player *player);
-void					render_3d(t_mlx *data);
+void				init_raycast(t_player *player);
+void				render_3d(t_mlx *data);
 
 // SMOOTH MOVE
-t_keys					*init_keys(void);
-int						key_press(int keycode, t_mlx *data);
-int						key_release(int keycode, t_mlx *data);
-int						game_loop(t_mlx *data);
-void					move_front_back(t_mlx *data, double *new_x, double *new_y, double speed);
-void					rot(t_mlx *data, double save_dir_x, double save_plane_x, double rot_speed);
+t_keys				*init_keys(void);
+int					key_press(int keycode, t_mlx *data);
+int					key_release(int keycode, t_mlx *data);
+int					game_loop(t_mlx *data);
+void				move_front_back(t_mlx *data, double *new_x,
+						double *new_y, double speed);
+void				rot(t_mlx *data, double save_dir_x,
+						double save_plane_x, double rot_speed);
 
 // TEXTURES
-t_img					*init_textures(void);
-void					load_textures(t_mlx *data);
-int						get_texture_pixel(t_img *texture, int x, int y);
-void					load_handgun(t_mlx *data);
+t_img				*init_textures(void);
+void				load_textures(t_mlx *data);
+int					get_texture_pixel(t_img *texture, int x, int y);
+void				load_handgun(t_mlx *data);
 
 #endif

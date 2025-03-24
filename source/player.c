@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 12:19:50 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:46:52 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	check_wall(t_mlx *data, int x, int y)
 	int	old_y;
 	int	dx;
 	int	dy;
+	int	xy[2];
 
 	if (x < 0 || y < 0 || x > data->longest_row || y > data->num_rows)
 		return (0);
@@ -104,18 +105,8 @@ int	check_wall(t_mlx *data, int x, int y)
 		return (0);
 	old_x = (int)data->player->x_pos;
 	old_y = (int)data->player->y_pos;
-	if (data->player->dir_x > 0)
-		dx = 1;
-	else if (data->player->dir_x == 0)
-		dx = 0;
-	else
-		dx = -1;
-	if (data->player->dir_y > 0)
-		dy = 1;
-	else if (data->player->dir_y == 0)
-		dy = 0;
-	else
-		dy = -1;
+	set_dir_x_y(data, &dx, &dy);
+	set_xy(xy, x, y);
 	if (old_x + dx != x && old_y + dy != y)
 	{
 		dx *= (-1);
@@ -123,26 +114,8 @@ int	check_wall(t_mlx *data, int x, int y)
 	}
 	if (old_x != x && old_y != y)
 	{
-		if (dx == 1 && dy == 1)
-		{
-			if (data->map[y - 1][x] == '1' && data->map[y][x - 1] == '1')
-				return (0);
-		}
-		else if (dx == 1 && dy == -1)
-		{
-			if (data->map[y + 1][x] == '1' && data->map[y][x - 1] == '1')
-				return (0);
-		}
-		else if (dx == -1 && dy == 1)
-		{
-			if (data->map[y - 1][x] == '1' && data->map[y][x + 1] == '1')
-				return (0);
-		}
-		else if (dx == -1 && dy == -1)
-		{
-			if (data->map[y + 1][x] == '1' && data->map[y][x + 1] == '1')
-				return (0);
-		}
+		if (!(norm_fix(data, dx, dy, xy)))
+			return (0);
 	}
 	return (1);
 }
