@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:09:01 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 12:38:24 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:55:49 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,5 @@ t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows)
 		free(last->next);
 		last->next = NULL;
 	}
-	write(2, "EXTRACT OK\n", 11);
 	return (head);
 }

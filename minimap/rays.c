@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 23:03:39 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 00:59:57 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:56:06 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	draw_long_line(t_mlx *data, double x, double y, double *dir_xy)
 	img_x = (x * cellsize) + 4 * dir_xy[0];
 	img_y = ((y * cellsize) + WINDOW_HEIGHT
 			- (data->num_rows * cellsize)) + 4 * dir_xy[1];
-	i = 0;
+	i = -1;
 	while (1)
 	{
 		if (!rays_check_wall(data, (img_x / cellsize), (img_y - WINDOW_HEIGHT
 					+ (data->num_rows * cellsize)) / cellsize))
 			break ;
-		if (i == 0 || i++ % cellsize == 0)
+		if (++i == 0 || i % cellsize == 0)
 			my_mlx_pixel_put(data, (int) img_x, (int) img_y, BLUE);
 		img_x += dir_xy[0] * 1.0;
 		img_y += dir_xy[1] * 1.0;

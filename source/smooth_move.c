@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:44:23 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/05 15:46:54 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:39:23 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_keys	*init_keys(void)
 	return (keys);
 }
 
-int key_press(int keycode, t_mlx *data)
+int	key_press(int keycode, t_mlx *data)
 {
 	if (keycode == 65307)
 	{
@@ -44,7 +44,7 @@ int key_press(int keycode, t_mlx *data)
 	return (0);
 }
 
-int key_release(int keycode, t_mlx *data)
+int	key_release(int keycode, t_mlx *data)
 {
 	if (keycode == 65362 || keycode == 119)
 		data->keys->forward = 0;
@@ -57,66 +57,19 @@ int key_release(int keycode, t_mlx *data)
 	return (0);
 }
 
-//fonction qui gere le fps, les mouvements fluides
 int	game_loop(t_mlx *data)
 {
-	double newX;
-	double newY;
-	double currentTime;
-	double deltaTime;
-	double moveSpeed;
-	double rot_speed;
-	double	save_dir_x;
-	double	save_plane_x;
+	t_loop	n;
 
-	currentTime = get_time_in_seconds(); // Get time
-	deltaTime = currentTime - data->last_frame;
-	data->last_frame = currentTime;
-	moveSpeed = 4.0 * deltaTime; // Movement speed (units per second)
-	rot_speed = 2.0 * deltaTime; // Rotation speed (radians per second)
-
-	if (data->keys->forward)
-	{
-		newX = data->player->x_pos + data->player->dir_x * moveSpeed;
-		newY = data->player->y_pos + data->player->dir_y * moveSpeed;
-		if (check_wall(data, (int)newX, (int)newY))
-		{
-			data->player->x_pos = newX;
-			data->player->y_pos = newY;
-		}
-	}
-	if (data->keys->backward)
-	{
-		newX = data->player->x_pos - data->player->dir_x * moveSpeed;
-		newY = data->player->y_pos - data->player->dir_y * moveSpeed;
-		if (check_wall(data, (int)newX, (int)newY))
-		{
-			data->player->x_pos = newX;
-			data->player->y_pos = newY;
-		}
-	}
-
-	save_dir_x = data->player->dir_x;
-	save_plane_x = data->player->plane_x;
-	if (data->keys->rotate_left)
-	{
-		data->player->dir_x = data->player->dir_x * cos(-rot_speed) - data->player->dir_y * sin(-rot_speed);
-		data->player->dir_y = save_dir_x * sin(-rot_speed) + data->player->dir_y * cos(-rot_speed);
-
-		data->player->plane_x = data->player->plane_x * cos(-rot_speed) - data->player->plane_y * sin(-rot_speed);
-		data->player->plane_y = save_plane_x * sin(-rot_speed) + data->player->plane_y * cos(-rot_speed);
-	}
-	if (data->keys->rotate_right)
-	{
-		data->player->dir_x = data->player->dir_x * cos(rot_speed) - data->player->dir_y * sin(rot_speed);
-		data->player->dir_y = save_dir_x * sin(rot_speed) + data->player->dir_y * cos(rot_speed);
-
-		data->player->plane_x = data->player->plane_x * cos(rot_speed) - data->player->plane_y * sin(rot_speed);
-		data->player->plane_y = save_plane_x * sin(rot_speed) + data->player->plane_y * cos(rot_speed);
-	}
-
-	//clear_image(data, 0X000000);
+	n.current_time = get_time_in_seconds();
+	n.delta_time = n.current_time - data->last_frame;
+	data->last_frame = n.current_time;
+	n.move_speed = 4.0 * n.delta_time;
+	n.rot_speed = 2.0 * n.delta_time;
+	move_front_back(data, &n.new_x, &n.new_y, n.move_speed);
+	n.save_dir_x = data->player->dir_x;
+	n.save_plane_x = data->player->plane_x;
+	rot(data, n.save_dir_x, n.save_plane_x, n.rot_speed);
 	render_3d(data);
-
 	return (0);
 }

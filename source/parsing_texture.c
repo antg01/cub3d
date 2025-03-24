@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:01:45 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 12:07:41 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:48:56 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,13 @@ void	do_textures(t_mlx *data, char *path_texture, int index)
 	if (path_texture[i] == '\n')
 		path_texture[i] = '\0';
 	data->textures[index].img_ptr = mlx_xpm_file_to_image(data->mlx,
-															path_texture,
-															&width,
-															&height);
+			path_texture, &width, &height);
 	if (!(data->textures[index].img_ptr))
 		my_exit("Error: xpm_file_to_image failed");
 	data->textures[index].height = height;
 	data->textures[index].width = width;
-	data->textures[index].addr = mlx_get_data_addr(data->textures[index].img_ptr,
-													&data->textures[index].bpp,
-													&data->textures[index].line_length,
-													&data->textures[index].endian);
+	data->textures[index].addr
+		= mlx_get_data_addr(data->textures[index].img_ptr,
+			&data->textures[index].bpp, &data->textures[index].line_length,
+			&data->textures[index].endian);
 }

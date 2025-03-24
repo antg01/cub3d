@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 01:00:09 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/24 15:39:15 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ typedef struct s_mlx
 	//...
 }						t_mlx;
 
-typedef struct	s_grid
+typedef struct s_grid
 {
 	int	x;
 	int	y;
@@ -167,6 +167,18 @@ typedef struct	s_grid
 	int	x_limit;
 	int	biggest_line;
 }				t_grid;
+
+typedef struct s_loop
+{
+	double	new_x;
+	double	new_y;
+	double	current_time;
+	double	delta_time;
+	double	move_speed;
+	double	rot_speed;
+	double	save_dir_x;
+	double	save_plane_x;
+}				t_loop;
 
 /* ********* */
 /* FONCTIONS */
@@ -245,6 +257,8 @@ t_keys					*init_keys(void);
 int						key_press(int keycode, t_mlx *data);
 int						key_release(int keycode, t_mlx *data);
 int						game_loop(t_mlx *data);
+void					move_front_back(t_mlx *data, double *new_x, double *new_y, double speed);
+void					rot(t_mlx *data, double save_dir_x, double save_plane_x, double rot_speed);
 
 // TEXTURES
 t_img					*init_textures(void);

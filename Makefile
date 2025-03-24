@@ -26,6 +26,7 @@ SRCS =	source/main.c \
 		source/raycast_norm.c \
 		source/raycast.c \
 		source/smooth_move.c \
+		source/smooth_move_norm.c \
 		source/textures.c \
 		source/parsing_texture.c \
 		source/parsing_colors.c \
