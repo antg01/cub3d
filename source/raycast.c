@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:45:32 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 18:11:42 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:26:45 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Récupère la couleur d'un pixel à partir des coordonnées d'une texture sprite.
+*/
 int	get_sprite_pixel(t_img *sprite, int x, int y)
 {
 	char	*pixel;
@@ -21,6 +24,9 @@ int	get_sprite_pixel(t_img *sprite, int x, int y)
 	return (*(int *)pixel);
 }
 
+/*
+** Initialise les variables de base pour le raycasting pour chaque colonne.
+*/
 void	init_variables(t_raycast *r, t_mlx *data, int x)
 {
 	r->camera_x = 2 * x / (double)WINDOW_LENGTH - 1;
@@ -38,6 +44,10 @@ void	init_variables(t_raycast *r, t_mlx *data, int x)
 		r->delta_dist_y = fabs(1 / r->raydir_y);
 }
 
+/*
+** Calcule les distances initiales du rayon jusqu'aux premières
+** intersections en X et Y.
+*/
 void	initial_distance(t_mlx *data, t_raycast *r)
 {
 	if (r->raydir_x < 0)
@@ -66,6 +76,10 @@ void	initial_distance(t_mlx *data, t_raycast *r)
 	r->hit = 0;
 }
 
+/*
+** Exécute l'algorithme DDA pour trouver le mur rencontré par le rayon
+** et calcule la distance perpendiculaire.
+*/
 void	actual_dda(t_mlx *data, t_raycast *r)
 {
 	while (!r->hit)
@@ -93,6 +107,10 @@ void	actual_dda(t_mlx *data, t_raycast *r)
 		r->perp_wall_dis = r->side_dist_y - r->delta_dist_y;
 }
 
+/*
+** Effectue le rendu 3D ligne par ligne avec raycasting
+** et affiche l'image finale.
+*/
 void	render_3d(t_mlx *data)
 {
 	t_raycast	r;

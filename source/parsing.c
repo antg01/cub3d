@@ -6,12 +6,15 @@
 /*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:52:31 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 12:06:34 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:16:48 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Gère l'analyse des lignes de textures et marque les éléments déjà définis.
+*/
 static int	handle_texture_line(t_mlx *data, char *line, t_element_flags *flags)
 {
 	if (!ft_strncmp(line, "NO", 2) && !flags->no)
@@ -41,6 +44,10 @@ static int	handle_texture_line(t_mlx *data, char *line, t_element_flags *flags)
 	return (0);
 }
 
+/*
+** Gère l'analyse des lignes de couleurs et met à jour
+** les indicateurs correspondants.
+*/
 static int	handle_color_line(t_mlx *data, char *line, t_element_flags *flags)
 {
 	if (*line == 'F' && !flags->f)
@@ -58,6 +65,10 @@ static int	handle_color_line(t_mlx *data, char *line, t_element_flags *flags)
 	return (0);
 }
 
+/*
+** Analyse une ligne de configuration et appelle le traitement approprié
+**  pour textures ou couleurs.
+*/
 static void	handle_config_line(t_mlx *data, char *line, t_element_flags *flags)
 {
 	char	*trimmed_line;
@@ -73,6 +84,10 @@ static void	handle_config_line(t_mlx *data, char *line, t_element_flags *flags)
 		my_exit("Error: Invalid or duplicate element in config");
 }
 
+/*
+** Lit et analyse les 6 éléments de configuration (textures et couleurs)
+** depuis le fichier.
+*/
 static void	parse_config_elements(t_mlx *data, int fd)
 {
 	char			*line;
@@ -92,6 +107,10 @@ static void	parse_config_elements(t_mlx *data, int fd)
 	}
 }
 
+/*
+** Parse le fichier de configuration, extrait la map et
+**  vérifie qu'elle est fermée.
+*/
 int	parsing(t_mlx *data, int fd)
 {
 	t_maplist	*head;

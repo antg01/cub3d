@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 14:07:54 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 15:46:52 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:27:10 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Recherche et retourne l'indice de la ligne contenant
+** la position du joueur dans la map.
+*/
 int	which_row(char **map)
 {
 	int	i;
@@ -33,6 +37,10 @@ int	which_row(char **map)
 	return (-1);
 }
 
+/*
+** Recherche et retourne l'indice de la colonne contenant
+** la position du joueur dans une ligne.
+*/
 int	which_col(char *row)
 {
 	int	i;
@@ -47,6 +55,9 @@ int	which_col(char *row)
 	return (-1);
 }
 
+/*
+** Définit la direction initiale du joueur en fonction de son orientation.
+*/
 void	set_start_dirs(t_mlx *data, t_player *player)
 {
 	if (*(data->orientation) == 'N')
@@ -71,6 +82,10 @@ void	set_start_dirs(t_mlx *data, t_player *player)
 	}
 }
 
+/*
+** Initialise la structure joueur avec position, direction,
+** plan de caméra et vitesse de rotation.
+*/
 t_player	*init_player(t_mlx *data)
 {
 	t_player	*player;
@@ -91,6 +106,10 @@ t_player	*init_player(t_mlx *data)
 	return (player);
 }
 
+/*
+** Vérifie si le déplacement vers une case est possible
+** (pas de mur et conditions spéciales).
+*/
 int	check_wall(t_mlx *data, int x, int y)
 {
 	int	old_x;

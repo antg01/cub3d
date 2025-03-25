@@ -6,12 +6,16 @@
 /*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:53:45 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 12:20:15 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:21:21 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Alloue de la mémoire en toute sécurité et initialise la zone à zéro,
+** quitte en cas d'échec.
+*/
 void	*safe_malloc(size_t size)
 {
 	void	*result;
@@ -26,6 +30,9 @@ void	*safe_malloc(size_t size)
 	return (result);
 }
 
+/*
+** Duplique une chaîne en toute sécurité et quitte le programme en cas d'échec.
+*/
 char	*safe_strdup(char *str)
 {
 	char	*result;

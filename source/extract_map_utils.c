@@ -6,12 +6,16 @@
 /*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 11:57:43 by angerard          #+#    #+#             */
-/*   Updated: 2025/03/19 11:58:10 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:26:56 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Vérifie si la ligne ne contient que des espaces,
+** tabulations ou sauts de ligne.
+*/
 int	is_only_spaces(char *line)
 {
 	int	i;
@@ -26,6 +30,10 @@ int	is_only_spaces(char *line)
 	return (1);
 }
 
+/*
+** Vérifie que la map est fermée en s’assurant qu’aucun espace ouvert
+** n’est présent aux bords ou autour des cases valides.
+*/
 void	check_map_closed(char **map, int num_rows, int longest_row)
 {
 	int	i;
@@ -53,6 +61,9 @@ void	check_map_closed(char **map, int num_rows, int longest_row)
 	}
 }
 
+/*
+** Définit l’orientation du joueur selon le caractère rencontré dans la map.
+*/
 void	which_orien(t_mlx *data, char c)
 {
 	if (c == 'N')
@@ -66,6 +77,10 @@ void	which_orien(t_mlx *data, char c)
 	*(data->orientation + 1) = '\0';
 }
 
+/*
+** Vérifie la validité des caractères d'une ligne de map et détecte
+** la position du joueur.
+*/
 void	check_chars(t_mlx *data, char *str, int *check_nsew)
 {
 	int	i;

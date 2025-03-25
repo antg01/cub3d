@@ -6,12 +6,16 @@
 /*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:52:35 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 11:59:43 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:11:39 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Convertit la liste chaînée de lignes en tableau de chaînes
+** et détermine la longueur maximale des lignes de la map.
+*/
 char	**make_map(t_maplist *head, int num_rows, int *longest_row)
 {
 	char		**map;

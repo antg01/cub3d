@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:01:45 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 14:48:56 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:14:16 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Lit une ligne et vérifie qu'elle est vide (newline), sinon affiche une erreur.
+*/
 void	skip_nl(int fd)
 {
 	char	*line;
@@ -25,6 +28,9 @@ void	skip_nl(int fd)
 	free(line);
 }
 
+/*
+** Affiche un message d'erreur puis quitte proprement le programme.
+*/
 void	my_exit(char *msg)
 {
 	write(2, msg, ft_strlen(msg));
@@ -32,6 +38,10 @@ void	my_exit(char *msg)
 	exit(EXIT_SUCCESS);
 }
 
+/*
+** Charge une texture depuis un fichier XPM et initialise ses
+** paramètres dans la structure.
+*/
 void	do_textures(t_mlx *data, char *path_texture, int index)
 {
 	int	height;

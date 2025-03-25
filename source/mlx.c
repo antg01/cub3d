@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 18:38:34 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:12:46 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Place un pixel de couleur aux coordonnées (x, y)
+** dans l'image MLX si elles sont valides.
+*/
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
 	char	*dest;
@@ -24,6 +28,9 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 	}
 }
 
+/*
+** Remplit toute l'image MLX avec la couleur donnée, pixel par pixel.
+*/
 void	clear_image(t_mlx *data, int color)
 {
 	int	y;
@@ -40,6 +47,9 @@ void	clear_image(t_mlx *data, int color)
 	}
 }
 
+/*
+** Gère la fermeture du programme si la touche Échap est pressée.
+*/
 int	handle_keypress(int keycode, t_mlx *data)
 {
 	if (keycode == 65307)
@@ -52,12 +62,19 @@ int	handle_keypress(int keycode, t_mlx *data)
 	return (0);
 }
 
+/*
+** Ferme proprement la fenêtre et quitte le programme.
+*/
 int	close_window(t_mlx *data)
 {
 	mlx_destroy_window(data->mlx, data->window);
 	exit(0);
 }
 
+/*
+** Initialise la fenêtre, les images, les hooks d'événements MLX
+** et lance la boucle principale du jeu.
+*/
 void	handle_mlx(t_mlx *data)
 {
 	data->window = mlx_new_window(data->mlx,

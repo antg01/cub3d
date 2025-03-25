@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:09:01 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 14:55:49 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:11:25 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Initialise l'état utilisé pour extraire et analyser la map
+** depuis la liste chaînée.
+*/
 static void	init_extract_map_state(t_extract_state *state, t_maplist *head)
 {
 	state->line = NULL;
@@ -20,6 +24,10 @@ static void	init_extract_map_state(t_extract_state *state, t_maplist *head)
 	state->curr = head;
 }
 
+/*
+** Parcourt le fichier ligne par ligne pour extraire la map, vérifier sa validité
+** et stocker chaque ligne dans une liste chaînée.
+*/
 static void	extract_map_loop(t_mlx *data, int fd, t_extract_state *state,
 		int *count_rows)
 {
@@ -49,6 +57,10 @@ static void	extract_map_loop(t_mlx *data, int fd, t_extract_state *state,
 	}
 }
 
+/*
+** Extrait la map depuis le fichier, la stocke dans une liste chaînée
+** et vérifie la présence d'une position de départ pour le joueur.
+*/
 t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows)
 {
 	t_maplist		*head;

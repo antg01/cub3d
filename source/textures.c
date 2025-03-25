@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:25:21 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 16:25:23 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:24:22 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Charge deux textures par défaut (redbrick et bluestone)
+** dans la structure texture.
+*/
 void	load_text1(t_mlx *data, int *height, int *width, int i)
 {
 	data->textures[i].img_ptr = mlx_xpm_file_to_image(data->mlx,
@@ -30,6 +34,10 @@ void	load_text1(t_mlx *data, int *height, int *width, int i)
 			&data->textures[i].endian);
 }
 
+/*
+** Charge deux autres textures par défaut (eagle et greystone)
+** dans la structure texture.
+*/
 void	load_text2(t_mlx *data, int *height, int *width, int i)
 {
 	data->textures[i].img_ptr = mlx_xpm_file_to_image(data->mlx,
@@ -48,6 +56,10 @@ void	load_text2(t_mlx *data, int *height, int *width, int i)
 			&data->textures[i].endian);
 }
 
+/*
+** Charge l'ensemble des textures par défaut en
+** appelant les fonctions de chargement.
+*/
 void	load_textures(t_mlx *data)
 {
 	int	height;
@@ -67,6 +79,9 @@ void	load_textures(t_mlx *data)
 	}
 }
 
+/*
+** Récupère la couleur d’un pixel dans une texture en vérifiant les coordonnées.
+*/
 int	get_texture_pixel(t_img *texture, int x, int y)
 {
 	char	*pixel;
@@ -79,6 +94,9 @@ int	get_texture_pixel(t_img *texture, int x, int y)
 	return (*(int *)pixel);
 }
 
+/*
+** Charge le sprite du pistolet et initialise ses paramètres dans la structure.
+*/
 void	load_handgun(t_mlx *data)
 {
 	int	width;

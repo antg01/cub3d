@@ -6,12 +6,16 @@
 /*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:56:02 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 12:08:52 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:13:36 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Extrait une valeur numérique de couleur à partir d'une chaîne,
+** en gérant les espaces.
+*/
 static int	extract_color_value(char *str, t_color_parse *state,
 		char *error_msg)
 {
@@ -27,6 +31,9 @@ static int	extract_color_value(char *str, t_color_parse *state,
 	return (value);
 }
 
+/*
+** Vérifie la présence d'une virgule dans la chaîne et met à jour l'état.
+*/
 static void	check_comma(char *str, t_color_parse *state, char *error_msg)
 {
 	while (str[state->i] == ' ' || str[state->i] == '\t')
@@ -37,6 +44,10 @@ static void	check_comma(char *str, t_color_parse *state, char *error_msg)
 	state->i++;
 }
 
+/*
+** Convertit une chaîne de valeurs RGB en un entier
+** hexadécimal après vérifications.
+*/
 unsigned int	str_to_hexa(char *str)
 {
 	t_color_parse	state;

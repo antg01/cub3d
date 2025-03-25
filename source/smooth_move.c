@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   smooth_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:44:23 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 15:39:23 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:25:58 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Initialise la structure des touches de contrôle avec des valeurs à zéro.
+*/
 t_keys	*init_keys(void)
 {
 	t_keys	*keys;
@@ -26,6 +29,10 @@ t_keys	*init_keys(void)
 	return (keys);
 }
 
+/*
+** Met à jour l'état des touches lors d'une pression
+** clavier pour gérer les mouvements et rotations.
+*/
 int	key_press(int keycode, t_mlx *data)
 {
 	if (keycode == 65307)
@@ -44,6 +51,10 @@ int	key_press(int keycode, t_mlx *data)
 	return (0);
 }
 
+/*
+** Réinitialise l'état des touches lorsque les touches
+** de mouvement ou rotation sont relâchées.
+*/
 int	key_release(int keycode, t_mlx *data)
 {
 	if (keycode == 65362 || keycode == 119)
@@ -57,6 +68,10 @@ int	key_release(int keycode, t_mlx *data)
 	return (0);
 }
 
+/*
+** Gère la boucle principale du jeu : calcul des mouvements,
+** rotations et rendu 3D.
+*/
 int	game_loop(t_mlx *data)
 {
 	t_loop	n;

@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:59:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 15:20:25 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:25:25 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Retourne le temps actuel en secondes avec une précision microseconde.
+*/
 double	get_time_in_seconds(void)
 {
 	struct timeval	tv;
@@ -20,6 +23,9 @@ double	get_time_in_seconds(void)
 	return (tv.tv_sec + tv.tv_usec / 1000000.0);
 }
 
+/*
+** Libère la mémoire allouée pour un tableau de chaînes de caractères.
+*/
 void	free_split(char **map)
 {
 	int	i;
@@ -33,6 +39,10 @@ void	free_split(char **map)
 	free(map);
 }
 
+/*
+** Libère toutes les ressources allouées et détruit les images,
+** fenêtres et affichage MLX.
+*/
 void	free_all(t_mlx *data)
 {
 	int	i;
@@ -61,6 +71,9 @@ void	free_all(t_mlx *data)
 	free(data->mlx);
 }
 
+/*
+** Libère la mémoire allouée pour une liste chaînée de lignes de map.
+*/
 void	free_maplist(t_maplist *head)
 {
 	t_maplist	*temp;

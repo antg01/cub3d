@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_norm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 17:51:06 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 18:14:11 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:19:09 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Calcule la hauteur du mur à dessiner et les positions
+** de début et de fin à l'écran.
+*/
 void	calc_wall_height(t_raycast *r)
 {
 	r->line_height = (int)(WINDOW_HEIGHT / r->perp_wall_dis);
@@ -23,6 +27,10 @@ void	calc_wall_height(t_raycast *r)
 		r->draw_end = WINDOW_HEIGHT - 1;
 }
 
+/*
+** Prépare les calculs pour dessiner la ligne verticale,
+** détermine la texture et la coordonnée murale.
+*/
 void	prep_vertical_line(t_mlx *data, t_raycast *r)
 {
 	if (r->side == 0)
@@ -51,6 +59,9 @@ void	prep_vertical_line(t_mlx *data, t_raycast *r)
 		r->tex_x = r->tex_width - r->tex_x - 1;
 }
 
+/*
+** Dessine une ligne verticale texturée à l'écran pour la colonne donnée.
+*/
 void	draw_vertical_line(t_mlx *data, t_raycast *r, int x)
 {
 	int	y;

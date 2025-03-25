@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   smooth_move_norm.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 15:22:33 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 15:39:39 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:25:45 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+/*
+** Gère les déplacements avant et arrière du joueur en vérifiant les collisions.
+*/
 void	move_front_back(t_mlx *data, double *new_x, double *new_y, double speed)
 {
 	if (data->keys->forward)
@@ -36,6 +39,10 @@ void	move_front_back(t_mlx *data, double *new_x, double *new_y, double speed)
 	}
 }
 
+/*
+** Applique la rotation du joueur et du plan de caméra
+** selon les touches de rotation.
+*/
 void	rot(t_mlx *data, double save_dir_x, double save_plane, double rot_speed)
 {
 	if (data->keys->rotate_left)
