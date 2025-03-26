@@ -1,4 +1,4 @@
-NAME = Cub3d
+NAME = cub3D
 
 LIBFT = libft/libft.a
 
