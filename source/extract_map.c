@@ -6,7 +6,7 @@
 /*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:09:01 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/25 18:11:25 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:26:15 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ static void	init_extract_map_state(t_extract_state *state, t_maplist *head)
 }
 
 /*
-** Parcourt le fichier ligne par ligne pour extraire la map, vérifier sa validité
+** Parcourt le fichier ligne par ligne pour extraire la map,
+	vérifier sa validité
 ** et stocker chaque ligne dans une liste chaînée.
 */
-static void	extract_map_lines(t_mlx *data, int fd, t_extract_state *state, int *count_rows)
+static void	extract_map_lines(t_mlx *data, int fd, t_extract_state *state,
+		int *count_rows)
 {
 	while (1)
 	{
@@ -82,7 +84,8 @@ static void	check_double_map_description(int fd)
 ** Parcourt le fichier ligne par ligne pour verifier
 ** si il y a une 2eme description de map
 */
-static void	extract_map_loop(t_mlx *data, int fd, t_extract_state *state, int *count_rows)
+static void	extract_map_loop(t_mlx *data, int fd, t_extract_state *state,
+		int *count_rows)
 {
 	extract_map_lines(data, fd, state, count_rows);
 	check_double_map_description(fd);

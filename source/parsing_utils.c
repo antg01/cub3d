@@ -6,7 +6,7 @@
 /*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:03:42 by angerard          #+#    #+#             */
-/*   Updated: 2025/03/25 18:26:30 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:26:38 by angerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ char	*trim_spaces_texture(char *line)
 	while (line[start] == ' ' || line[start] == '\t')
 		start++;
 	end = ft_strlen(line) - 1;
-	while (end > start && (line[end] == ' ' || line[end] == '\t' || line[end] == '\n'))
+	while (end > start && (line[end] == ' ' || line[end] == '\t'
+			|| line[end] == '\n'))
 		end--;
 	result = ft_substr(line, start, end - start + 1);
 	if (!result)
-		my_exit("Error: Memory allocation failed in trim_spaces_tabs_both_sides");
+		my_exit("Error: Memory allocation failed in trim_spaces_texture");
 	return (result);
 }
 
