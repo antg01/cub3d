@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 11:57:43 by angerard          #+#    #+#             */
-/*   Updated: 2025/03/26 14:47:26 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/26 14:54:00 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	check_map_closed(char **map, int num_rows, int longest_row)
 			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'E' || map[i][j] == 'W')
 			{
-				if (i == 0 || j == 0 || i == num_rows - 1 || j == (int)ft_strlen(map[i])
-					- 1)
+				if (i == 0 || j == 0 || i == num_rows - 1
+					|| j == (int)ft_strlen(map[i]) - 1)
 					my_exit("Error: Map is not closed (border)");
 				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j
 					- 1] == ' ' || map[i][j + 1] == ' ')
