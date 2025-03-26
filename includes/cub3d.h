@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/24 15:53:20 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:58:10 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,8 @@ int					render(t_mlx *data);
 void				set_biggest_line(t_mlx *data, t_grid *g, int num_rows);
 int					norm_fix(t_mlx *data, int dx, int dy, int *xy);
 void				set_xy(int *xy, int x, int y);
+int					draw_white(t_mlx *data,
+						t_grid *g, int cell_size, int num_rows);
 
 // PLAYER
 t_player			*init_player(t_mlx *data);

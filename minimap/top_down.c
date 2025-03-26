@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:34:59 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 19:04:54 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:55:45 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	draw_grid(t_mlx *data, int num_rows, int cell_size)
 			else if (data->map[(g.y - WINDOW_HEIGHT + (num_rows * cell_size))
 					/ cell_size][(g.x / cell_size)] == '1')
 				draw_red_square(data, g.x, g.y, cell_size);
-			else
+			else if (draw_white(data, &g, cell_size, num_rows))
 				draw_white_square(data, g.x, g.y, cell_size);
 			g.x += cell_size;
 		}
