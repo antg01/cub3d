@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:01:45 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/25 18:14:16 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:52:25 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	my_exit(char *msg)
 {
 	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);
+	//free_all(data);
 	exit(EXIT_SUCCESS);
 }
 
