@@ -29,33 +29,74 @@ static void	init_extract_map_state(t_extract_state *state, t_maplist *head)
 ** et stocker chaque ligne dans une liste chaînée.
 */
 static void	extract_map_loop(t_mlx *data, int fd, t_extract_state *state,
-		int *count_rows)
+    int *count_rows)
 {
-	while (1)
-	{
-		state->line = get_next_line(fd);
-		if (!state->line)
-			break ;
-		if (state->started && (*state->line == '\n' || *state->line == '\0'
-				|| is_only_spaces(state->line)))
-		{
-			free(state->line);
-			break ;
-		}
-		if (!state->started && (*state->line == '\n' || *state->line == '\0'
-				|| is_only_spaces(state->line)))
-		{
-			free(state->line);
-			continue ;
-		}
-		state->started = 1;
-		check_chars(data, state->line, &state->check_nsew);
-		(*count_rows)++;
-		state->curr->line = state->line;
-		state->curr->next = safe_malloc(sizeof(t_maplist));
-		state->curr = state->curr->next;
-	}
+    while (1)
+    {
+        state->line = get_next_line(fd);
+        if (!state->line)
+            break ;
+        if (state->started && (*state->line == '\n' || *state->line == '\0'
+                || is_only_spaces(state->line)))
+        {
+            free(state->line);
+            break ;
+        }
+        if (!state->started && (*state->line == '\n' || *state->line == '\0'
+                || is_only_spaces(state->line)))
+        {
+            free(state->line);
+            continue ;
+        }
+        state->started = 1;
+        check_chars(data, state->line, &state->check_nsew);
+        (*count_rows)++;
+        state->curr->line = state->line;
+        state->curr->next = safe_malloc(sizeof(t_maplist));
+        state->curr = state->curr->next;
+    }
+    while (1)
+    {
+        state->line = get_next_line(fd);
+        if (!state->line)
+            break ;
+        if (!is_only_spaces(state->line))
+        {
+            free(state->line);
+            my_exit("Error: multiple map descriptions found");
+        }
+        free(state->line);
+    }
 }
+
+// static void	extract_map_loop(t_mlx *data, int fd, t_extract_state *state,
+// 		int *count_rows)
+// {
+// 	while (1)
+// 	{
+// 		state->line = get_next_line(fd);
+// 		if (!state->line)
+// 			break ;
+// 		if (state->started && (*state->line == '\n' || *state->line == '\0'
+// 				|| is_only_spaces(state->line)))
+// 		{
+// 			free(state->line);
+// 			break ;
+// 		}
+// 		if (!state->started && (*state->line == '\n' || *state->line == '\0'
+// 				|| is_only_spaces(state->line)))
+// 		{
+// 			free(state->line);
+// 			continue ;
+// 		}
+// 		state->started = 1;
+// 		check_chars(data, state->line, &state->check_nsew);
+// 		(*count_rows)++;
+// 		state->curr->line = state->line;
+// 		state->curr->next = safe_malloc(sizeof(t_maplist));
+// 		state->curr = state->curr->next;
+// 	}
+// }
 
 /*
 ** Extrait la map depuis le fichier, la stocke dans une liste chaînée

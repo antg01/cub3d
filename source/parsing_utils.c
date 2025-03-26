@@ -13,6 +13,28 @@
 #include "../includes/cub3d.h"
 
 /*
+** Supprime les espaces et tabulations en début et fin de ligne et
+** retourne le pointeur ajusté.
+*/
+char	*trim_spaces_texture(char *line)
+{
+	int		start;
+	int		end;
+	char	*result;
+
+	start = 0;
+	while (line[start] == ' ' || line[start] == '\t')
+		start++;
+	end = ft_strlen(line) - 1;
+	while (end > start && (line[end] == ' ' || line[end] == '\t' || line[end] == '\n'))
+		end--;
+	result = ft_substr(line, start, end - start + 1);
+	if (!result)
+		my_exit("Error: Memory allocation failed in trim_spaces_tabs_both_sides");
+	return (result);
+}
+
+/*
 ** Supprime les espaces et tabulations en début de ligne et
 ** retourne le pointeur ajusté.
 */
@@ -25,16 +47,19 @@ char	*trim_spaces_tabs(char *line)
 
 /*
 ** Extrait et charge le chemin de la texture depuis une ligne de configuration.
+** Trim les espaces et tabulations des deux côtés.
 */
 void	parse_texture_line(t_mlx *data, char *line, int index)
 {
+	char	*trimmed_line;
 	char	*path_copy;
 
-	line = trim_spaces_tabs(line + 2);
-	path_copy = ft_strdup(line);
+	trimmed_line = trim_spaces_texture(line + 2);
+	path_copy = ft_strdup(trimmed_line);
 	if (!path_copy)
 		my_exit("Memory allocation failed in parse_texture_line");
 	do_textures(data, path_copy, index);
+	free(trimmed_line);
 	free(path_copy);
 }
 
