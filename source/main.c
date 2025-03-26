@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:10 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/25 18:27:45 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:26:18 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int	check_extension(char *filename)
 		i++;
 	if (i < 5)
 		return (0);
-	if (filename[i - 4] != '.' || filename[i - 3] != 'c' || filename[i
-         - 2] != 'u' || filename[i - 1] != 'b')
+	if (filename[i - 4] != '.' || filename[i - 3] != 'c'
+		|| filename[i - 2] != 'u' || filename[i - 1] != 'b')
 		return (0);
 	return (1);
 }
