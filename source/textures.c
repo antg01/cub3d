@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:25:21 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/25 18:24:22 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:05:21 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,24 +94,3 @@ int	get_texture_pixel(t_img *texture, int x, int y)
 	return (*(int *)pixel);
 }
 
-/*
-** Charge le sprite du pistolet et initialise ses paramètres dans la structure.
-*/
-void	load_handgun(t_mlx *data)
-{
-	int	width;
-	int	height;
-
-	data->hand->img_ptr = mlx_xpm_file_to_image(data->mlx,
-			"textures/handgun.xpm", &width, &height);
-	if (!data->hand->img_ptr)
-	{
-		perror("Failed to load gun sprite");
-		exit(1);
-	}
-	data->hand->width = width;
-	data->hand->height = height;
-	data->hand->addr = mlx_get_data_addr(data->hand->img_ptr,
-			&data->hand->bpp, &data->hand->line_length,
-			&data->hand->endian);
-}

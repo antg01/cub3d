@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/26 13:58:10 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:05:33 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,5 @@ void				rot(t_mlx *data, double save_dir_x,
 t_img				*init_textures(void);
 void				load_textures(t_mlx *data);
 int					get_texture_pixel(t_img *texture, int x, int y);
-void				load_handgun(t_mlx *data);
 
 #endif

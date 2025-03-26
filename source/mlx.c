@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:49:04 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/25 18:12:46 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:11:02 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int	handle_keypress(int keycode, t_mlx *data)
 {
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(data->mlx, data->window);
-		free_split(data->map);
 		free_all(data);
 		exit(0);
 	}
@@ -67,7 +65,7 @@ int	handle_keypress(int keycode, t_mlx *data)
 */
 int	close_window(t_mlx *data)
 {
-	mlx_destroy_window(data->mlx, data->window);
+	free_all(data);
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:59:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/26 16:55:50 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:05:01 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	free_all(t_mlx *data)
 			mlx_destroy_image(data->mlx, data->textures[i].img_ptr);
 		i++;
 	}
-	if (data->hand->img_ptr)
-		mlx_destroy_image(data->mlx, data->hand->img_ptr);
 	if (data->image)
 		mlx_destroy_image(data->mlx, data->image);
 	if (data->window)
