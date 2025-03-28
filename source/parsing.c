@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:52:31 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/25 18:16:48 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:50:35 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ static int	handle_color_line(t_mlx *data, char *line, t_element_flags *flags)
 {
 	if (*line == 'F' && !flags->f)
 	{
-		parse_color_line(&(data->floor_color), line);
+		parse_color_line(data, &(data->floor_color), line);
 		flags->f = 1;
 		return (1);
 	}
 	if (*line == 'C' && !flags->c)
 	{
-		parse_color_line(&(data->ceiling_color), line);
+		parse_color_line(data, &(data->ceiling_color), line);
 		flags->c = 1;
 		return (1);
 	}
@@ -81,7 +81,7 @@ static void	handle_config_line(t_mlx *data, char *line, t_element_flags *flags)
 	if (!ok)
 		ok = handle_color_line(data, trimmed_line, flags);
 	if (!ok)
-		my_exit("Error: Invalid or duplicate element in config");
+		my_exit("Error: Invalid/duplicate element in config", data);
 }
 
 /*
@@ -100,7 +100,7 @@ static void	parse_config_elements(t_mlx *data, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			my_exit("Error: Unexpected EOF before all elements parsed");
+			my_exit("Error: Unexpected EOF", data);
 		handle_config_line(data, line, &flags);
 		count = flags.no + flags.so + flags.we + flags.ea + flags.f + flags.c;
 		free(line);
@@ -121,13 +121,13 @@ int	parsing(t_mlx *data, int fd)
 	head = extract_map(data, fd, &count_rows);
 	if (count_rows == 0)
 	{
-		my_exit("Error: empty map");
+		my_exit("Error: empty map", data);
 	}
 	data->num_rows = count_rows;
 	data->longest_row = 0;
 	data->map = make_map(head, count_rows, &(data->longest_row));
 	if (!data->map)
-		my_exit("make_map returned NULL (allocation or linked list issue)");
-	check_map_closed(data->map, data->num_rows, data->longest_row);
+		my_exit("make_map returned NULL (allocation or linked list issue)", data);
+	check_map_closed(data, data->map, data->num_rows, data->longest_row);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:01:45 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/26 16:52:25 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:43:50 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,7 @@ void	skip_nl(int fd)
 /*
 ** Affiche un message d'erreur puis quitte proprement le programme.
 */
-void	my_exit(char *msg)
-{
-	write(2, msg, ft_strlen(msg));
-	write(2, "\n", 1);
-	//free_all(data);
-	exit(EXIT_SUCCESS);
-}
+
 
 /*
 ** Charge une texture depuis un fichier XPM et initialise ses
@@ -57,7 +51,7 @@ void	do_textures(t_mlx *data, char *path_texture, int index)
 	data->textures[index].img_ptr = mlx_xpm_file_to_image(data->mlx,
 			path_texture, &width, &height);
 	if (!(data->textures[index].img_ptr))
-		my_exit("Error: xpm_file_to_image failed");
+		my_exit("Error: xpm_file_to_image failed", data);
 	data->textures[index].height = height;
 	data->textures[index].width = width;
 	data->textures[index].addr

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 11:57:43 by angerard          #+#    #+#             */
-/*   Updated: 2025/03/26 14:54:00 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:38:07 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_only_spaces(char *line)
 ** Vérifie que la map est fermée en s’assurant qu’aucun espace ouvert
 ** n’est présent aux bords ou autour des cases valides.
 */
-void	check_map_closed(char **map, int num_rows, int longest_row)
+void	check_map_closed(t_mlx *data, char **map, int num_rows, int longest_row)
 {
 	int	i;
 	int	j;
@@ -50,10 +50,10 @@ void	check_map_closed(char **map, int num_rows, int longest_row)
 			{
 				if (i == 0 || j == 0 || i == num_rows - 1
 					|| j == (int)ft_strlen(map[i]) - 1)
-					my_exit("Error: Map is not closed (border)");
+					my_exit("Error: Map isn't closed (border)", data);
 				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j
 					- 1] == ' ' || map[i][j + 1] == ' ')
-					my_exit("Error: Map is not closed (adjacent to space)");
+					my_exit("Error: Map isn't closed (space)", data);
 			}
 			j++;
 		}
@@ -95,14 +95,14 @@ void	check_chars(t_mlx *data, char *str, int *check_nsew)
 	{
 		if (str[i] != ' ' && str[i] != '1' && str[i] != '0' && str[i] != 'N'
 			&& str[i] != 'S' && str[i] != 'E' && str[i] != 'W')
-			my_exit("Error: non-valid character in map");
+			my_exit("Error: non-valid character in map", data);
 		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
 		{
 			which_orien(data, str[i]);
 			(*check_nsew)++;
 		}
 		if (*check_nsew > 1)
-			my_exit("Error: Too many player's start positions");
+			my_exit("Error: Too many player's start positions", data);
 		i++;
 	}
 }

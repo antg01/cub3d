@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:09:01 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/26 14:26:15 by angerard         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:39:01 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	extract_map_lines(t_mlx *data, int fd, t_extract_state *state,
 ** Parcourt le fichier ligne par ligne pour verifier
 ** si il y a une 2eme description de map
 */
-static void	check_double_map_description(int fd)
+static void	check_double_map_description(t_mlx *data, int fd)
 {
 	char	*line;
 
@@ -74,7 +74,7 @@ static void	check_double_map_description(int fd)
 		if (!is_only_spaces(line))
 		{
 			free(line);
-			my_exit("Error: multiple map descriptions found");
+			my_exit("Error: multiple map descriptions found", data);
 		}
 		free(line);
 	}
@@ -88,7 +88,7 @@ static void	extract_map_loop(t_mlx *data, int fd, t_extract_state *state,
 		int *count_rows)
 {
 	extract_map_lines(data, fd, state, count_rows);
-	check_double_map_description(fd);
+	check_double_map_description(data, fd);
 }
 
 /*
@@ -105,7 +105,7 @@ t_maplist	*extract_map(t_mlx *data, int fd, int *count_rows)
 	init_extract_map_state(&state, head);
 	extract_map_loop(data, fd, &state, count_rows);
 	if (state.check_nsew == 0)
-		my_exit("Error: no player start position found in map");
+		my_exit("Error: no player start position found in map", data);
 	last = head;
 	while (last->next && last->next->line != NULL)
 		last = last->next;

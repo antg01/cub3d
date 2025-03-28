@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/26 17:05:33 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:49:37 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,25 +194,24 @@ int					parsing(t_mlx *data, int fd);
 char				*trim_spaces_tabs(char *line);
 char				*trim_spaces_tabs(char *line);
 void				parse_texture_line(t_mlx *data, char *line, int index);
-void				parse_color_line(unsigned int *color, char *line);
+void				parse_color_line(t_mlx *data, unsigned int *color, char *line);
 void				init_element_flags(t_element_flags *flags);
 
 //PARSING TEXTURE && COLORS
 void				check_four_dir(int fd, t_mlx *data);
-void				my_exit(char *msg);
 void				skip_nl(int fd);
 void				check_colors(t_mlx *data, int fd);
 void				do_textures(t_mlx *data, char *path_texture, int index);
-unsigned int		str_to_hexa(char *str);
+unsigned int		str_to_hexa(t_mlx *data, char *str);
 
 // MAP
 char				**make_map(t_maplist *head, int num_rows, int *longest_row);
 
 // EXTRACT MAP + utils
 t_maplist			*extract_map(t_mlx *data, int fd, int *count_rows);
-void				check_map_closed(char **map, int num_rows, int longest_row);
+void				check_map_closed(t_mlx * data,
+						char **map, int num_rows, int longest_row);
 int					is_only_spaces(char *line);
-void				check_map_closed(char **map, int num_rows, int longest_row);
 void				check_chars(t_mlx *data, char *str, int *check_nsew);
 
 // UTILS
@@ -266,5 +265,9 @@ void				rot(t_mlx *data, double save_dir_x,
 t_img				*init_textures(void);
 void				load_textures(t_mlx *data);
 int					get_texture_pixel(t_img *texture, int x, int y);
+
+// EXITS
+void				my_exit(char *msg, t_mlx *data);
+
 
 #endif

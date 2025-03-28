@@ -11,7 +11,7 @@ MLX_LIB = -L $(MLX_DIR) -lmlx
 
 CC = cc
 
-CFLAGS = -Werror -Wall -Wextra -g #-fsanitize=address
+CFLAGS = -Werror -Wall -Wextra #-g -fsanitize=address
 
 RM = rm -rf
 
@@ -32,6 +32,7 @@ SRCS =	source/main.c \
 		source/parsing_colors.c \
 		source/extract_map.c \
 		source/extract_map_utils.c \
+		source/exits.c \
 		minimap/top_down_norm.c \
 		minimap/top_down.c \
 		minimap/rays_norm.c \
