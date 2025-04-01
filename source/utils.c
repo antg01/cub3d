@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:59:00 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/28 17:53:39 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:34:13 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	free_all(t_mlx *data)
 	if (data->mlx)
 		mlx_destroy_display(data->mlx);
 	free(data->mlx);
-	write(2, "AAAAAAA\n", 8);
 }
 
 /*

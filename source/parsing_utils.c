@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:03:42 by angerard          #+#    #+#             */
-/*   Updated: 2025/03/28 15:46:10 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:32:09 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	parse_texture_line(t_mlx *data, char *line, int index)
 	char	*path_copy;
 
 	trimmed_line = trim_spaces_texture(data, line + 2);
-	path_copy = ft_strdup(trimmed_line);
+	path_copy = safe_strdup(trimmed_line);
 	if (!path_copy)
 		my_exit("Memory allocation failed in parse_texture_line", data);
 	do_textures(data, path_copy, index);

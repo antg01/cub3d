@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/28 17:49:37 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:31:22 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ typedef struct s_mlx
 	t_player			*player;
 	t_keys				*keys;
 	t_img				textures[4];
-	t_img				hand[1];
 	unsigned int		floor_color;
 	unsigned int		ceiling_color;
 	char				orientation[2];
@@ -194,7 +193,8 @@ int					parsing(t_mlx *data, int fd);
 char				*trim_spaces_tabs(char *line);
 char				*trim_spaces_tabs(char *line);
 void				parse_texture_line(t_mlx *data, char *line, int index);
-void				parse_color_line(t_mlx *data, unsigned int *color, char *line);
+void				parse_color_line(t_mlx *data,
+						unsigned int *color, char *line);
 void				init_element_flags(t_element_flags *flags);
 
 //PARSING TEXTURE && COLORS
@@ -209,7 +209,7 @@ char				**make_map(t_maplist *head, int num_rows, int *longest_row);
 
 // EXTRACT MAP + utils
 t_maplist			*extract_map(t_mlx *data, int fd, int *count_rows);
-void				check_map_closed(t_mlx * data,
+void				check_map_closed(t_mlx *data,
 						char **map, int num_rows, int longest_row);
 int					is_only_spaces(char *line);
 void				check_chars(t_mlx *data, char *str, int *check_nsew);
@@ -268,6 +268,5 @@ int					get_texture_pixel(t_img *texture, int x, int y);
 
 // EXITS
 void				my_exit(char *msg, t_mlx *data);
-
 
 #endif

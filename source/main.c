@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:52:10 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/26 13:26:18 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:28:04 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,25 @@ static int	check_arguments(int argc, char **argv)
 	return (1);
 }
 
+void	set_nulls(t_mlx *data)
+{
+	int	i;
+
+	data->player = NULL;
+	data->keys = NULL;
+	data->window = NULL;
+	data->image = NULL;
+	data->mlx = NULL;
+	data->addr = NULL;
+	data->map = NULL;
+	i = 0;
+	while (i < 4)
+	{
+		data->textures[i].img_ptr = NULL;
+		i++;
+	}
+}
+
 /*
 ** Point d’entrée du programme : initialise la fenêtre, vérifie les arguments
 ** et lance le parsing puis l'affichage du jeu.
@@ -67,6 +86,7 @@ int	main(int argc, char **argv)
 	t_mlx	data;
 	int		fd;
 
+	set_nulls(&data);
 	if (!check_arguments(argc, argv))
 		return (1);
 	fd = open(argv[1], O_RDONLY);

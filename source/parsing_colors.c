@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:56:02 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/28 17:48:35 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:30:24 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static int	extract_color_value(t_mlx *data, char *str, t_color_parse *state,
 /*
 ** Vérifie la présence d'une virgule dans la chaîne et met à jour l'état.
 */
-static void	check_comma(t_mlx *data, char *str, t_color_parse *state, char *error_msg)
+static void	check_comma(t_mlx *data, char *str,
+		t_color_parse *state, char *error_msg)
 {
 	while (str[state->i] == ' ' || str[state->i] == '\t')
 		state->i++;
@@ -57,7 +58,7 @@ unsigned int	str_to_hexa(t_mlx *data, char *str)
 
 	state.i = 0;
 	state.comma_count = 0;
-	r = extract_color_value(data, str, &state, "Error: Missing or invalid red value");
+	r = extract_color_value(data, str, &state, "Error: Invalid red value");
 	check_comma(data, str, &state, "Error: Missing first comma");
 	g = extract_color_value(data, str, &state,
 			"Error: Missing or invalid green value");

@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:44:23 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/26 16:50:57 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:29:20 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ int	key_press(int keycode, t_mlx *data)
 {
 	if (keycode == 65307)
 	{
-		//mlx_destroy_window(data->mlx, data->window);
-		//mlx_destroy_display(data->mlx);
-		//mlx_destroy_image(data->mlx, data->image);
 		free_all(data);
 		exit(0);
 	}

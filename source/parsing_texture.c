@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 16:01:45 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/28 15:43:50 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:30:36 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	skip_nl(int fd)
 /*
 ** Affiche un message d'erreur puis quitte proprement le programme.
 */
-
 
 /*
 ** Charge une texture depuis un fichier XPM et initialise ses

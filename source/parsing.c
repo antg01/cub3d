@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:52:31 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/28 17:50:35 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:29:42 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	parsing(t_mlx *data, int fd)
 	data->longest_row = 0;
 	data->map = make_map(head, count_rows, &(data->longest_row));
 	if (!data->map)
-		my_exit("make_map returned NULL (allocation or linked list issue)", data);
+		my_exit("make_map returned NULL (alloc or linked list issue)", data);
 	check_map_closed(data, data->map, data->num_rows, data->longest_row);
 	return (1);
 }
