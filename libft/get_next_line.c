@@ -5,135 +5,159 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 14:44:36 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/01/29 15:27:48 by gnyssens         ###   ########.fr       */
+/*   Created: 2024/05/02 19:15:52 by gnyssens          #+#    #+#             */
+/*   Updated: 2025/04/01 17:50:09 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_listt	**free_node(t_listt **node, int loop)
+ssize_t	end_of_line(char *line)
 {
-	t_listt	*tmp;
+	ssize_t	i;
 
-	if (!node || !*node)
+	i = 0;
+	while (line[i])
+	{
+		if ('\n' == line[i])
+			return (i);
+		i++;
+	}
+	i = 0;
+	return (-1);
+}
+
+char	*dupl_and_adjust_remain(char *remain)
+{
+	ssize_t	i;
+	ssize_t	j;
+	char	*new_line;
+
+	new_line = myy_strdup(remain);
+	if (!new_line)
 		return (NULL);
-	while (*node)
+	i = 0;
+	while (new_line[i] && new_line[i] != '\n')
+		i++;
+	if ('\n' == new_line[i])
 	{
-		tmp = (*node)->next;
-		free((*node)->content);
-		free(*node);
-		*node = tmp;
-		if (!loop)
-			break ;
+		j = i + 1;
+		while (new_line[++i] != '\0')
+			new_line[i] = '\0';
+		i = 0;
+		while (remain[j])
+			remain[i++] = remain[j++];
+		remain[i] = '\0';
 	}
-	return (node);
+	else if ('\0' == new_line[i])
+		my_bzero(remain, i + 1);
+	return (new_line);
 }
 
-char	*get_line_from_list(t_listt *lst)
+char	extract_buffer(int fd, char *buffer)
 {
-	t_listt	*head;
-	char	*line;
-	size_t	len;
+	ssize_t	count;
+	ssize_t	i;
 
-	head = lst;
-	len = 0;
-	while (lst && !ft_strchr_bis(lst, '\n', 0))
+	count = read(fd, buffer, BUFFER_SIZE);
+	if (count < 0)
+		return ('e');
+	buffer[count] = '\0';
+	if (count == 0)
+		return ('\0');
+	i = 0;
+	while (i < count)
 	{
-		len += lst->len;
-		lst = lst->next;
+		if ('\n' == buffer[i])
+			return ('\n');
+		i++;
 	}
-	if (lst)
-		len += (ft_strchr_bis(lst, '\n', 0) - lst->content) + 1;
-	line = (char *)malloc(sizeof(char) * (len + 1));
-	if (!line)
-		return (NULL);
-	lst = head;
-	ft_strjoin_bis(line, head, len);
-	line[len] = '\0';
-	return (line);
+	return ('c');
 }
 
-void	clean_buffer(t_listt **lst)
+ssize_t	manage_extraction(int fd, char *buf, char **line)
 {
-	t_listt	*curr;
-	t_listt	*next;
-	char	*newline_pos;
+	char	check;
+	ssize_t	i;
 
-	curr = *lst;
-	while (curr && !ft_strchr_bis(curr, '\n', 0))
-		curr = *(free_node(lst, 0));
-	if (curr)
+	check = 'c';
+	while (check == 'c')
 	{
-		newline_pos = ft_strchr_bis(curr, '\n', 0);
-		if (newline_pos)
-		{
-			next = ft_lstneww(ft_strdup(newline_pos + 1));
-			if (next)
-			{
-				next->next = curr->next;
-				free_node(&curr, 0);
-				*lst = next;
-			}
-		}
-		else
-		{
-			lst = free_node(&curr, 1);
-		}
+		check = extract_buffer(fd, buf);
+		if (check == 'c')
+			*line = my_strjoin(*line, buf);
+		if (!(*line))
+			return (-1);
 	}
-}
-
-int	read_to_buffer(int fd, t_listt **lst)
-{
-	char	*buf;
-	ssize_t	bytes_read;
-	t_listt	*new_node;
-
-	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buf)
-		return (-1);
-	bytes_read = read(fd, buf, BUFFER_SIZE);
-	if (bytes_read <= 0)
+	if (check == '\n')
 	{
-		free(buf);
-		return (bytes_read);
+		*line = my_strjoin(*line, buf);
+		if (!(*line))
+			return (-1);
+		i = end_of_line(*line) + 1;
+		while ((*line)[i] != 0)
+			(*line)[i++] = '\0';
+		return (0);
 	}
-	buf[bytes_read] = '\0';
-	new_node = ft_lstneww(buf);
-	if (!new_node)
-	{
-		free(buf);
-		return (-1);
-	}
-	ft_lstadd_backk(lst, new_node);
-	return (bytes_read);
+	if (check == 'e')
+		return (free(*line), -1);
+	return (2);
 }
 
 char	*get_next_line(int fd)
 {
-	static t_listt	*bf;
-	char			*line;
-	int				res;
+	t_variable	v;
+	static char	*rest = NULL;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	res = 1;
-	while ((bf == NULL || ft_strchr_bis(bf, '\n', 1) == NULL) && res > 0)
+	v.buffer = NULL;
+	rest = init_remainder(rest, &v.buffer);
+	if (!rest || fd < 0)
+		return (free(v.buffer), NULL);
+	v.line = dupl_and_adjust_remain(rest);
+	if (!v.line)
+		return (free(rest), rest = NULL, free(v.buffer), NULL);
+	if (end_of_line(v.line) >= 0)
+		return (free(v.buffer), v.buffer = NULL, v.line);
+	v.check = manage_extraction(fd, v.buffer, &(v.line));
+	if (v.check == -1)
+		return (free(rest), rest = NULL, free(v.buffer), NULL);
+	else if (v.check == 0)
 	{
-		res = read_to_buffer(fd, &bf);
-		if (res < 0)
-		{
-			free_node(&bf, 1);
-			return (NULL);
-		}
+		v.i = end_of_line(v.buffer);
+		while (v.buffer[++(v.i)] != '\0')
+			rest[v.check++] = v.buffer[v.i];
+		rest[v.check] = '\0';
 	}
-	line = get_line_from_list(bf);
-	if (line == NULL || *line == '\0')
-	{
-		free_node(&bf, 1);
-		free(line);
-		return (NULL);
-	}
-	clean_buffer(&bf);
-	return (line);
+	if (*(v.line) == '\0')
+		return (free(rest), rest = NULL, free(v.line), free(v.buffer), NULL);
+	return (free(v.buffer), v.line);
 }
+
+/*
+int main() {
+    int fd;
+    char *line;
+
+    fd = open("tekst.txt", O_RDONLY);
+    if (fd == -1) {
+        perror("Error opening file");
+        return (1);
+    }
+	
+	int i = 0;
+	while (i < 100) // && line != NULL)
+	{
+		line = get_next_line(fd);
+        printf("%d'th line: %s", i + 1, line); 
+		if(line == NULL)
+		{
+			exit(0);
+		}
+		free(line); // Don't forget to free memory!
+		i++;
+    }
+
+    close(fd);
+    return (0);
+}
+*/

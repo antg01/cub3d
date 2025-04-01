@@ -1,10 +1,10 @@
     WE                  ./textures/wood.xpm
-NO       ./textures/bluestone.xpm
+NO       ./textures/bluestone.xpmqq
 
 
 SO ./textures/redbrick.xpm
 
-F       48,60,32
+F       48,60,32qq
 
 EA ./textures/eagle.xpm
 

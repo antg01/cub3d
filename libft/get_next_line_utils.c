@@ -3,110 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: angerard <angerard@student.s19.be>         +#+  +:+       +#+        */
+/*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 14:45:29 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/03/19 12:26:59 by angerard         ###   ########.fr       */
+/*   Created: 2024/05/02 19:42:53 by gnyssens          #+#    #+#             */
+/*   Updated: 2025/04/01 17:43:41 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_listt	*ft_lstneww(char *content)
+ssize_t	my_strlen(char *str)
 {
-	t_listt	*new_elem;
+	ssize_t	i;
 
-	if (content)
-	{
-		new_elem = (t_listt *)malloc(sizeof(t_listt));
-		if (!new_elem)
-			return (NULL);
-		new_elem->content = content;
-		new_elem->next = NULL;
-		new_elem->len = 0;
-		while (content[new_elem->len] != '\0')
-			new_elem->len++;
-		return (new_elem);
-	}
-	return (NULL);
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-void	ft_lstadd_backk(t_listt **lst, t_listt *new)
+char	*init_remainder(char *remain, char **buffer)
 {
-	t_listt	*last;
-
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
+	*buffer = (char *)malloc(BUFFER_SIZE + 1);
+	if (!(*buffer))
 	{
-		last = *lst;
-		while (last->next)
-			last = last->next;
-		last->next = new;
-	}
-}
-
-char	*ft_strchr_bis(t_listt *lst, int c, int loop)
-{
-	const char	*s;
-
-	while (lst)
-	{
-		s = lst->content;
-		while (*s)
+		if (remain)
 		{
-			if (*s == (char)c)
-				return ((char *)s);
-			s++;
+			free(remain);
+			remain = NULL;
 		}
-		if (c == '\0')
-			return ((char *)s);
-		lst = lst->next;
-		if (!loop)
-			break ;
+		return (NULL);
 	}
-	return (NULL);
+	if (remain != NULL)
+		return (remain);
+	remain = (char *)malloc(BUFFER_SIZE + 1);
+	if (!remain)
+		return (NULL);
+	*remain = '\0';
+	return (remain);
 }
-/*
-char	*ft_strdup(const char *s1)
-{
-	char	*copy;
-	size_t	len;
-	size_t	i;
 
-	len = 0;
-	while (s1[len])
-		len++;
-	copy = (char *)malloc(sizeof(char) * (len + 1));
-	if (!copy)
+void	my_bzero(char *s, ssize_t n)
+{
+	ssize_t	i;
+
+	if (!s || 0 == n)
+		return ;
+	i = 0;
+	while (n > 0)
+	{
+		s[i] = '\0';
+		i++;
+		n--;
+	}
+}
+
+char	*myy_strdup(char *str)
+{
+	ssize_t	len;
+	ssize_t	i;
+	char	*ptr;
+
+	if (!str)
+		return (NULL);
+	len = my_strlen(str);
+	ptr = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ptr)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (str[i] != '\0')
 	{
-		copy[i] = s1[i];
+		ptr[i] = str[i];
 		i++;
 	}
-	copy[i] = '\0';
-	return (copy);
+	ptr[i] = '\0';
+	return (ptr);
 }
-*/
 
-void	ft_strjoin_bis(char *line, t_listt *node, size_t len)
+char	*my_strjoin(char *s1, char *s2)
 {
+	size_t	len;
+	char	*result;
 	size_t	i;
-	char	*tmp;
+	size_t	j;
 
+	len = my_strlen(s1) + my_strlen(s2);
+	result = (char *)malloc(len + 1);
+	if (!result)
+		return (free(s1), NULL);
 	i = 0;
-	while (node && i < len)
+	while (s1[i])
 	{
-		tmp = node->content;
-		while (*tmp && *tmp != '\n' && i < len)
-			line[i++] = *tmp++;
-		if (*tmp == '\n' && i < len)
-			line[i++] = *tmp++;
-		node = node->next;
+		result[i] = s1[i];
+		i++;
 	}
-	line[i] = '\0';
+	j = 0;
+	while (s2[j])
+	{
+		result[i + j] = s2[j];
+		j++;
+	}
+	result[i + j] = '\0';
+	return (free(s1), result);
 }
