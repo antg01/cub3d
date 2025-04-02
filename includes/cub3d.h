@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 17:55:51 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/04/01 17:31:22 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:10:19 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,7 @@ char				**make_map(t_maplist *head, int num_rows, int *longest_row);
 
 // EXTRACT MAP + utils
 t_maplist			*extract_map(t_mlx *data, int fd, int *count_rows);
-void				check_map_closed(t_mlx *data,
-						char **map, int num_rows, int longest_row);
+void				check_map_closed(t_mlx *data, char **map, int num_rows);
 int					is_only_spaces(char *line);
 void				check_chars(t_mlx *data, char *str, int *check_nsew);
 

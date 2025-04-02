@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 11:57:43 by angerard          #+#    #+#             */
-/*   Updated: 2025/03/28 15:38:07 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:09:59 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,58 @@ int	is_only_spaces(char *line)
 	return (1);
 }
 
+int	is_open_space(char **map, int row, int col, int num_rows)
+{
+	int row_len;
+
+	// If row out of range => open
+	if (row < 0 || row >= num_rows)
+		return (1);
+
+	row_len = ft_strlen(map[row]);
+	// If col out of range for that row => open
+	if (col < 0 || col >= row_len)
+		return (1);
+
+	// If the char is ' ' => open
+	if (map[row][col] == ' ')
+		return (1);
+
+	// Otherwise, it's presumably a '1' or something else => not open
+	return (0);
+}
+
+
 /*
 ** Vérifie que la map est fermée en s’assurant qu’aucun espace ouvert
 ** n’est présent aux bords ou autour des cases valides.
 */
-void	check_map_closed(t_mlx *data, char **map, int num_rows, int longest_row)
+void	check_map_closed(t_mlx *data, char **map, int num_rows)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < num_rows)
+	for (int i = 0; i < num_rows; i++)
 	{
-		j = 0;
-		while (j < longest_row && map[i][j])
+		int row_len = ft_strlen(map[i]);  // length of this specific row
+		for (int j = 0; j < row_len; j++)
 		{
-			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
-				|| map[i][j] == 'E' || map[i][j] == 'W')
+			char c = map[i][j];
+			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
-				if (i == 0 || j == 0 || i == num_rows - 1
-					|| j == (int)ft_strlen(map[i]) - 1)
+				// 1) If on the outer boundary => not closed
+				if (i == 0 || i == num_rows - 1 || j == 0 || j == row_len - 1)
 					my_exit("Error: Map isn't closed (border)", data);
-				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j
-					- 1] == ' ' || map[i][j + 1] == ' ')
-					my_exit("Error: Map isn't closed (space)", data);
+
+				// 2) Check each neighbor
+				//    If out of range or ' ' => not closed
+				if (is_open_space(map, i - 1, j, num_rows))  // up
+					my_exit("Error: Map isn't closed (space above)", data);
+				if (is_open_space(map, i + 1, j, num_rows))  // down
+					my_exit("Error: Map isn't closed (space below)", data);
+				if (is_open_space(map, i, j - 1, num_rows))  // left
+					my_exit("Error: Map isn't closed (space left)", data);
+				if (is_open_space(map, i, j + 1, num_rows))  // right
+					my_exit("Error: Map isn't closed (space right)", data);
 			}
-			j++;
 		}
-		i++;
 	}
 }
 
