@@ -6,7 +6,7 @@
 /*   By: gnyssens <gnyssens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 00:44:23 by gnyssens          #+#    #+#             */
-/*   Updated: 2025/04/01 17:29:20 by gnyssens         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:53:21 by gnyssens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,14 @@ int	key_press(int keycode, t_mlx *data)
 		data->keys->forward = 1;
 	else if (keycode == 65364 || keycode == 115)
 		data->keys->backward = 1;
-	else if (keycode == 65361 || keycode == 97)
+	else if (keycode == 65361)
 		data->keys->rotate_left = 1;
-	else if (keycode == 65363 || keycode == 100)
+	else if (keycode == 65363)
 		data->keys->rotate_right = 1;
+	else if (keycode == 97)
+		data->keys->left = 1;
+	else if (keycode == 100)
+		data->keys->right = 1;
 	return (0);
 }
 
@@ -61,11 +65,39 @@ int	key_release(int keycode, t_mlx *data)
 		data->keys->forward = 0;
 	else if (keycode == 65364 || keycode == 115)
 		data->keys->backward = 0;
-	else if (keycode == 65361 || keycode == 97)
+	else if (keycode == 65361)
 		data->keys->rotate_left = 0;
-	else if (keycode == 65363 || keycode == 100)
+	else if (keycode == 65363)
 		data->keys->rotate_right = 0;
+	else if (keycode == 97)
+		data->keys->left = 0;
+	else if (keycode == 100)
+		data->keys->right = 0;
 	return (0);
+}
+
+void	move_left_right(t_mlx *data, double *new_x, double *new_y, double speed)
+{
+	if (data->keys->left)
+	{
+		*new_x = data->player->x_pos + data->player->dir_y * speed;
+		*new_y = data->player->y_pos - data->player->dir_x * speed;
+		if (check_wall(data, (int)*new_x, (int)*new_y))
+		{
+			data->player->x_pos = *new_x;
+			data->player->y_pos = *new_y;
+		}
+	}
+	if (data->keys->right)
+	{
+		*new_x = data->player->x_pos - data->player->dir_y * speed;
+		*new_y = data->player->y_pos + data->player->dir_x * speed;
+		if (check_wall(data, (int)*new_x, (int)*new_y))
+		{
+			data->player->x_pos = *new_x;
+			data->player->y_pos = *new_y;
+		}
+	}
 }
 
 /*
@@ -82,6 +114,7 @@ int	game_loop(t_mlx *data)
 	n.move_speed = 4.0 * n.delta_time;
 	n.rot_speed = 2.0 * n.delta_time;
 	move_front_back(data, &n.new_x, &n.new_y, n.move_speed);
+	move_left_right(data, &n.new_x, &n.new_y, n.move_speed);
 	n.save_dir_x = data->player->dir_x;
 	n.save_plane_x = data->player->plane_x;
 	rot(data, n.save_dir_x, n.save_plane_x, n.rot_speed);
